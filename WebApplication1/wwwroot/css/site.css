@@ -35,19 +35,22 @@ body {
 }
 
 .title-Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: #525252;
-    border-radius: 40px;
+    border-radius: 37px;
     text-align: center;
     height: 300px;
     width: 500px;
     padding: 20px;
-    /*padding: 20px;*/
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
 }
+
 
 .inner-Content {
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .image-Logo img {
@@ -56,12 +59,13 @@ body {
 
 .main-Title {
     text-align: left;
+    font-family: 'Writing Signature', sans-serif;
 }
 
 .main-Title h1 {
     font-family: "Poppins";
 }
 
-.main-Title {
-    font-family: 'Writing Signature', sans-serif;
+.main-Title h3 {
+    margin-top: -17px;
 }
