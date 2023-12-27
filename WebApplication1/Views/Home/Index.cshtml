@@ -2,7 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="background">
+    <div class="title-Wrapper">
+        <div class="inner-Content">
+            <div class="image-Logo">
+                <img src="/images/logo.png" alt="Logo" class="img-styl">
+            </div>
+            <div class="main-Title">
+                <h1>Gym <b>Management</b></h1>
+                <h3>where fitness meets efficiency</h3>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = '/Home/LoginRegister';
+    }, 3000); // 3000 milliseconds = 3 seconds
+</script>
