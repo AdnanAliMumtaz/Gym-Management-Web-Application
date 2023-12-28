@@ -107,7 +107,6 @@ html, body {
 }
 
 /*Login Page & Register Page CSS*/
-
 .login-Section {
     color: #ffd803;
     font-family: "Poppins";
@@ -154,17 +153,15 @@ input.form-control {
     border: solid 0px #ffd803;
     border-radius: 5px;
     transition: 0.5s;
+    margin-bottom: 30px;
 }
-
     .login-Button:hover {
         box-shadow: 0 0 10px #ffd803;
     }
-
 .checkbox input.form-check-input {
 
     border-color: white;
 }
-
     .checkbox input.form-check-input:checked {
         background-color: #ffd803;
         border-color: #ffd803; 
@@ -172,3 +169,17 @@ input.form-control {
     .checkbox input.form-check-input:focus {
         box-shadow: 0 0 10px #ffd803;
     }
+
+.final-Writings {
+    color: black;
+    padding-left: 5%;
+}
+
+.final-Writings a{
+    color: #ffd803;
+    transition: 0.5s;
+}
+    .final-Writings a:hover {
+        text-shadow: 0 0 10px #ffd803;
+    }
+
