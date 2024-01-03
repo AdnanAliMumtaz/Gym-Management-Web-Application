@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gym Management Web Application</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/writing-signature" rel="stylesheet">
+    @* <link rel="stylesheet" href="~/css/site.css" /> *@
+</head>
+
+@{
+    var isActive = true;
+}
+
+<body>
+    <div class="main-Background">
+        <div class="side-Bar">
+            <div class="image-Logo">
+                <img src="/images/logo.png" alt="Logo">
+            </div>
+            <div class="list-Navigation">
+                <button class="btn-style @(isActive ? "active" : "")">
+                    <img src="/images/DashboardBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Dashboard</b>
+                </button>
+                <button class="btn-style">
+                    <img src="/images/MembersBefore.png" href="/Dashboard/LoginRegister.cshtml" alt="Dashboard Icon" /> <b>Members</b>
+                </button>
+                <button class="btn-style">
+                    <img src="/images/ResourceBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Resource</b>
+                </button>
+                <button class="btn-style">
+                    <img src="/images/MessageBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Messages</b>
+                </button>
+                <button class="btn-style">
+                    <img src="/images/ClassesBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Classes</b>
+                </button>
+                <button class="btn-style">
+                    <img src="/images/SettingBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Settings</b>
+                </button>
+            </div>
+        </div>
+        <div class="main-Content">
+            @RenderBody()
+        </div>
+    </div>
+
+  
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

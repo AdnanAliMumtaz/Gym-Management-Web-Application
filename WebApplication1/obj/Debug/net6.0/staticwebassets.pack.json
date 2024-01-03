@@ -13,6 +13,34 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\ClassesBefore.png",
+      "PackagePath": "staticwebassets\\images\\ClassesBefore.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\Dashboard.png",
+      "PackagePath": "staticwebassets\\images\\Dashboard.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\DashboardBefore.png",
+      "PackagePath": "staticwebassets\\images\\DashboardBefore.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\MembersBefore.png",
+      "PackagePath": "staticwebassets\\images\\MembersBefore.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\MessageBefore.png",
+      "PackagePath": "staticwebassets\\images\\MessageBefore.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\ResourceBefore.png",
+      "PackagePath": "staticwebassets\\images\\ResourceBefore.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\SettingBefore.png",
+      "PackagePath": "staticwebassets\\images\\SettingBefore.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\SofaGuy.png",
       "PackagePath": "staticwebassets\\images\\SofaGuy.png"
     },
@@ -95,6 +123,22 @@
     {
       "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.css.map"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-theme.min.css.map"
     },
     {
       "Id": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",

@@ -117,7 +117,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     /*return LocalRedirect(returnUrl); This is the default one*/
-                    return LocalRedirect("/Home/LoginRegister");
+                    return LocalRedirect("/Dashboard/Index");
                 }
                 if (result.RequiresTwoFactor)
                 {
