@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/writing-signature" rel="stylesheet">
-    @* <link rel="stylesheet" href="~/css/site.css" /> *@
 </head>
 
 @{
-    var isActive = true;
+    var currentController = ViewContext.RouteData.Values["controller"] as string;
+    var currentAction = ViewContext.RouteData.Values["action"] as string;
 }
 
 <body>
@@ -22,26 +22,32 @@
             <div class="image-Logo">
                 <img src="/images/logo.png" alt="Logo">
             </div>
-            <div class="list-Navigation">
-                <button class="btn-style @(isActive ? "active" : "")">
-                    <img src="/images/DashboardBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Dashboard</b>
-                </button>
-                <button class="btn-style">
-                    <img src="/images/MembersBefore.png" href="/Dashboard/LoginRegister.cshtml" alt="Dashboard Icon" /> <b>Members</b>
-                </button>
-                <button class="btn-style">
-                    <img src="/images/ResourceBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Resource</b>
-                </button>
-                <button class="btn-style">
-                    <img src="/images/MessageBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Messages</b>
-                </button>
-                <button class="btn-style">
-                    <img src="/images/ClassesBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Classes</b>
-                </button>
-                <button class="btn-style">
-                    <img src="/images/SettingBefore.png" href="/Dashboard/Index.cshtml" alt="Dashboard Icon" /> <b>Settings</b>
-                </button>
-            </div>
+            <ul class="list-Navigation">
+                <li class="btn-style @(currentController == "Dashboard" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/DashboardBefore.png" alt="Dashboard Icon" />
+                    <a href="/Dashboard/Index"><b>Dashboard</b></a>
+                </li>
+                <li class="btn-style @(currentController == "Members" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/MembersBefore.png" alt="Members Icon" />
+                    <a href="/Members/Index"><b>Members</b></a>
+                </li>
+                <li class="btn-style @(currentController == "Resource" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/ResourceBefore.png" alt="Resource Icon" />
+                    <a href="/Resource/Index"><b>Resource</b></a>
+                </li>
+                <li class="btn-style @(currentController == "Messages" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/MessageBefore.png" alt="Message Icon" />
+                    <a href="/Messages/Index"><b>Messages</b></a>
+                </li>
+                <li class="btn-style @(currentController == "Classes" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/ClassesBefore.png" alt="Classes Icon" />
+                    <a href="/Classes/Index"><b>Classes</b></a>
+                </li>
+                <li class="btn-style @(currentController == "Settings" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/SettingBefore.png" alt="Settings Icon" />
+                    <a href="/Settings/Index"><b>Settings</b></a>
+                </li>
+            </ul>
         </div>
         <div class="main-Content">
             @RenderBody()

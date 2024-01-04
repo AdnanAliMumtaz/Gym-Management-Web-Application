@@ -12,33 +12,25 @@ builder.Services.AddDbContext<WebDbContext>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<WebDbContext>();
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireUppercase = false;
-}
-);
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
 app.UseStaticFiles();
-
-/*app.UseRouting();
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-*/
 
 app.UseRouting();
 
@@ -53,14 +45,36 @@ app.UseEndpoints(endpoints =>
         defaults: new { controller = "Dashboard" });
 
     endpoints.MapControllerRoute(
+        name: "members",
+        pattern: "members/{action=Index}/{id?}",
+        defaults: new { controller = "Members" });
+
+    endpoints.MapControllerRoute(
+        name: "resource",
+        pattern: "resource/{action=Index}/{id?}",
+        defaults: new { controller = "Resource" });
+
+    endpoints.MapControllerRoute(
+        name: "messages",
+        pattern: "messages/{action=Index}/{id?}",
+        defaults: new { controller = "Messages" });
+
+    endpoints.MapControllerRoute(
+        name: "classes",
+        pattern: "classes/{action=Index}/{id?}",
+        defaults: new { controller = "Classes" });
+
+    endpoints.MapControllerRoute(
+        name: "settings",
+        pattern: "settings/{action=Index}/{id?}",
+        defaults: new { controller = "Settings" });
+
+    endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 
     endpoints.MapRazorPages();
 });
 
-
-
-app.MapRazorPages();
 
 app.Run();

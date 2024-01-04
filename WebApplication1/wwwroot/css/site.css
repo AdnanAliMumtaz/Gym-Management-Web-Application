@@ -189,6 +189,7 @@ input.form-control {
     background-color: #ECECEC;
     height: 100%;
     width: 100%;
+    display: flex;
 }
 
 .side-Bar {
@@ -205,14 +206,79 @@ input.form-control {
     margin-top: 50px; 
 }
 
+/*.list-Navigation {
+    background-color: red;
+    margin-top: 48%;
+    text-align: left;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
 .list-Navigation {
     margin-top: 48%;
     text-align: left;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    padding: 0px;
+    list-style-type: none;
 }
+
+    .list-Navigation li {
+        width: 100%;
+        border: 1px solid transparent;
+        transition: 0.5s;
+        margin-bottom: 5px;
+        Add some spacing between list items if needed
+    }
+
+        .list-Navigation li:hover {
+            color: black;
+            background-color: white;
+            border-radius: 6px;
+            transition: 0.5s;
+        }
+
+        .list-Navigation li.active {
+            color: black;
+            background-color: white;
+            border-radius: 6px;
+            transition: 0.5s;
+        }
+
+        .list-Navigation li a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+
+
+
+
+
+
+
+
 
 .btn-style {
     display: flex;
@@ -241,10 +307,10 @@ input.form-control {
     }
 
     .btn-style:hover img {
-        filter: brightness(0); /* On hover, set brightness to 0% (black) */
+        filter: brightness(0);  
     }
     .btn-style.active img {
-        filter: brightness(0); /* Set brightness to 0% for the active state (black) */
+        filter: brightness(0);  
     }
 
     .btn-style.active {
