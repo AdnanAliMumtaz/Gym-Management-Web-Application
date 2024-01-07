@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Areas.Identity.Data;
@@ -37,8 +38,18 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+/*endpoints.MapControllerRoute(
+        name: "dashboard",
+        pattern: "dashboard/{action=Index}/{id?}",
+        defaults: new { controller = "Dashboard" });*/
+
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllerRoute(
+        name: "logout",
+        pattern: "account/logout",
+        defaults: new { controller = "Account", action = "Logout" });
+
     endpoints.MapControllerRoute(
         name: "dashboard",
         pattern: "dashboard/{action=Index}/{id?}",
@@ -75,6 +86,5 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapRazorPages();
 });
-
 
 app.Run();

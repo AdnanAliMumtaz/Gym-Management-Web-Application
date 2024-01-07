@@ -102,6 +102,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
+        
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -116,7 +117,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    /*return LocalRedirect(returnUrl); This is the default one*/
+                    /*return LocalRedirect(returnUrl);*/
                     return LocalRedirect("/Dashboard/Index");
                 }
                 if (result.RequiresTwoFactor)
