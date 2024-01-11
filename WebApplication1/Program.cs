@@ -10,6 +10,12 @@ var connectionString = builder.Configuration.GetConnectionString("WebDbContextCo
 builder.Services.AddDbContext<WebDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Add the other database here
+var managingDbContextConnectionString = builder.Configuration.GetConnectionString("ManagingDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ManagingDbContext' not found.");
+builder.Services.AddDbContext<ManagingDbContext>(options =>
+options.UseSqlServer(managingDbContextConnectionString));
+
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<WebDbContext>();
 
@@ -37,11 +43,6 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-/*endpoints.MapControllerRoute(
-        name: "dashboard",
-        pattern: "dashboard/{action=Index}/{id?}",
-        defaults: new { controller = "Dashboard" });*/
 
 app.UseEndpoints(endpoints =>
 {

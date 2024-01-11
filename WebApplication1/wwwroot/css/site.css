@@ -186,7 +186,8 @@ input.form-control {
 /*Main Dashboard*/
 
 .main-Background {
-    background-color: #ECECEC;
+    /*background-color: #ECECEC;*/
+    background-color: white;
     height: 100%;
     width: 100%;
     display: flex;
@@ -206,28 +207,6 @@ input.form-control {
     margin-top: 50px; 
 }
 
-/*.list-Navigation {
-    background-color: red;
-    margin-top: 48%;
-    text-align: left;
-    padding: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
 .list-Navigation {
     margin-top: 48%;
     text-align: left;
@@ -244,7 +223,7 @@ input.form-control {
         border: 1px solid transparent;
         transition: 0.5s;
         margin-bottom: 5px;
-        Add some spacing between list items if needed
+        /*Add some spacing between list items if needed*/
     }
 
         .list-Navigation li:hover {
@@ -269,16 +248,6 @@ input.form-control {
             text-decoration: none;
             color: inherit;
         }
-
-
-
-
-
-
-
-
-
-
 
 .btn-style {
     display: flex;
@@ -319,3 +288,9 @@ input.form-control {
         border-radius: 6px;
         transition: 0.5s;
     }
+
+.main-Content {
+    width: 100%;
+}
+
+/*Dashboard Styling*/

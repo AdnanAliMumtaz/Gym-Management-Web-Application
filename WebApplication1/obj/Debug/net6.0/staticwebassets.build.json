@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bGyBlKvpUDcyM72ratjmPVlWSNUOAQEmS5ujzqao1WI=",
+  "Hash": "fXu2RiAQ0Z2PIDnBD93cuBtyDVLMfzydu18mWknkEuA=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -1173,6 +1173,23 @@
       "OriginalItemSpec": "wwwroot\\images\\DashboardBefore.png"
     },
     {
+      "Identity": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\DollarSign.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/DollarSign.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\DollarSign.png"
+    },
+    {
       "Identity": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\logo.png",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
@@ -1224,6 +1241,23 @@
       "OriginalItemSpec": "wwwroot\\images\\MessageBefore.png"
     },
     {
+      "Identity": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\NewMembers.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/NewMembers.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\NewMembers.png"
+    },
+    {
       "Identity": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\ResourceBefore.png",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
@@ -1273,6 +1307,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\SofaGuy.png"
+    },
+    {
+      "Identity": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\images\\TotalMembers.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/TotalMembers.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\TotalMembers.png"
     },
     {
       "Identity": "C:\\Users\\adnan\\OneDrive - UCLan\\3rd Year\\Project\\WebApplication1\\WebApplication1\\wwwroot\\js\\site.js",
