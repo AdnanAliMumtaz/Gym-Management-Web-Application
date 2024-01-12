@@ -194,7 +194,8 @@ input.form-control {
 }
 
 .side-Bar {
-    background-color: #525252;
+    /*background-color: #525252;*/
+    background-color: white;
     width: 9.5%;
     height: 100%;
     border-top-right-radius: 40px;
@@ -223,22 +224,23 @@ input.form-control {
         border: 1px solid transparent;
         transition: 0.5s;
         margin-bottom: 5px;
+        /*background-color: red;*/
         /*Add some spacing between list items if needed*/
     }
 
-        .list-Navigation li:hover {
+        /*.list-Navigation li:hover {
             color: black;
             background-color: white;
             border-radius: 6px;
             transition: 0.5s;
-        }
+        }*/
 
-        .list-Navigation li.active {
+        /*.list-Navigation li.active {
             color: black;
             background-color: white;
             border-radius: 6px;
             transition: 0.5s;
-        }
+        }*/
 
         .list-Navigation li a {
             display: flex;
@@ -253,8 +255,9 @@ input.form-control {
     display: flex;
     align-items: center;
     height: 50px;
-    background-color: transparent;
-    color: white;
+    /*background-color: white;*/
+    /*color: black;*/
+    color: #525252;
     border: 1px solid transparent;
     font-size: 18px;
     width: 100%;
@@ -262,29 +265,29 @@ input.form-control {
     text-align: left;
 }
 
-
-.btn-style:hover {
-    color: black;
-    background-color: white;
-    border-radius: 6px;
-    transition: 0.5s;
-}
+    .btn-style:hover {
+        color: #525252;
+        background-color: #ffd803;
+        border-radius: 6px;
+        transition: 0.5s;
+    }
     .btn-style img {
         width: 30px;
         margin-right: 4%;
         margin-left: 1%;
+        filter: brightness(0);
     }
 
     .btn-style:hover img {
-        filter: brightness(0);  
+        /*filter: brightness(0);  */
     }
     .btn-style.active img {
-        filter: brightness(0);  
+        /*filter: brightness(0);  */
     }
 
     .btn-style.active {
-        color: black;
-        background-color: white;
+        color: #525252;
+        background-color: #ffd803;
         border-radius: 6px;
         transition: 0.5s;
     }
