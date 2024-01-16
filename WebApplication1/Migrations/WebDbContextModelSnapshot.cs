@@ -232,6 +232,71 @@ namespace WebApplication1.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Member", b =>
+                {
+                    b.Property<int>("MemberID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MemberID"), 1L, 1);
+
+                    b.Property<DateTime>("MemberDateJoined")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("MemberDateLeft")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MemberEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MemberFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MemberLastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MemberPhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("MemberID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Member");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
+                {
+                    b.Property<int>("TransactionFeeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionFeeID"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("DatePaid")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
+                    b.HasKey("TransactionFeeID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("TransactionFee");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -281,6 +346,38 @@ namespace WebApplication1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Member", b =>
+                {
+                    b.HasOne("WebApplication1.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("Member")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Member", "Member")
+                        .WithMany("TransactionFee")
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
+            modelBuilder.Entity("WebApplication1.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("Member");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Member", b =>
+                {
+                    b.Navigation("TransactionFee");
                 });
 #pragma warning restore 612, 618
         }

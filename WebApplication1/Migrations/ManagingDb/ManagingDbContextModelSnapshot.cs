@@ -22,6 +22,66 @@ namespace WebApplication1.Migrations.ManagingDb
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("WebApplication1.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Member", b =>
                 {
                     b.Property<int>("MemberID")
@@ -52,9 +112,15 @@ namespace WebApplication1.Migrations.ManagingDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("MemberID");
 
-                    b.ToTable("Members");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
@@ -78,7 +144,18 @@ namespace WebApplication1.Migrations.ManagingDb
 
                     b.HasIndex("MemberID");
 
-                    b.ToTable("TransactionFees");
+                    b.ToTable("TransactionFee");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Member", b =>
+                {
+                    b.HasOne("WebApplication1.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("Member")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
@@ -89,6 +166,11 @@ namespace WebApplication1.Migrations.ManagingDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Member");
+                });
+
+            modelBuilder.Entity("WebApplication1.Areas.Identity.Data.ApplicationUser", b =>
+                {
                     b.Navigation("Member");
                 });
 

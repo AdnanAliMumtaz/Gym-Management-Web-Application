@@ -1,8 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using NuGet.Protocol.Plugins;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication1.Areas.Identity.Data;
 
 namespace WebApplication1.Models
 {
+    [Table("Member")]
     public class Member
     {
         [Key]
@@ -30,6 +35,11 @@ namespace WebApplication1.Models
         [DataType(DataType.Date)]
         public DateTime? MemberDateLeft { get; set; }
 
+        // Editing
+        // Foreign key referencing the login identity
+        public string UserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        // Ends
 
         public ICollection<TransactionFee> TransactionFee {  get; set; }
     }

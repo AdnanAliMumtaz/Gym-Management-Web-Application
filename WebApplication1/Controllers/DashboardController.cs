@@ -7,17 +7,20 @@ using WebApplication1.Models;
 using System.Linq; // Import this namespace for LINQ queries
 /*using AspNetCore;*/
 using WebApplication1.Models.ViewModels;
-
-
+using WebApplication1.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace WebApplication1.Controllers
 {
     public class DashboardController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ManagingDbContext _context;
-        public DashboardController(ManagingDbContext context)
+        public DashboardController(ManagingDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
 
@@ -28,20 +31,57 @@ namespace WebApplication1.Controllers
         }*/
 
 
+        /*        [Authorize]
+                public IActionResult Index()
+                {
+                    // Query 1: Total Fees Amount for all members
+                    decimal totalFeesAmount = _context.TransactionFees.Sum(tf => tf.Amount);
+
+                    // Query 2: Count of New Members who joined in the recent one month
+                    DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
+                    int newMembersCount = _context.Members
+                        .Count(m => m.MemberDateJoined >= oneMonthAgo);
+
+                    // Query 3: Count of Active Admission (all members with non-null MemberDateJoined)
+                    int activeAdmissionMembersCount = _context.Members
+                        .Count(m => m.MemberDateJoined != null);
+
+                    // Create a ViewModel to hold the data for the view
+                    var viewModel = new DashboardViewModel
+                    {
+                        TotalFeesAmount = totalFeesAmount,
+                        NewMembersCount = newMembersCount,
+                        ActiveAdmissionMembersCount = activeAdmissionMembersCount
+                    };
+
+                    // Pass the ViewModel to the view
+                    return View(viewModel);
+                }*/
+
+
+
+
         [Authorize]
         public IActionResult Index()
         {
-            // Query 1: Total Fees Amount for all members
-            decimal totalFeesAmount = _context.TransactionFees.Sum(tf => tf.Amount);
+            // Get the currently logged-in user
+            ApplicationUser user = _userManager.GetUserAsync(User).Result;
 
-            // Query 2: Count of New Members who joined in the recent one month
+            // Query 1: Total Fees Amount for the current user's members
+            decimal totalFeesAmount = _context.TransactionFees
+                .Where(tf => tf.Member.ApplicationUser == user)
+                .Sum(tf => tf.Amount);
+
+            // Query 2: Count of New Members who joined in the recent one month for the current user
             DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
             int newMembersCount = _context.Members
-                .Count(m => m.MemberDateJoined >= oneMonthAgo);
+                .Where(m => m.MemberDateJoined >= oneMonthAgo && m.ApplicationUser == user)
+                .Count();
 
-            // Query 3: Count of Active Admission (all members with non-null MemberDateJoined)
+            // Query 3: Count of Active Admission Members for the current user
             int activeAdmissionMembersCount = _context.Members
-                .Count(m => m.MemberDateJoined != null);
+                .Where(m => m.MemberDateJoined != null && m.ApplicationUser == user)
+                .Count();
 
             // Create a ViewModel to hold the data for the view
             var viewModel = new DashboardViewModel
@@ -57,34 +97,25 @@ namespace WebApplication1.Controllers
 
 
 
-
-
-        /*[Authorize]
-        public IActionResult Index()
-        {
-            // Retrieve data from the database (example: get all members and related transaction fees)
-            var membersWithTransactionFees = _context.Members.Include(m => m.TransactionFee).ToList();
-
-            // Pass the data to the view
-            return View(membersWithTransactionFees);
-        }
-
-
-
+        [Authorize]
         [HttpPost]
-        public IActionResult AddDummyData(string FirstName, string LastName, decimal Amount, DateTime DatePaid)
+        public async Task<IActionResult> AddDummyData(string FirstName, string LastName, decimal Amount, DateTime DatePaid)
         {
-            // Create a new Member
+            // Get the currently logged-in user
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Create a new Member with the UserId set to the current user's Id
             var newMember = new Member
             {
                 MemberFirstName = FirstName,
                 MemberLastName = LastName,
                 MemberEmail = "adnan3432@gmail.com",
                 MemberPhoneNumber = "093434334",
-                MemberDateJoined = DatePaid
+                MemberDateJoined = DatePaid,
+                UserId = user.Id,
             };
 
-            // Create a new TransactionFee
+            // Create a new TransactionFee associated with the new member
             var newTransactionFee = new TransactionFee
             {
                 Amount = Amount,
@@ -93,20 +124,14 @@ namespace WebApplication1.Controllers
             };
 
             // Add the new Member and TransactionFee to the database
-            
             _context.Members.Add(newMember);
             _context.TransactionFees.Add(newTransactionFee);
 
             // Save changes to the database
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             // Redirect to a success page or back to the Members page
-            *//*return RedirectToAction("/Dashboard/Index");*//*
             return RedirectToAction(nameof(Index));
-        }*/
-
-
-
-
+        }
     }
 }

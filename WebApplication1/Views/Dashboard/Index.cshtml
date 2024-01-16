@@ -169,25 +169,6 @@
                     <p>Active Admissions</p>
                 </div>
             </div>
-
-            @* <form method="post" asp-controller="Dashboard" asp-action="AddDummyData">
-                <!-- Member information fields -->
-                <label for="FirstName">First Name:</label>
-                <input type="text" id="FirstName" name="FirstName" required>
-
-                <label for="LastName">Last Name:</label>
-                <input type="text" id="LastName" name="LastName" required>
-
-                <!-- TransactionFee information fields -->
-                <label for="Amount">Transaction Amount:</label>
-                <input type="text" id="Amount" name="Amount" required>
-
-                <label for="DatePaid">Date Paid:</label>
-                <input type="date" id="DatePaid" name="DatePaid" required>
-
-                <button type="submit">Add Dummy Data</button>
-            </form> *@
-
         </div>
     </div>
 
@@ -212,5 +193,24 @@
 
         </div>
     </div>
+
+
+    <form method="post" asp-controller="Dashboard" asp-action="AddDummyData">
+        <!-- Member information fields -->
+        <label for="FirstName">First Name:</label>
+        <input type="text" id="FirstName" name="FirstName" required>
+
+        <label for="LastName">Last Name:</label>
+        <input type="text" id="LastName" name="LastName" required>
+
+        <!-- TransactionFee information fields -->
+        <label for="Amount">Transaction Amount:</label>
+        <input type="text" id="Amount" name="Amount" required>
+
+        <label for="DatePaid">Date Paid:</label>
+        <input type="date" id="DatePaid" name="DatePaid" required>
+
+        <button type="submit">Add Dummy Data</button>
+    </form>
 
 </div>
