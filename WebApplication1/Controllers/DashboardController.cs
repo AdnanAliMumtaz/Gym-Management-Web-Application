@@ -16,8 +16,8 @@ namespace WebApplication1.Controllers
     public class DashboardController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ManagingDbContext _context;
-        public DashboardController(ManagingDbContext context, UserManager<ApplicationUser> userManager)
+        private readonly WebDbContext _context;
+        public DashboardController(WebDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -30,58 +30,57 @@ namespace WebApplication1.Controllers
             return View();
         }*/
 
+        /* [Authorize]
+         public IActionResult Index()
+         {
+             // Query 1: Total Fees Amount for all members
+             decimal totalFeesAmount = _context.TransactionFees.Sum(tf => tf.Amount);
 
-        /*        [Authorize]
-                public IActionResult Index()
-                {
-                    // Query 1: Total Fees Amount for all members
-                    decimal totalFeesAmount = _context.TransactionFees.Sum(tf => tf.Amount);
+             // Query 2: Count of New Members who joined in the recent one month
+             DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
+             int newMembersCount = _context.Members
+                 .Count(m => m.MemberDateJoined >= oneMonthAgo);
 
-                    // Query 2: Count of New Members who joined in the recent one month
-                    DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
-                    int newMembersCount = _context.Members
-                        .Count(m => m.MemberDateJoined >= oneMonthAgo);
+             // Query 3: Count of Active Admission (all members with non-null MemberDateJoined)
+             int activeAdmissionMembersCount = _context.Members
+                 .Count(m => m.MemberDateJoined != null);
 
-                    // Query 3: Count of Active Admission (all members with non-null MemberDateJoined)
-                    int activeAdmissionMembersCount = _context.Members
-                        .Count(m => m.MemberDateJoined != null);
+             // Create a ViewModel to hold the data for the view
+             var viewModel = new DashboardViewModel
+             {
+                 TotalFeesAmount = totalFeesAmount,
+                 NewMembersCount = newMembersCount,
+                 ActiveAdmissionMembersCount = activeAdmissionMembersCount
+             };
 
-                    // Create a ViewModel to hold the data for the view
-                    var viewModel = new DashboardViewModel
-                    {
-                        TotalFeesAmount = totalFeesAmount,
-                        NewMembersCount = newMembersCount,
-                        ActiveAdmissionMembersCount = activeAdmissionMembersCount
-                    };
+             // Pass the ViewModel to the view
+             return View(viewModel);
+         }*/
 
-                    // Pass the ViewModel to the view
-                    return View(viewModel);
-                }*/
+
 
 
 
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             // Get the currently logged-in user
-            ApplicationUser user = _userManager.GetUserAsync(User).Result;
+            ApplicationUser user = await _userManager.GetUserAsync(User);
 
-            // Query 1: Total Fees Amount for the current user's members
+            // Query 1: Total Fees Amount for the specific user's members
             decimal totalFeesAmount = _context.TransactionFees
-                .Where(tf => tf.Member.ApplicationUser == user)
+                .Where(tf => tf.Member.UserId == user.Id)
                 .Sum(tf => tf.Amount);
 
-            // Query 2: Count of New Members who joined in the recent one month for the current user
+            // Query 2: Count of New Members who joined in the recent one month for the specific user
             DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
             int newMembersCount = _context.Members
-                .Where(m => m.MemberDateJoined >= oneMonthAgo && m.ApplicationUser == user)
-                .Count();
+                .Count(m => m.MemberDateJoined >= oneMonthAgo && m.UserId == user.Id);
 
-            // Query 3: Count of Active Admission Members for the current user
+            // Query 3: Count of Active Admission for the specific user (members with non-null MemberDateJoined)
             int activeAdmissionMembersCount = _context.Members
-                .Where(m => m.MemberDateJoined != null && m.ApplicationUser == user)
-                .Count();
+                .Count(m => m.MemberDateJoined != null && m.UserId == user.Id);
 
             // Create a ViewModel to hold the data for the view
             var viewModel = new DashboardViewModel
@@ -94,6 +93,12 @@ namespace WebApplication1.Controllers
             // Pass the ViewModel to the view
             return View(viewModel);
         }
+
+
+
+
+
+
 
 
 
@@ -112,7 +117,7 @@ namespace WebApplication1.Controllers
                 MemberEmail = "adnan3432@gmail.com",
                 MemberPhoneNumber = "093434334",
                 MemberDateJoined = DatePaid,
-                UserId = user.Id,
+                ApplicationUser = user,
             };
 
             // Create a new TransactionFee associated with the new member

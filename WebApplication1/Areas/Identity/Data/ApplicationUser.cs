@@ -19,7 +19,7 @@ public class ApplicationUser : IdentityUser
     [Column(TypeName = "nvarchar(100)")]
     public string LastName { get; set; }
 
-    public ICollection<Member> Member { get; set; }
+    public List<Member> Member { get; set; } = new List<Member>();
 
 }
 

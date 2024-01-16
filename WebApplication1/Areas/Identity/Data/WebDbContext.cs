@@ -9,6 +9,9 @@ namespace WebApplication1.Data;
 
 public class WebDbContext : IdentityDbContext<ApplicationUser>
 {
+    public DbSet<Member> Members { get; set; }
+    public DbSet<TransactionFee> TransactionFees { get; set; }
+
     public WebDbContext(DbContextOptions<WebDbContext> options)
         : base(options)
     {
@@ -19,10 +22,10 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(builder);
 
         // Configuration for the one-to-many relationship
-        builder.Entity<Member>()
-            .HasOne(m => m.ApplicationUser)
-            .WithMany(u => u.Member)
-            .HasForeignKey(m => m.UserId)
-            .IsRequired();
+        builder.Entity<ApplicationUser>()
+        .HasMany(u => u.Member)
+        .WithOne(m => m.ApplicationUser)
+        .HasForeignKey(m => m.UserId)
+        .IsRequired();
     }
 }
