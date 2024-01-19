@@ -11,7 +11,8 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
 {
     public DbSet<Member> Members { get; set; }
     public DbSet<TransactionFee> TransactionFees { get; set; }
-
+    public DbSet<EntryLog> EntryLogs { get; set; }
+ 
     public WebDbContext(DbContextOptions<WebDbContext> options)
         : base(options)
     {
@@ -27,5 +28,10 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
         .WithOne(m => m.ApplicationUser)
         .HasForeignKey(m => m.UserId)
         .IsRequired();
+
+        // Configuration for the EntryLog
+        builder.Entity<EntryLog>()
+        .HasIndex(e => new { e.MemberId, e.EntryDate })
+        .IsUnique();
     }
 }

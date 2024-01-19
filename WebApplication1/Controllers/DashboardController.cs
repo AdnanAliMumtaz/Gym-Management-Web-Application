@@ -4,8 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using WebApplication1.Data;
 using WebApplication1.Models;
-using System.Linq; // Import this namespace for LINQ queries
-/*using AspNetCore;*/
+using System.Linq;
 using WebApplication1.Models.ViewModels;
 using WebApplication1.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
@@ -30,32 +29,16 @@ namespace WebApplication1.Controllers
             return View();
         }*/
 
-        /* [Authorize]
-         public IActionResult Index()
-         {
-             // Query 1: Total Fees Amount for all members
-             decimal totalFeesAmount = _context.TransactionFees.Sum(tf => tf.Amount);
 
-             // Query 2: Count of New Members who joined in the recent one month
-             DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
-             int newMembersCount = _context.Members
-                 .Count(m => m.MemberDateJoined >= oneMonthAgo);
 
-             // Query 3: Count of Active Admission (all members with non-null MemberDateJoined)
-             int activeAdmissionMembersCount = _context.Members
-                 .Count(m => m.MemberDateJoined != null);
 
-             // Create a ViewModel to hold the data for the view
-             var viewModel = new DashboardViewModel
-             {
-                 TotalFeesAmount = totalFeesAmount,
-                 NewMembersCount = newMembersCount,
-                 ActiveAdmissionMembersCount = activeAdmissionMembersCount
-             };
 
-             // Pass the ViewModel to the view
-             return View(viewModel);
-         }*/
+
+
+
+
+
+
 
 
 
@@ -63,6 +46,65 @@ namespace WebApplication1.Controllers
 
 
         [Authorize]
+        public async Task<IActionResult> Index()
+        {
+            // Get the currently logged-in user
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Query 1: Total Fees Amount for the specific user's members
+            decimal totalFeesAmount = _context.TransactionFees
+                .Where(tf => tf.Member.UserId == user.Id)
+                .Sum(tf => tf.Amount);
+
+            // Query 2: Count of New Members who joined in the recent one month for the specific user
+            DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
+            int newMembersCount = _context.Members
+                .Count(m => m.MemberDateJoined >= oneMonthAgo && m.UserId == user.Id);
+
+            // Query 3: Count of Active Admission for the specific user (members with non-null MemberDateJoined)
+            int activeAdmissionMembersCount = _context.Members
+                .Count(m => m.MemberDateJoined != null && m.UserId == user.Id);
+
+            // Query 4: Retrieve all EntryLogs for the specific user
+            var entryLogs = _context.EntryLogs
+                .Where(el => el.Member.UserId == user.Id)
+                .ToList();
+
+            // Create a ViewModel to hold the data for the view
+            var viewModel = new DashboardViewModel
+            {
+                TotalFeesAmount = totalFeesAmount,
+                NewMembersCount = newMembersCount,
+                ActiveAdmissionMembersCount = activeAdmissionMembersCount,
+                EntryLogs = entryLogs
+            };
+
+            // Pass the ViewModel to the view
+            return View(viewModel);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*[Authorize]
         public async Task<IActionResult> Index()
         {
             // Get the currently logged-in user
@@ -92,15 +134,7 @@ namespace WebApplication1.Controllers
 
             // Pass the ViewModel to the view
             return View(viewModel);
-        }
-
-
-
-
-
-
-
-
+        }*/
 
         [Authorize]
         [HttpPost]
@@ -138,5 +172,48 @@ namespace WebApplication1.Controllers
             // Redirect to a success page or back to the Members page
             return RedirectToAction(nameof(Index));
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddEntry()
+        {
+            // Get the currently logged-in user
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Get the member associated with the current user
+            Member member = _context.Members.FirstOrDefault(m => m.UserId == user.Id);
+
+            if (member != null)
+            {
+                // Create a new entry log associated with the member
+                var newEntryLog = new EntryLog
+                {
+                    EntryDate = DateTime.Now,
+                    RfidTag = "Adnasndjkash kj234 ekja",
+                    Member = member
+                };
+
+                // Add the new entry log to the database
+                _context.EntryLogs.Add(newEntryLog);
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+            }
+
+            // Redirect back to the dashboard
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

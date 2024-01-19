@@ -232,6 +232,32 @@ namespace WebApplication1.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.EntryLog", b =>
+                {
+                    b.Property<int>("EntryLogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EntryLogId"), 1L, 1);
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RfidTag")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EntryLogId");
+
+                    b.HasIndex("MemberId", "EntryDate")
+                        .IsUnique();
+
+                    b.ToTable("EntryLogs");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Member", b =>
                 {
                     b.Property<int>("MemberID")
@@ -348,6 +374,17 @@ namespace WebApplication1.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.EntryLog", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Member", "Member")
+                        .WithMany("EntryLog")
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Member", b =>
                 {
                     b.HasOne("WebApplication1.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
@@ -377,6 +414,8 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.Member", b =>
                 {
+                    b.Navigation("EntryLog");
+
                     b.Navigation("TransactionFee");
                 });
 #pragma warning restore 612, 618

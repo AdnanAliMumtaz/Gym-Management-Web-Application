@@ -35,12 +35,12 @@ namespace WebApplication1.Models
         [DataType(DataType.Date)]
         public DateTime? MemberDateLeft { get; set; }
 
-        // Editing
-        // Foreign key referencing the login identity
         public string UserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-        // Ends
+        public ApplicationUser ApplicationUser { get; set; } 
 
         public ICollection<TransactionFee> TransactionFee {  get; set; }
+        public ICollection<EntryLog> EntryLog { get; set; } 
+        /*public List<EntryLog> EntryLog { get; set; } = new List<EntryLog>();*/
+
     }
 }

@@ -173,7 +173,11 @@
     </div>
 
     <div class="middleLayer-Dashboard">
+        
+        @* Working on this  *@
         <div class="firstBarGraph">
+
+
 
         </div>
         <div class="secondBarGraph">
@@ -195,7 +199,33 @@
     </div>
 
 
-    <form method="post" asp-controller="Dashboard" asp-action="AddDummyData">
+
+    <h2>Entry Logs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Entry Time</th>
+                <!-- Add more columns as needed based on your EntryLog model -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entryLog in Model.EntryLogs)
+            {
+                <tr>
+                    <td>@entryLog.EntryDate</td>
+                    <!-- Add more columns as needed based on your EntryLog model -->
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Button to add entry -->
+    <form method="post" asp-action="AddEntry">
+        <button type="submit">Add Entry</button>
+    </form>
+
+    @* This is working *@
+   @*  <form method="post" asp-controller="Dashboard" asp-action="AddDummyData">
         <!-- Member information fields -->
         <label for="FirstName">First Name:</label>
         <input type="text" id="FirstName" name="FirstName" required>
@@ -211,6 +241,5 @@
         <input type="date" id="DatePaid" name="DatePaid" required>
 
         <button type="submit">Add Dummy Data</button>
-    </form>
-
+    </form> *@
 </div>
