@@ -115,26 +115,10 @@
 
     /*Second Box*/
     .middleLayer-Dashboard {
-        /* background-color: blue; */
-        height: 300px;
+        height: 30%;
+        width: 100%;
+        display: flex;
     }
-
-    /* .firstBarGraph {
-        margin: 7px 0px;
-        background-color: transparent;
-        border-radius: 6px;
-        height: 100%;
-        width: 40%;
-        box-shadow: 0 0 8px #525252;
-    }
-
-    .Graph-Canvas {
-        border-radius: 6px;
-        background-color: red;
-    }  */
-
-    
-
 
     .firstBarGraph {
         margin: 7px 0px;
@@ -143,14 +127,14 @@
         height: 100%;
         width: 40%;
         box-shadow: 0 0 8px #525252;
-        /* Center the content using flexbox */
+        
+
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
     .Graph-Canvas {
-        /* Set canvas width and height to 100% */
         width: 90%;
         height: 100%;
         /* Additional styling for the canvas */
@@ -172,7 +156,123 @@
         text-align:left;
     }
 
+    .secondBarGraph {
+        background-color: white;
+        box-shadow: 0 0 8px #525252;
+        width: 50%;
+        height: 100%;
+        border-radius: 6px;
+        margin: 7px;
+        text-align: right;
 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .secondBarGraph canvas {
+            text-align: center;
+            margin-top: 10px;
+    }
+
+    .lastLayer-Dashboard {
+        width: 95%;
+        height: 30%;
+        background-color: transparent;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .firstBox {
+        width: 30%;
+        border-radius: 6px;
+        height: 170px;
+        background-color: white;
+        box-shadow: 0 0 8px #525252;
+    }
+
+    .firstBox-Upper {
+        height: 50%;
+        width: 100%;
+        /* background-color: red; */
+        display: flex;
+    }
+
+    .imageContent {
+        height: 100%;
+        width: 50%;
+        margin: 0 20px;
+        /* background-color: yellow; */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .imageContent h1 {
+        margin: 0px;
+    }
+
+    .textContent {
+        height: 100%;
+        width: 30%;
+        margin: 0;
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .textContent h1 {
+        margin: 0px;
+    }
+
+    .textContentDescription{ 
+        margin: 0px;
+        margin-right: 20px;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .textContentDescription p {
+        margin: 0px;
+    }
+
+    .firstBox-Lower {
+        height: 50%;
+        width: 100%;
+        /* background-color: blue; */
+        display: flex;
+        /* flex-direction: column;
+        justify-content: flex-start; */
+    }
+
+    .textContentLower {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .textContentLower h4 {
+        margin: 0;
+        margin-left: 20px;
+    }
+
+    .textContentDescriptionLower {
+        width: 50%;
+        text-align: center;
+        opacity: 0.6;
+    }
+
+    .textContentDescriptionLower p {
+        margin: 0px;
+        background-color: #FFCC00;
+        padding: 3px;
+        border-radius: 10px;
+    }
 
 </style>
 
@@ -227,20 +327,64 @@
             </div>
         </div>
         <div class="secondBarGraph">
-
+            <div class="Graph-Canvas">
+                <canvas id="joiningLeavingMembersChart" width="110" height="40"></canvas>
+            </div>
         </div>
     </div>
 
 
     <div class="lastLayer-Dashboard">
         <div class="firstBox">
-
+            <div class="firstBox-Upper">
+                <div class="imageContent">
+                    <h1><b>Img</b></h1>
+                </div>
+                <div class="textContent">
+                    <h1>21</h1>
+                </div>
+                <div class="textContentDescription">
+                    <p>Members</p>
+                </div>
+            </div>
+            <div class="firstBox-Lower">
+                <div class="textContentLower">
+                    <h4><b>Cancellation</b></h4>
+                </div>
+                <div class="textContentDescriptionLower">
+                    <p><b>Today</b></p>
+                </div>
+            </div>
         </div>
-        <div class="secondBox">
-
+        <div class="firstBox">
+            <div class="firstBox-Upper">
+                <div class="imageContent">
+                    <h1><b>Img</b></h1>
+                </div>
+                <div class="textContent">
+                    <h1>21</h1>
+                </div>
+                <div class="textContentDescription">
+                    <p>Members</p>
+                </div>
+            </div>
+            <div class="firstBox-Lower">
+            </div>
         </div>
-        <div class="thirdBox">
-
+        <div class="firstBox">
+            <div class="firstBox-Upper">
+                <div class="imageContent">
+                    <h1><b>Img</b></h1>
+                </div>
+                <div class="textContent">
+                    <h1>21</h1>
+                </div>
+                <div class="textContentDescription">
+                    <p>Members</p>
+                </div>
+            </div>
+            <div class="firstBox-Lower">
+            </div>
         </div>
     </div>
 
@@ -297,8 +441,21 @@
     @section Scripts {
         <script>
             // Explanatory data for the bar graph
+            var daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+            // Function to rotate array to position current day at the end
+            function rotateArray(arr, count) {
+                return arr.slice(count, arr.length).concat(arr.slice(0, count));
+            }
+
+            // Get the current day index (0 for Sunday, 1 for Monday, etc.)
+            var currentDayIndex = new Date().getDay() - 6;
+
+            // Rotate the daysOfWeek array to position the current day at the end
+            var rotatedDays = rotateArray(daysOfWeek, currentDayIndex);
+
             var data = {
-                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                labels: rotatedDays,
                 datasets: [{
                     label: 'Number of Entries',
                     data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data
@@ -309,6 +466,7 @@
                     borderSkipped: false,
                 }]
             };
+
 
             // Bar graph options
             var options = {
@@ -353,6 +511,89 @@
             var ctx = document.getElementById('entryLogsChart').getContext('2d');
             var entryLogsChart = new Chart(ctx, {
                 type: 'bar',
+                data: data,
+                options: options
+            });
+        </script>
+
+        <script>
+            // Explanatory data for the line graph
+            var data = {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [
+                    {
+                        label: 'Joining Members',
+                        data: [0, 0, 0, 9, 6, 8, 4, 3,10,7,4], // Replace with your actual data
+                        borderColor: '#FFD803',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        tension: 0.4, // Adjust the tension for a curvy line
+                        hoverRadius: 8, // Adjust the hover radius for larger tooltip area
+                        hitRadius: 10,
+                    },
+                    {
+                        label: 'Leaving Members',
+                        data: [0, 0, 0, 5, 3, 6, 2, 8, 6], // Replace with your actual data
+                        borderColor: '#525252',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        tension: 0.4, // Adjust the tension for a curvy line
+                        hoverRadius: 8, // Adjust the hover radius for larger tooltip area
+                        hitRadius: 10,
+                    }
+                ]
+            };
+
+            // Line graph options
+            var options = {
+                scales: {
+                    x: {
+                        type: 'category',
+                        position: 'bottom',
+                        grid: {
+                            display: false,
+                        },
+                        ticks: {
+                            color: 'black'
+                        },
+                        border: {
+                            display: false
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            display: true,
+                        },
+                        border: {
+                            display: false
+                        },
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true, // Enable tooltips
+                        intersect: false, // Allow tooltips to overlap each other
+                    }
+                },
+                interaction: {
+                    mode: 'nearest', // Display tooltips for all datasets at the same index
+                },
+
+            };
+
+            // Create line graph
+            var ctx = document.getElementById('joiningLeavingMembersChart').getContext('2d');
+            var joiningLeavingMembersChart = new Chart(ctx, {
+                type: 'line',
                 data: data,
                 options: options
             });
