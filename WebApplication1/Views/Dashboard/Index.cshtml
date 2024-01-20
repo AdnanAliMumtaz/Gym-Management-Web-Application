@@ -119,14 +119,59 @@
         height: 300px;
     }
 
-    .firstBarGraph {
+    /* .firstBarGraph {
         margin: 7px 0px;
-        background-color: #525252;
+        background-color: transparent;
         border-radius: 6px;
         height: 100%;
         width: 40%;
         box-shadow: 0 0 8px #525252;
     }
+
+    .Graph-Canvas {
+        border-radius: 6px;
+        background-color: red;
+    }  */
+
+    
+
+
+    .firstBarGraph {
+        margin: 7px 0px;
+        background-color: transparent;
+        border-radius: 6px;
+        height: 100%;
+        width: 40%;
+        box-shadow: 0 0 8px #525252;
+        /* Center the content using flexbox */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Graph-Canvas {
+        /* Set canvas width and height to 100% */
+        width: 90%;
+        height: 100%;
+        /* Additional styling for the canvas */
+        border-radius: 6px;
+        /* Center content vertically */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .Graph-Canvas canvas {
+            text-align: center;
+            /* Add margin to space out the h2 */
+            margin-top: 10px;
+        }
+
+    .text-Design {
+        text-align:left;
+    }
+
 
 
 </style>
@@ -173,12 +218,13 @@
     </div>
 
     <div class="middleLayer-Dashboard">
-        
-        @* Working on this  *@
         <div class="firstBarGraph">
-
-
-
+            <div class="Graph-Canvas">
+                <div class="text-Design">
+                    <p><b>Average Gym Attendance</b></p>
+                </div>
+                <canvas id="entryLogsChart" width="150" height="75"></canvas>
+            </div>
         </div>
         <div class="secondBarGraph">
 
@@ -200,7 +246,7 @@
 
 
 
-    <h2>Entry Logs</h2>
+    @* <h2>Entry Logs</h2>
     <table>
         <thead>
             <tr>
@@ -217,12 +263,12 @@
                 </tr>
             }
         </tbody>
-    </table>
+    </table> *@
 
     <!-- Button to add entry -->
-    <form method="post" asp-action="AddEntry">
+   @*  <form method="post" asp-action="AddEntry">
         <button type="submit">Add Entry</button>
-    </form>
+    </form> *@
 
     @* This is working *@
    @*  <form method="post" asp-controller="Dashboard" asp-action="AddDummyData">
@@ -242,4 +288,79 @@
 
         <button type="submit">Add Dummy Data</button>
     </form> *@
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    @section Scripts {
+        <script>
+            // Explanatory data for the bar graph
+            var data = {
+                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                datasets: [{
+                    label: 'Number of Entries',
+                    data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data
+                    backgroundColor: '#FFD803',
+                    borderColor: '#FFD803',
+                    borderWidth: 1,
+                    borderRadius: 12,
+                    borderSkipped: false,
+                }]
+            };
+
+            // Bar graph options
+            var options = {
+                scales: {
+                    x: {
+                        type: 'category',
+                        position: 'bottom',
+                        grid: {
+                            display: false,
+                        },
+                        ticks: {
+                            color: 'black'
+                        },
+                        border: {
+                            display: false
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            display: false,
+                        },
+                        border: {
+                            display: false
+                        },
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: false // Set to false to hide legend
+                    }
+                },
+                indexAxis: 'x', // Set the axis for barPercentage and categoryPercentage
+                barPercentage: 0.9, // Adjust the bar width (0.5 means 50% of the available space)
+                // categoryPercentage: 0.01 // Adjust the space between bars (0.7 means 70% of the available space)
+            };
+
+            // Create bar graph
+            var ctx = document.getElementById('entryLogsChart').getContext('2d');
+            var entryLogsChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: options
+            });
+        </script>
+    }
+
+
+
+
+
 </div>

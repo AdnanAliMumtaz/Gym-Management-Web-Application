@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[6.0.23, )"
             },
+            "Microsoft.AspNetCore.Razor.Runtime": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.23, )"
