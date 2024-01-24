@@ -1,8 +1,10 @@
 ﻿@model WebApplication1.Models.ViewModels.DashboardViewModel
 
+
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "/Pages/_Layout.cshtml";
+    var entryLogsPerDayJson = Newtonsoft.Json.JsonConvert.SerializeObject(Model.EntryLogsPerDay.Values);
 }
 
 
@@ -264,14 +266,16 @@
     .textContentDescriptionLower {
         width: 50%;
         text-align: center;
-        opacity: 0.6;
     }
 
     .textContentDescriptionLower p {
         margin: 0px;
-        background-color: #FFCC00;
-        padding: 3px;
-        border-radius: 10px;
+        margin-left: 38px;
+        color: #FFCC00;
+            background-color: #ffeb98;
+        padding: 1px 22px;
+        border-radius: 15px;
+        display: inline-block;
     }
 
 </style>
@@ -292,6 +296,7 @@
                     <img src="~/images/DollarSign.png"/>
                 </div>
                 <div class="BarBox-Values">
+                    @* <h1>£@Model.TotalFeesAmount</h1> *@
                     <h1>£@Model.TotalFeesAmount</h1>
                     <p>Fees Amount</p>
                 </div>
@@ -301,6 +306,7 @@
                     <img src="~/images/NewMembers.png" />
                 </div>
                 <div class="BarBox-Values">
+                    @* <h1>@Model.NewMembersCount</h1> *@
                     <h1>@Model.NewMembersCount</h1>
                     <p>New Members</p>
                 </div>
@@ -310,6 +316,7 @@
                     <img src="~/images/TotalMembers.png" />
                 </div>
                 <div class="BarBox-Values">
+                    @* <h1>@Model.ActiveAdmissionMembersCount</h1> *@
                     <h1>@Model.ActiveAdmissionMembersCount</h1>
                     <p>Active Admissions</p>
                 </div>
@@ -326,12 +333,18 @@
                 <canvas id="entryLogsChart" width="150" height="75"></canvas>
             </div>
         </div>
+
+
         <div class="secondBarGraph">
             <div class="Graph-Canvas">
-                <canvas id="joiningLeavingMembersChart" width="110" height="40"></canvas>
+                <p>Joining vs Leaving Members</p>
+                <canvas id="joiningLeavingMembersChart" width="110" height="44"></canvas>
             </div>
         </div>
     </div>
+
+
+
 
 
     <div class="lastLayer-Dashboard">
@@ -369,6 +382,12 @@
                 </div>
             </div>
             <div class="firstBox-Lower">
+                <div class="textContentLower">
+                    <h4><b>Cancellation</b></h4>
+                </div>
+                <div class="textContentDescriptionLower">
+                    <p><b>Today</b></p>
+                </div>
             </div>
         </div>
         <div class="firstBox">
@@ -384,13 +403,35 @@
                 </div>
             </div>
             <div class="firstBox-Lower">
+                <div class="textContentLower">
+                    <h4><b>Cancellation</b></h4>
+                </div>
+                <div class="textContentDescriptionLower">
+                    <p><b>Today</b></p>
+                </div>
             </div>
         </div>
     </div>
 
 
+    @* <!-- Dropdown list to select the member -->
+    <form method="post" asp-action="AddEntry">
+        <label for="memberId">Select Member: </label>
+        <select name="memberId" id="memberId">
+            @foreach (var member in Model.Members)
+            {
+                <option value="@member.MemberID">@($"{member.MemberFirstName} {member.MemberLastName}")</option>
+            }
+        </select>
+        <button type="submit">Add Entry</button>
+    </form> *@
 
-    @* <h2>Entry Logs</h2>
+
+
+
+
+@* 
+    <h2>Entry Logs</h2>
     <table>
         <thead>
             <tr>
@@ -407,10 +448,10 @@
                 </tr>
             }
         </tbody>
-    </table> *@
+    </table>
 
     <!-- Button to add entry -->
-   @*  <form method="post" asp-action="AddEntry">
+    <form method="post" asp-action="AddEntry">
         <button type="submit">Add Entry</button>
     </form> *@
 
@@ -434,7 +475,6 @@
     </form> *@
 
 
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
@@ -454,11 +494,16 @@
             // Rotate the daysOfWeek array to position the current day at the end
             var rotatedDays = rotateArray(daysOfWeek, currentDayIndex);
 
+            var entryLogsPerDayData = @Html.Raw(entryLogsPerDayJson);
+
+
+
             var data = {
                 labels: rotatedDays,
                 datasets: [{
                     label: 'Number of Entries',
-                    data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data
+                    data: entryLogsPerDayData,
+                    // data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data data: entryCounts,
                     backgroundColor: '#FFD803',
                     borderColor: '#FFD803',
                     borderWidth: 1,
@@ -516,31 +561,55 @@
             });
         </script>
 
+
+
+
+
+
+
+
+
+
+
         <script>
             // Explanatory data for the line graph
+            // Explanatory data for the line graph
+            var monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            // Function to rotate array to position current month at the end
+            function rotateArray(arr, count) {
+                return arr.slice(count, arr.length).concat(arr.slice(0, count));
+            }
+
+            // Get the current month index (0 for January, 1 for February, etc.)
+            var currentMonthIndex = new Date().getMonth() + 1;
+
+            // Rotate the monthsOfYear array to position the current month at the end
+            var rotatedMonths = rotateArray(monthsOfYear, currentMonthIndex);
+
             var data = {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: rotatedMonths,
                 datasets: [
                     {
                         label: 'Joining Members',
-                        data: [0, 0, 0, 9, 6, 8, 4, 3,10,7,4], // Replace with your actual data
+                        data: [@string.Join(",", @Model.MembersJoinedPerMonth.Values.Reverse().Select(entry => entry.Count))], // Use C# to insert the actual data
                         borderColor: '#FFD803',
                         backgroundColor: 'transparent',
                         borderWidth: 3,
                         pointRadius: 0,
                         tension: 0.4, // Adjust the tension for a curvy line
-                        hoverRadius: 8, // Adjust the hover radius for larger tooltip area
+                        hoverRadius: 8, // Adjust the hover radius for a larger tooltip area
                         hitRadius: 10,
                     },
                     {
                         label: 'Leaving Members',
-                        data: [0, 0, 0, 5, 3, 6, 2, 8, 6], // Replace with your actual data
+                        data: [@string.Join(",", @Model.MembersLeftPerMonth.Values.Reverse().Select(entry => entry.Count))], // Use C# to insert the actual data
                         borderColor: '#525252',
                         backgroundColor: 'transparent',
                         borderWidth: 3,
                         pointRadius: 0,
                         tension: 0.4, // Adjust the tension for a curvy line
-                        hoverRadius: 8, // Adjust the hover radius for larger tooltip area
+                        hoverRadius: 8, // Adjust the hover radius for a larger tooltip area
                         hitRadius: 10,
                     }
                 ]
@@ -587,7 +656,6 @@
                 interaction: {
                     mode: 'nearest', // Display tooltips for all datasets at the same index
                 },
-
             };
 
             // Create line graph
@@ -598,10 +666,19 @@
                 options: options
             });
         </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
-
 
 </div>

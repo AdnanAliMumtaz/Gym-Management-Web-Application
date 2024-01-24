@@ -40,7 +40,5 @@ namespace WebApplication1.Models
 
         public ICollection<TransactionFee> TransactionFee {  get; set; }
         public ICollection<EntryLog> EntryLog { get; set; } 
-        /*public List<EntryLog> EntryLog { get; set; } = new List<EntryLog>();*/
-
     }
 }

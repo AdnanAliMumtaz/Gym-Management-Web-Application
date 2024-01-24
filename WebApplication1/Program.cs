@@ -14,7 +14,7 @@ builder.Services.AddDbContext<WebDbContext>(options =>
 /*var managingDbContextConnectionString = builder.Configuration.GetConnectionString("ManagingDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ManagingDbContext' not found.");
 builder.Services.AddDbContext<ManagingDbContext>(options =>
 options.UseSqlServer(managingDbContextConnectionString));*/
-
+ 
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<WebDbContext>();
@@ -59,7 +59,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "members",
         pattern: "members/{action=Index}/{id?}",
-        defaults: new { controller = "Members" });
+        defaults: new { controller = "Member" });
 
     endpoints.MapControllerRoute(
         name: "resource",
