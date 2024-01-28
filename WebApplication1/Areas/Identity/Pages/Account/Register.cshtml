@@ -5,18 +5,16 @@
     Layout = "/Areas/Identity/Pages/_WebLayout.cshtml";
 }
 
-
-
-<div class="login-Section">
+   <div class="login-Section">
     <div class="first-Section">
         <div class="inner-Content">
             <div class="image-Logo">
                 <img src="/images/logo.png" alt="Logo">
             </div>
-            <div class="main-Title">
+            @* <div class="main-Title">
                 <h1>Gym <b>Management</b></h1>
                 <h3>where fitness meets efficiency</h3>
-            </div>
+            </div> *@
         </div>
     </div>
     <div class="second-Section">
@@ -60,8 +58,11 @@
             <p>Have an account? <b><u><a href="/Identity/Account/Login">Sign In</a></u></b></p>
         </div>
     </div>
-</div>
+</div>   
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+

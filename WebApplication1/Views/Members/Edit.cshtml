@@ -1,0 +1,55 @@
+﻿@model WebApplication1.Models.Member
+
+<h2>Edit Member</h2>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="MemberID" />
+
+    <div class="form-group">
+        <label asp-for="MemberFirstName" class="control-label"></label>
+        <input asp-for="MemberFirstName" class="form-control" />
+        <span asp-validation-for="MemberFirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MemberLastName" class="control-label"></label>
+        <input asp-for="MemberLastName" class="form-control" />
+        <span asp-validation-for="MemberLastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MemberEmail" class="control-label"></label>
+        <input asp-for="MemberEmail" class="form-control" />
+        <span asp-validation-for="MemberEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MemberPhoneNumber" class="control-label"></label>
+        <input asp-for="MemberPhoneNumber" class="form-control" />
+        <span asp-validation-for="MemberPhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MemberDateJoined" class="control-label"></label>
+        <input asp-for="MemberDateJoined" class="form-control" />
+        <span asp-validation-for="MemberDateJoined" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MemberDateLeft" class="control-label"></label>
+        <input asp-for="MemberDateLeft" class="form-control" />
+        <span asp-validation-for="MemberDateLeft" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+@*         <button type="submit" value="Save" class="btn btn-primary">Save</button>
+
+         <button type="submit" class="btn btn-danger">Delete</button> 
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a> *@
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

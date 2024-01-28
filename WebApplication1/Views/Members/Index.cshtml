@@ -1,4 +1,5 @@
-﻿@model List<Member>
+﻿@model WebApplication1.Models.ViewModels.DashboardViewModel
+@* @model IEnumerable<WebApplication1.Models.Member> *@
 
 @{
     ViewData["Title"] = "Members";
@@ -48,7 +49,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var member in Model)
+            @foreach (var member in Model.Members)
             {
                 <tr>
                     <td>@member.MemberID</td>
@@ -58,10 +59,58 @@
                     <td>@member.MemberPhoneNumber</td>
                     <td>@member.MemberDateJoined.ToString("yyyy-MM-dd")</td>
                     <td>@(member.MemberDateLeft.HasValue ? member.MemberDateLeft.Value.ToString("yyyy-MM-dd") : "")</td>
+
+                    <td>
+                        @* <a asp-action="Edit" asp-route-id="@member.MemberID">Edit</a> *@
+                        <a asp-controller="Members" asp-action="Edit" asp-route-id="@member.MemberID">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@member.MemberID">Delete</a> 
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+
+</div>
+
+
+<div class="entryLogs">
+    <!-- Dropdown list to select the member -->
+    <form method="post" asp-action="AddEntry">
+        <label for="memberId">Select Member: </label>
+        <select name="memberId" id="memberId">
+            @foreach (var member in Model.Members)
+            {
+                <option value="@member.MemberID">@($"{member.MemberFirstName} {member.MemberLastName}")</option>
+            }
+        </select>
+        <button type="submit">Add Entry</button>
+    </form>
+
+
+
+    <div class="entryLogs">
+        <h3>Entry Logs</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Entry Date</th>
+                    <th>RFID Tag</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entryLog in Model.EntryLogs)
+                {
+                    <tr>
+                        <td>@entryLog.EntryLogId</td>
+                        <td>@entryLog.EntryDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@entryLog.RfidTag</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 
 </div>
 

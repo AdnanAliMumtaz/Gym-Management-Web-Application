@@ -47,7 +47,6 @@
         transition: background 0.5s; /* Use transition on background property */
         position: relative;
         overflow: hidden;
-
         z-index: 1;    
     }
 
@@ -413,68 +412,6 @@
         </div>
     </div>
 
-
-    @* <!-- Dropdown list to select the member -->
-    <form method="post" asp-action="AddEntry">
-        <label for="memberId">Select Member: </label>
-        <select name="memberId" id="memberId">
-            @foreach (var member in Model.Members)
-            {
-                <option value="@member.MemberID">@($"{member.MemberFirstName} {member.MemberLastName}")</option>
-            }
-        </select>
-        <button type="submit">Add Entry</button>
-    </form> *@
-
-
-
-
-
-@* 
-    <h2>Entry Logs</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Entry Time</th>
-                <!-- Add more columns as needed based on your EntryLog model -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var entryLog in Model.EntryLogs)
-            {
-                <tr>
-                    <td>@entryLog.EntryDate</td>
-                    <!-- Add more columns as needed based on your EntryLog model -->
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <!-- Button to add entry -->
-    <form method="post" asp-action="AddEntry">
-        <button type="submit">Add Entry</button>
-    </form> *@
-
-    @* This is working *@
-   @*  <form method="post" asp-controller="Dashboard" asp-action="AddDummyData">
-        <!-- Member information fields -->
-        <label for="FirstName">First Name:</label>
-        <input type="text" id="FirstName" name="FirstName" required>
-
-        <label for="LastName">Last Name:</label>
-        <input type="text" id="LastName" name="LastName" required>
-
-        <!-- TransactionFee information fields -->
-        <label for="Amount">Transaction Amount:</label>
-        <input type="text" id="Amount" name="Amount" required>
-
-        <label for="DatePaid">Date Paid:</label>
-        <input type="date" id="DatePaid" name="DatePaid" required>
-
-        <button type="submit">Add Dummy Data</button>
-    </form> *@
-
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
@@ -666,19 +603,5 @@
                 options: options
             });
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 </div>

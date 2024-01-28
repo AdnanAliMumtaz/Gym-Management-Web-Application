@@ -9,12 +9,153 @@
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/writing-signature" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
 </head>
 
 @{
     var currentController = ViewContext.RouteData.Values["controller"] as string;
     var currentAction = ViewContext.RouteData.Values["action"] as string;
 }
+
+<style>
+
+    .image-Logo img{
+        width: 90%;
+    }
+
+    .side-Bar {
+        background-color: #525252;
+        background-color: white;
+        width: 17%;
+        height: 100%;
+        border-right: 2px solid #ECECEC;
+        text-align: center;
+    }
+        .side-Bar .image-Logo img {
+            margin-top: 50px;
+        }
+
+
+    .list-Navigation {
+        margin-top: 40%;
+        margin-left: 10%;
+        margin-right: 5%;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0px;
+        list-style-type: none;
+    }
+
+        .list-Navigation li {
+            width: 100%;
+            border: 1px solid transparent;
+            transition: 0.5s;
+            margin-bottom: 5px;
+            /* padding: 5px 10px; */
+        }
+
+            .list-Navigation li a {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                text-decoration: none;
+                color: inherit;
+                padding-left: 3px;
+            }
+
+
+    .btn-style {
+        display: flex;
+        align-items: center;
+        height: 45px;
+        /*background-color: white;*/
+        /*color: black;*/
+        color: #525252;
+        border: 1px solid transparent;
+        font-size: 18px;
+        width: 100%;
+        transition: 0.5s;
+        text-align: left;
+        padding-left: 7px;
+        padding-right: 20px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+        .btn-style:hover {
+            /* color: white; */
+            background-color: #ECECEC;
+            border-radius: 6px;
+            transition: 0.5s;
+        }
+
+        .btn-style img {
+            width: 18px;
+            margin-right: 4%;
+            margin-left: 1%;
+            filter: brightness(0);
+        }
+
+        .btn-style.active {
+            color: white;
+            background-color: #304D70;
+            border-radius: 6px;
+            transition: 0.5s;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .sideBarHeadings {
+            text-align: left;
+            width: 100%;
+            padding: 0px;
+            margin-bottom: -15px;
+            /* background-color: red; */
+        }
+
+    .logoutBox {
+        display: flex;
+        background-color: rgba(48, 77, 112, 0.3);
+        border-radius: 5px;
+        height: 80px;
+        margin: 0px 10px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .iconPerson {
+        width: 20%;
+    }
+    .iconPerson img {
+        width: 30px;
+    }
+
+    .detailsPerson {
+        color: black;
+        width: 60%;
+    }
+
+    .detailsPerson p{
+        margin: 0px;
+    }
+
+    .buttonLogout {
+        width: 20%;
+    }
+
+
+</style>
 
 <body>
     <div class="main-Background">
@@ -23,38 +164,58 @@
                 <img src="/images/logo.png" alt="Logo">
             </div>
             <ul class="list-Navigation">
+                <div class="sideBarHeadings">
+                    <p><b>HOME</b></p>
+                </div>
                 <li class="btn-style @(currentController == "Dashboard" && currentAction == "Index" ? "active" : "")">
                     <img src="/images/DashboardBefore.png" alt="Dashboard Icon" />
-                    <a href="/Dashboard/Index"><b>Dashboard</b></a>
+                    <a href="/Dashboard/Index">Dashboard</a>
                 </li>
                 <li class="btn-style @(currentController == "Members" && currentAction == "Index" ? "active" : "")">
                     <img src="/images/MembersBefore.png" alt="Members Icon" />
-                    <a href="/Members/Index"><b>Members</b></a>
+                    <a href="/Members/Index">Members</a>
                 </li>
                 <li class="btn-style @(currentController == "Resource" && currentAction == "Index" ? "active" : "")">
                     <img src="/images/ResourceBefore.png" alt="Resource Icon" />
-                    <a href="/Resource/Index"><b>Resource</b></a>
+                    <a href="/Resource/Index">Resource</a>
                 </li>
                 <li class="btn-style @(currentController == "Messages" && currentAction == "Index" ? "active" : "")">
                     <img src="/images/MessageBefore.png" alt="Message Icon" />
-                    <a href="/Messages/Index"><b>Messages</b></a>
+                    <a href="/Messages/Index">Messages</a>
                 </li>
                 <li class="btn-style @(currentController == "Classes" && currentAction == "Index" ? "active" : "")">
                     <img src="/images/ClassesBefore.png" alt="Classes Icon" />
-                    <a href="/Classes/Index"><b>Classes</b></a>
-                </li>
-                <li class="btn-style @(currentController == "Settings" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/SettingBefore.png" alt="Settings Icon" />
-                    <a href="/Settings/Index"><b>Settings</b></a>
+                    <a href="/Classes/Index">Classes</a>
                 </li>
             </ul>
-            <ul>
-                <li class="btn-style">
+
+            <ul class="list-Navigation">
+                <div class="sideBarHeadings">
+                    <p><b>OTHERS</b></p>
+                </div>
+                <li class="btn-style @(currentController == "Settings" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/SettingBefore.png" alt="Settings Icon" />
+                    <a href="/Settings/Index">Settings</a>
+                </li>
+            </ul>
+
+
+            <div class="logoutBox">
+                <div class="iconPerson">
+                    <img src="/images/SettingBefore.png" alt="Settings Icon" />
+                </div>
+                <div class="detailsPerson">
+                    <p><b>Adnan Ali</b></p>
+                    <p>Owner</p>
+                </div>
+                <div class="buttonLogout">
                     @{
                         if (User.Identity?.IsAuthenticated ?? false)
                         {
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                <button type="submit" class="nav-link btn btn-link text-dark">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </button>
                             </form>
                         }
                         else
@@ -62,9 +223,9 @@
                             <p>You have successfully logged out of the application.</p>
                         }
                     }
-                </li>
-            </ul>
 
+                </div>
+            </div>
         </div>
         <div class="main-Content">
             @RenderBody()

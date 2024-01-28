@@ -1,19 +1,49 @@
 ﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
-}
-
-@{
     ViewData["Title"] = "LoginRegister";
 }
 
-<div class="background-Login">
+<style>
+
+    .inner-left {
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
+        height: 100%;
+        width: 50%;
+        text-align: center;
+    }
+
+    .middle-left {
+        width: 50%;
+    }
+
+     .inner-right {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #304D70;
+        border-bottom-left-radius: 90px;
+        border-top-left-radius: 150px;
+    }
+        .inner-right img {
+            height: 70%;
+        }
+</style>
+
+
+  <div class="background-Login">
     <div class="inner-left">
-        @RenderBody()
+        <div class="middle-left">
+            @RenderBody()
+        </div>
     </div>
     <div class="inner-right">
-        <img src="/images/SofaGuy.png" alt="SofaGuy">
+        @* <img src="/images/SofaGuy.png" alt="SofaGuy"> *@
     </div>
-</div>
+</div> 
+
 
 @section Scripts {
     @await RenderSectionAsync("Scripts", required: false)

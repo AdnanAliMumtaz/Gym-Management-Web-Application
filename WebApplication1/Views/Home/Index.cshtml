@@ -2,14 +2,59 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="background">
+<style>
+
+    .fullBackground {
+        background-color: white;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .title-Wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* background-color: #525252; */
+        border-radius: 7px;
+        text-align: center;
+        height: 300px;
+        width: 500px;
+    }
+        .image-Logo img {
+            height: 50px;
+            margin-bottom: -5px;
+    }
+
+    .main-Title {
+        text-align: left;
+        font-family: 'Writing Signature', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        background-color: #304D70;
+        border-radius: 7px;
+        word-spacing: 4px; 
+        padding-bottom: 7px;
+    }
+
+        .main-Title h1,
+        .main-Title h3 {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+</style>
+
+<div class="fullBackground">
     <div class="title-Wrapper">
         <div class="inner-Content">
             <div class="image-Logo">
-                <img src="/images/logo.png" alt="Logo">
+                <img src="/images/Logo.png" alt="Logo">
             </div>
             <div class="main-Title">
-                <h1>Gym <b>Management</b></h1>
                 <h3>where fitness meets efficiency</h3>
             </div>
         </div>
@@ -20,4 +65,4 @@
     setTimeout(function () {
         window.location.href = "/Identity/Account/Login";
     }, 1000) 
-</script>
+</script> 

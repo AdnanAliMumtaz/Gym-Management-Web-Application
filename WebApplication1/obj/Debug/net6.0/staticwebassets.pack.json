@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\images\\DollarSign.png"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Logo.png",
+      "PackagePath": "staticwebassets\\images\\Logo.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\MembersBefore.png",
       "PackagePath": "staticwebassets\\images\\MembersBefore.png"
     },
@@ -61,8 +65,8 @@
       "PackagePath": "staticwebassets\\images\\backgroung.png.png"
     },
     {
-      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\logo.png",
-      "PackagePath": "staticwebassets\\images\\logo.png"
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\useless.png",
+      "PackagePath": "staticwebassets\\images\\useless.png"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\site.js",

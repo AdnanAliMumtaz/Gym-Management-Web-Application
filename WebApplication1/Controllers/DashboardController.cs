@@ -22,9 +22,6 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
         }
 
-
-
-
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -71,30 +68,6 @@ namespace WebApplication1.Controllers
 
             // Query 6: Retrieve Members joined and left per month for the last 12 months
             DateTime startMonthDate = DateTime.Now.Date.AddMonths(-11); // Start from 12 months ago
-
-
-            /*// Query 6: Retrieve Members joined and left per month for the last 12 months
-            var membersJoinedPerMonth = _context.Members
-                .Where(m => m.UserId == user.Id && m.MemberDateJoined >= startMonthDate)
-                .GroupBy(m => new { Year = m.MemberDateJoined.Year, Month = m.MemberDateJoined.Month })
-                .Select(group => new EntryCount
-                {
-                    Date = new DateTime(group.Key.Year, group.Key.Month, 1), // First day of the month
-                    Count = group.Count()
-                })
-                .ToDictionary(entry => entry.Date, entry => entry);
-
-            var membersLeftPerMonth = _context.Members
-                .Where(m => m.UserId == user.Id && m.MemberDateLeft.HasValue && m.MemberDateLeft.Value >= startMonthDate)
-                .GroupBy(m => new { Year = m.MemberDateLeft.Value.Year, Month = m.MemberDateLeft.Value.Month })
-                .Select(group => new EntryCount
-                {
-                    Date = new DateTime(group.Key.Year, group.Key.Month, 1), // First day of the month
-                    Count = group.Count()
-                })
-                .ToDictionary(entry => entry.Date, entry => entry);*/
-
-
 
             var currentDate = DateTime.Now.Date;
 
@@ -156,69 +129,6 @@ namespace WebApplication1.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         [Authorize]
         public async Task<IActionResult> EntriesGraph()
         {
@@ -247,145 +157,5 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
-        /*[Authorize]
-        [HttpPost]
-        public async Task<IActionResult> AddDummyData(string FirstName, string LastName, string Email, string PhoneNumber, decimal Amount, DateTime DatePaid)
-        {
-            // Get the currently logged-in user
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            // Create a new Member with the UserId set to the current user's Id
-            var newMember = new Member
-            {
-                MemberFirstName = FirstName,
-                MemberLastName = LastName,
-                MemberEmail = Email,
-                MemberPhoneNumber = PhoneNumber,
-                *//*MemberEmail = "adnan3432@gmail.com",*/
-                /*MemberPhoneNumber = "093434334",*//*
-                MemberDateJoined = DatePaid,
-                ApplicationUser = user,
-            };
-
-            // Create a new TransactionFee associated with the new member
-            var newTransactionFee = new TransactionFee
-            {
-                Amount = Amount,
-                DatePaid = DatePaid,
-                Member = newMember,
-            };
-
-            // Add the new Member and TransactionFee to the database
-            _context.Members.Add(newMember);
-            _context.TransactionFees.Add(newTransactionFee);
-
-            // Save changes to the database
-            await _context.SaveChangesAsync();
-
-            // Redirect to a success page or back to the Members page
-            return RedirectToAction(nameof(Index));
-        }*/
-
-
-
-
-
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> AddEntry(int memberId)
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            // Get the selected member
-            Member member = _context.Members
-                .Include(m => m.EntryLog)
-                .FirstOrDefault(m => m.UserId == user.Id && m.MemberID == memberId);
-
-            if (member != null)
-            {
-                // Check if there is an existing entry within the past 2 hours
-                DateTime twoHoursAgo = DateTime.Now.AddHours(-2);
-
-                bool hasExistingEntry = member.EntryLog.Any(el => el.EntryDate >= twoHoursAgo);
-
-                if (!hasExistingEntry)
-                {
-                    // Create a new EntryLog
-                    EntryLog newEntryLog = new EntryLog
-                    {
-                        EntryDate = DateTime.Now,
-                        RfidTag = "Adnasndjkash kj234 ekja",
-                        Member = member
-                    };
-
-                    // Add the new EntryLog to the database
-                    _context.EntryLogs.Add(newEntryLog);
-                    _context.SaveChanges();
-
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    // Member already has an entry within the past 2 hours
-                    // Handle this scenario (e.g., display a message or redirect to an error page)
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-
-            // Handle the case where the member is not found
-            return RedirectToAction(nameof(Index));
-        }
-
-
-
-
-        /*[Authorize]
-        [HttpPost]
-        public async Task<IActionResult> AddEntry()
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            // Get the member for the current user
-            Member member = _context.Members
-                .Include(m => m.EntryLog)
-                .FirstOrDefault(m => m.UserId == user.Id);
-
-            if (member != null)
-            {
-                // Check if there is an existing entry within the past 2 hours
-                DateTime twoHoursAgo = DateTime.Now.AddHours(-2);
-
-                bool hasExistingEntry = member.EntryLog.Any(el => el.EntryDate >= twoHoursAgo);
-
-                if (!hasExistingEntry)
-                {
-                    // Create a new EntryLog
-                    EntryLog newEntryLog = new EntryLog
-                    {
-                        EntryDate = DateTime.Now,
-                        RfidTag = "Adnasndjkash kj234 ekja",
-                        Member = member
-                    };
-
-                    // Add the new EntryLog to the database
-                    _context.EntryLogs.Add(newEntryLog);
-                    _context.SaveChanges();
-
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    // Member already has an entry within the past 2 hours
-                    // Handle this scenario (e.g., display a message or redirect to an error page)
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-
-            // Handle the case where the member is not found
-            return RedirectToAction(nameof(Index));
-        }*/
-
     }
 }
