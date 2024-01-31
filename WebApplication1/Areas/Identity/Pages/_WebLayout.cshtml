@@ -10,22 +10,41 @@
         border-bottom-right-radius: 40px;
         height: 100%;
         width: 50%;
-        text-align: center;
     }
 
     .middle-left {
+        height: 80%;
+        /* background-color: red; */
         width: 50%;
+        margin: auto;
+        display: flex;
+    }
+
+    .image-Logo {
+        padding: 40px;
+        height: 10%;
+        /* background-color: blue; */
+    }
+
+        .image-Logo img {
+            height: 30px;
+        }
+
+    .middle {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        /* justify-content: center;
+        align-items: center; */
     }
 
      .inner-right {
         height: 100%;
-        width: 50%;
+        width: 40%;
         display: flex;
-        justify-content: center;
-        align-items: center;
         background-color: #304D70;
-        border-bottom-left-radius: 90px;
-        border-top-left-radius: 150px;
+        border-top-left-radius: 20%;
     }
         .inner-right img {
             height: 70%;
@@ -33,10 +52,16 @@
 </style>
 
 
-  <div class="background-Login">
+<div class="background-Login">
+
     <div class="inner-left">
+        <div class="image-Logo">
+            <img src="/images/logo.png" alt="Logo">
+        </div>
         <div class="middle-left">
-            @RenderBody()
+            <div class="middle">
+                @RenderBody()
+            </div>
         </div>
     </div>
     <div class="inner-right">

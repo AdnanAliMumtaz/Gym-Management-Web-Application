@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
 
@@ -43,7 +43,50 @@ namespace WebApplication1.Controllers
             };
 
             return View(viewModel);
+        }*/
+
+
+        public async Task<IActionResult> Index(string search)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Filter members based on the user's ID
+            var membersQuery = _context.Members
+                .Where(m => m.UserId == user.Id);
+
+            // Apply search filter if a search query is provided
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                membersQuery = membersQuery.Where(m =>
+                    m.MemberFirstName.ToLower().Contains(search) ||
+                    m.MemberLastName.ToLower().Contains(search) ||
+                    m.MemberEmail.ToLower().Contains(search) ||
+                    m.MemberPhoneNumber.Contains(search));
+            }
+
+            var members = await membersQuery.ToListAsync();
+
+            // Retrieve entry logs for the specific user
+            var entryLogs = _context.EntryLogs
+                .Where(el => el.Member.UserId == user.Id)
+                .ToList();
+
+            // Create a DashboardViewModel instance and set its Members property
+            var viewModel = new WebApplication1.Models.ViewModels.DashboardViewModel
+            {
+                Members = members,
+                EntryLogs = entryLogs
+            };
+
+            return View(viewModel);
         }
+
+
+
+
+
+
 
 
         public IActionResult Members()

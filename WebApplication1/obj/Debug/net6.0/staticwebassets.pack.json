@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets\\images\\backgroung.png.png"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\member3D.png",
+      "PackagePath": "staticwebassets\\images\\member3D.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\useless.png",
       "PackagePath": "staticwebassets\\images\\useless.png"
     },
