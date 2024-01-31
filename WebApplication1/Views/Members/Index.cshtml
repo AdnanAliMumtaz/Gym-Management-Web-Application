@@ -142,58 +142,8 @@
     <div class="upperBody">
         <h4>Members</h4>
     </div>
+
     <div class="middleBody">
-        <div class="middleBodyLeft">
-
-
-
-            <form asp-controller="Members" asp-action="Index" method="get">
-                <label for="search">Search:</label>
-                <input type="text" name="search" id="search" />
-                <button type="submit">Search</button>
-            </form> 
-
-
- 
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Date Joined</th>
-                        @* <th>Date Left</th>  *@
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var member in Model.Members)
-                    {
-                        <tr>
-                            <td>@member.MemberID</td>
-                            <td>@member.MemberFirstName</td>
-                            <td>@member.MemberLastName</td>
-                            <td>@member.MemberEmail</td>
-                            <td>@member.MemberPhoneNumber</td>
-                            <td>@member.MemberDateJoined.ToString("yyyy-MM-dd")</td>
-                             @* <td>@(member.MemberDateLeft.HasValue ? member.MemberDateLeft.Value.ToString("yyyy-MM-dd") : "")</td> *@
-                            <td>
-                                <a asp-controller="Members" asp-action="Edit" asp-route-id="@member.MemberID">Edit</a>
-                                <a asp-action="Delete" asp-route-id="@member.MemberID">Delete</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-
-
-
-
-
 
 
 
@@ -233,15 +183,17 @@
 
 
 
+        <div class="middleBodyLeft">
+                <form asp-controller="Members" asp-action="Index" method="get">
+                    <label for="search">Search:</label>
+                    <input type="text" name="search" id="search" />
 
+                </form>
 
-
-
-
-
-
-
-
+                <div id="search-results">
+                    <!-- Display search results here -->
+                </div>            
+        </div>
         <div class="middleBodyRight">
             <div class="middleUpper">
                 <h4>Overall Statistics</h4>
@@ -258,72 +210,6 @@
 </div>
 
 
-
-
-
-
-
-
-<div class="members">
-    @* <form method="post" asp-controller="Member" asp-action="AddDummyData">
-        <!-- Member information fields -->
-        <label for="FirstName">First Name:</label>
-        <input type="text" id="FirstName" name="FirstName" required>
-
-        <label for="LastName">Last Name:</label>
-        <input type="text" id="LastName" name="LastName" required>
-
-        <label for="Email">Email:</label>
-        <input type="text" id="Email" name="Email" required>
-
-        <label for="PhoneNumber">PhoneNumber:</label>
-        <input type="text" id="PhoneNumber" name="PhoneNumber" required>
-
-        <!-- TransactionFee information fields -->
-        <label for="Amount">Transaction Amount:</label>
-        <input type="text" id="Amount" name="Amount" required>
-
-        <label for="DatePaid">Date Paid:</label>
-        <input type="date" id="DatePaid" name="DatePaid" required>
-
-        <button type="submit">Add Dummy Data</button>
-    </form> *@
-
-
-    @* <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Date Joined</th>
-                <th>Date Left</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var member in Model.Members)
-            {
-                <tr>
-                    <td>@member.MemberID</td>
-                    <td>@member.MemberFirstName</td>
-                    <td>@member.MemberLastName</td>
-                    <td>@member.MemberEmail</td>
-                    <td>@member.MemberPhoneNumber</td>
-                    <td>@member.MemberDateJoined.ToString("yyyy-MM-dd")</td>
-                    <td>@(member.MemberDateLeft.HasValue ? member.MemberDateLeft.Value.ToString("yyyy-MM-dd") : "")</td>
-
-                    <td>
-                        <a asp-controller="Members" asp-action="Edit" asp-route-id="@member.MemberID">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@member.MemberID">Delete</a> 
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table> *@
-
-</div>
 
 
 <div class="entryLogs">
@@ -368,7 +254,7 @@
 
 </div>
 
-                    <script>
+<script>
     document.addEventListener("DOMContentLoaded", function () {
         // Get references to the button, pop-up container, and overlay
         const openPopupButton = document.getElementById("openPopupButton");
@@ -395,4 +281,31 @@
         overlay.addEventListener("click", closePopup);
     });
 
-                    </script>
+    // Attach an event listener to the search input field
+    document.getElementById('search').addEventListener('input', function () {
+        // Get the value entered in the search input field
+        var searchQuery = this.value;
+
+        // Make an AJAX request to the server to fetch search results
+        fetch('/Members/Search?search=' + encodeURIComponent(searchQuery))
+            .then(response => response.text())
+            .then(html => {
+                // Update the search results container with the fetched results
+                document.getElementById('search-results').innerHTML = html;
+            })
+            .catch(error => console.error('Error fetching search results:', error));
+    });
+
+    // Trigger an initial search when the page loads to show all members
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/Members/Search')
+            .then(response => response.text())
+            .then(html => {
+                // Update the search results container with the fetched results
+                document.getElementById('search-results').innerHTML = html;
+            })
+            .catch(error => console.error('Error fetching search results:', error));
+    });
+
+</script>
+

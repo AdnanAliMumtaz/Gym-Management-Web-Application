@@ -46,6 +46,30 @@ namespace WebApplication1.Controllers
         }*/
 
 
+        [HttpGet]
+        public IActionResult Search(string search)
+        {
+            ApplicationUser user = _userManager.GetUserAsync(User).Result;
+
+            // Filter members based on the user's ID and the search query
+            var membersQuery = _context.Members
+                .Where(m => m.UserId == user.Id);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                membersQuery = membersQuery.Where(m =>
+                    m.MemberFirstName.ToLower().Contains(search) ||
+                    m.MemberLastName.ToLower().Contains(search) ||
+                    m.MemberEmail.ToLower().Contains(search) ||
+                    m.MemberPhoneNumber.Contains(search));
+            }
+
+            var members = membersQuery.ToList();
+
+            return PartialView("_SearchResultsPartial", members);
+        }
+
         public async Task<IActionResult> Index(string search)
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
