@@ -1,11 +1,9 @@
 ﻿@model WebApplication1.Models.ViewModels.DashboardViewModel
-@* @model IEnumerable<WebApplication1.Models.Member> *@
 
 @{
     ViewData["Title"] = "Members";
     Layout = "/Pages/_Layout.cshtml";
 }
-
 
 
 <style>
@@ -24,7 +22,7 @@
     .middleBody {
         display: flex;
         padding: 25px 5px;
-        height: 50%;
+        height: 70%;
     }
 
     .middleBodyLeft {
@@ -49,10 +47,12 @@
         height: 100%;
         background-color: #304D70;
         border-radius: 7px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         /* padding: 25px 5px; */
         margin: 0px 10px;
         /* margin: 15px; */
         text-align: center;
+        position: relative;
 
     }
 
@@ -136,6 +136,21 @@
         z-index: 999;
     }
 
+    .middleBottom {
+        overflow: auto;
+        height: 30%;
+        margin: 15px;
+        margin-top: -40px;
+        border-radius: 7px;
+        background-color: red;
+        z-index: 2; /* Set a higher z-index to bring it to the front */
+    }
+
+    .middleMiddle {
+        position: relative; /* Make sure position is set to relative or absolute */
+        z-index: 1; /* Set a lower z-index compared to .middleBottom */
+    }
+
 </style>
 
 <div class="memberBody">
@@ -144,10 +159,6 @@
     </div>
 
     <div class="middleBody">
-
-
-
-
 
 
         <!-- Button to trigger the pop-up -->
@@ -194,6 +205,8 @@
                     <!-- Display search results here -->
                 </div>            
         </div>
+
+
         <div class="middleBodyRight">
             <div class="middleUpper">
                 <h4>Overall Statistics</h4>
@@ -206,6 +219,10 @@
 
             </div>
         </div>
+
+
+
+
     </div>
 </div>
 
