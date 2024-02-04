@@ -22,6 +22,7 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
         }
 
+
         [Authorize]
         public async Task<IActionResult> Index()
         {

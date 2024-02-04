@@ -3,79 +3,8 @@
     ViewData["Title"] = "LoginRegister";
 }
 
-@* <style>
-
-    .inner-left {
-        border-top-right-radius: 40px;
-        border-bottom-right-radius: 40px;
-        height: 100%;
-        width: 50%;
-    }
-
-    .middle-left {
-        height: 80%;
-        /* background-color: red; */
-        width: 50%;
-        margin: auto;
-        display: flex;
-    }
-
-    .image-Logo {
-        padding: 40px;
-        height: 10%;
-        /* background-color: blue; */
-    }
-
-        .image-Logo img {
-            height: 30px;
-        }
-
-    .middle {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-        /* justify-content: center;
-        align-items: center; */
-    }
-
-     .inner-right {
-        height: 100%;
-        width: 40%;
-        display: flex;
-        background-color: #304D70;
-        border-top-left-radius: 20%;
-    }
-        .inner-right img {
-            height: 70%;
-        }
-</style> *@
-
-
 @RenderBody()
 
-@* <div class="background-Login">
-
-    <div class="inner-left">
-        
-        <div class="image-Logo">
-            <img src="/images/logo.png" alt="Logo">
-        </div>
-
-        <div class="middle-left">
-            <div class="middle">
-                @RenderBody()
-            </div>
-        </div>
-
-    </div>
-    <div class="inner-right">
-            @RenderBody()
-        <img src="/images/SofaGuy.png" alt="SofaGuy">
-    </div>
-</div> 
-
- *@
 @section Scripts {
     @await RenderSectionAsync("Scripts", required: false)
     <script>
@@ -91,5 +20,6 @@
             )
         }
         )
+
     </script>
 }

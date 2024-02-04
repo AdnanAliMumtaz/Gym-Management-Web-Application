@@ -1,8 +1,8 @@
-﻿@{
+﻿@using WebApplication1.Areas.Identity.Pages.Account
+@{
     ViewData["Title"] = "LoginRegister";
 }
-
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -220,11 +220,10 @@ body{
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up">
-            @Html.Partial("/Areas/Identity/Pages/Account/Register.cshtml")
-
+            @Html.Partial("_RegisterPartial")
         </div>
         <div class="form-container sign-in">
-            @Html.Partial("/Areas/Identity/Pages/Account/Login.cshtml")
+            @Html.Partial("_LoginPartial")
         </div>
 
         <div class="toggle-container">
@@ -243,7 +242,6 @@ body{
         </div>
     </div>
 
-    @* <script src="script.js"></script> *@
 
     <script>
         const container = document.getElementById('container');
