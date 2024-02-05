@@ -102,7 +102,13 @@
             width: 18px;
             margin-right: 4%;
             margin-left: 1%;
-            filter: brightness(0);
+            filter: invert(0%);
+            /* filter: brightness(0); */
+        }
+
+        .btn-style.active img {
+            /* filter: brightness(0); */
+            filter: invert(100%);
         }
 
         .btn-style.active {
@@ -154,7 +160,6 @@
         width: 20%;
     }
 
-
 </style>
 
 <body>
@@ -168,23 +173,23 @@
                     <p><b>HOME</b></p>
                 </div>
                 <li class="btn-style @(currentController == "Dashboard" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/DashboardBefore.png" alt="Dashboard Icon" />
+                    <img src="/images/dashboard.png" alt="Dashboard Icon" />
                     <a href="/Dashboard/Index">Dashboard</a>
                 </li>
                 <li class="btn-style @(currentController == "Members" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/MembersBefore.png" alt="Members Icon" />
+                    <img src="/images/members.png" alt="Members Icon" />
                     <a href="/Members/Index">Members</a>
                 </li>
                 <li class="btn-style @(currentController == "Resource" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/ResourceBefore.png" alt="Resource Icon" />
+                    <img src="/images/resource.png" alt="Resource Icon" />
                     <a href="/Resource/Index">Resource</a>
                 </li>
                 <li class="btn-style @(currentController == "Messages" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/MessageBefore.png" alt="Message Icon" />
+                    <img src="/images/messages.png" alt="Message Icon" />
                     <a href="/Messages/Index">Messages</a>
                 </li>
                 <li class="btn-style @(currentController == "Classes" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/ClassesBefore.png" alt="Classes Icon" />
+                    <img src="/images/classes.png" alt="Classes Icon" />
                     <a href="/Classes/Index">Classes</a>
                 </li>
             </ul>
@@ -194,7 +199,7 @@
                     <p><b>OTHERS</b></p>
                 </div>
                 <li class="btn-style @(currentController == "Settings" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/SettingBefore.png" alt="Settings Icon" />
+                    <img src="/images/settings.png" alt="Settings Icon" />
                     <a href="/Settings/Index">Settings</a>
                 </li>
             </ul>

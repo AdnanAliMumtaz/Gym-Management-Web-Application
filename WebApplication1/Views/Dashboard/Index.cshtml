@@ -414,6 +414,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.10/chartjs-plugin-annotation.min.js"></script>
 
     @section Scripts {
         <script>
@@ -508,7 +509,139 @@
 
 
 
+
+
+
+
+
         <script>
+            // Explanatory data for the line graph
+            var monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            function rotateArray(arr, count) {
+                return arr.slice(count, arr.length).concat(arr.slice(0, count));
+            }
+
+            var currentMonthIndex = new Date().getMonth() + 1;
+            var rotatedMonths = rotateArray(monthsOfYear, currentMonthIndex);
+
+            var data = {
+                labels: rotatedMonths,
+                datasets: [
+                    {
+                        label: 'Joining Members',
+                        data: [/* Your actual data here */],
+                        borderColor: '#FFD803',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        tension: 0.4,
+                        hoverRadius: 8,
+                        hitRadius: 10,
+                    },
+                    {
+                        label: 'Leaving Members',
+                        data: [/* Your actual data here */],
+                        borderColor: '#525252',
+                        backgroundColor: 'transparent',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        tension: 0.4,
+                        hoverRadius: 8,
+                        hitRadius: 10,
+                    }
+                ]
+            };
+
+            var options = {
+                scales: {
+                    x: {
+                        type: 'category',
+                        position: 'bottom',
+                        grid: {
+                            display: false,
+                        },
+                        ticks: {
+                            color: 'black'
+                        },
+                        border: {
+                            display: false
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            display: true,
+                        },
+                        border: {
+                            display: false
+                        },
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true,
+                        intersect: false,
+                    },
+                    annotation: {
+                        annotations: [
+                            {
+                                type: 'line',
+                                mode: 'horizontal',
+                                scaleID: 'y',
+                                value: 0,
+                                borderColor: {
+                                    stops: [
+                                        [0, 'rgba(255, 216, 3, 0.8)'],
+                                        [1, 'rgba(255, 216, 3, 0)']
+                                    ]
+                                },
+                                borderWidth: 3,
+                            },
+                        ],
+                    },
+                },
+                interaction: {
+                    mode: 'nearest',
+                },
+            };
+
+            var ctx = document.getElementById('joiningLeavingMembersChart').getContext('2d');
+            var joiningLeavingMembersChart = new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: options
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       @*  <script>
             // Explanatory data for the line graph
             // Explanatory data for the line graph
             var monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -602,6 +735,6 @@
                 data: data,
                 options: options
             });
-        </script>
+        </script> *@
     }
 </div>

@@ -1,46 +1,69 @@
-﻿@* @using Microsoft.AspNetCore.Identity
-@using WebApplication1.Areas.Identity.Data
-
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
-</ul>
- *@
-
-@using WebApplication1.Areas.Identity.Pages.Account
+﻿@using WebApplication1.Areas.Identity.Pages.Account
 @model LoginModel
 
 <style>
-    /* Your styling here */
+    /*Login Page & Register Page CSS*/
+    *{
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .login-form h1 {
+        line-height: 130%;
+        /* background-color: red; */
+    }
+
+    .form-floating {
+        padding-bottom: 25px;
+        width: 60%;
+    }
+
+    input.form-control {
+        background-color: #ECECEC;
+    }
+
+    .form-floating input.form-control:focus {
+        /* box-shadow: 0 0 10px #ffd803; */
+        border: 2px solid #304D70;
+        /* outline-color: #304D70; */
+    }
+
+    .login-Button {
+        background-color: #304D70;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        padding-left: 7%;
+        padding-right: 7%;
+        border: solid 0px #304D70;
+        border-radius: 5px;
+        transition: 0.5s;
+        margin-bottom: 30px;
+    }
+
+        .login-Button:hover {
+            box-shadow: 0 0 10px #304D70;
+        }
+
+    .checkbox input.form-check-input {
+        border-color: white;
+    }
+
+        .checkbox input.form-check-input:checked {
+            background-color: #304D70;
+            border-color: #304D70;
+        }
+
+        .checkbox input.form-check-input:focus {
+            box-shadow: 0 0 10px #304D70;
+        }
+
+
 </style>
 
-<form id="account" method="post" action="~/Identity/Account/Login">
-    @* @Html.AntiForgeryToken() *@
-    <h2><b>Sign In</b></h2>
+<form class="login-form" id="account" method="post" action="~/Identity/Account/Login">
+    <h1><b>Sign In</b></h1>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-floating">
-        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
         <label asp-for="Input.Email" class="form-label"></label>
         <span asp-validation-for="Input.Email" class="text-danger"></span>
     </div>
