@@ -8,13 +8,15 @@
 }
 
 
-
 <style>
     .dashboard-Background {
         width: 100%;
-        margin-top: 2.5%;
+        /* margin: 2%; */
+        /* margin-top: 2.5%; */
         /* margin-left: 2.3%; */
-        padding-left: 2.3%;
+        padding: 30px;
+        display: flex;
+        height: 100%;
     }
 
     .welcome-Dashboard h2 {
@@ -121,7 +123,7 @@
         display: flex;
     }
 
-    .firstBarGraph {
+    /* .firstBarGraph {
         margin: 7px 0px;
         background-color: transparent;
         border-radius: 6px;
@@ -133,48 +135,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
+    } */
 
-    .Graph-Canvas {
-        width: 90%;
-        height: 100%;
-        /* Additional styling for the canvas */
-        border-radius: 6px;
-        /* Center content vertically */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-        .Graph-Canvas canvas {
-            text-align: center;
-            /* Add margin to space out the h2 */
-            margin-top: 10px;
-        }
-
+   
     .text-Design {
         text-align:left;
-    }
-
-    .secondBarGraph {
-        background-color: white;
-        box-shadow: 0 0 8px #525252;
-        width: 50%;
-        height: 100%;
-        border-radius: 6px;
-        margin: 7px;
-        text-align: right;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-        .secondBarGraph canvas {
-            text-align: center;
-            margin-top: 10px;
     }
 
     .lastLayer-Dashboard {
@@ -185,7 +150,7 @@
         justify-content: space-between;
     }
 
-    .firstBox {
+    /* .firstBox {
         width: 30%;
         border-radius: 6px;
         height: 170px;
@@ -198,7 +163,7 @@
         width: 100%;
         /* background-color: red; */
         display: flex;
-    }
+    } */
 
     .imageContent {
         height: 100%;
@@ -241,15 +206,6 @@
         margin: 0px;
     }
 
-    .firstBox-Lower {
-        height: 50%;
-        width: 100%;
-        /* background-color: blue; */
-        display: flex;
-        /* flex-direction: column;
-        justify-content: flex-start; */
-    }
-
     .textContentLower {
         width: 50%;
         display: flex;
@@ -279,9 +235,249 @@
 
 </style>
 
+<style>
+    .left-dashboard { 
+        /* background-color: red; */
+        height: 100%;
+        width: 80%;
+        padding: 15px;
+    }
+
+    .right-dashboard {
+        padding: 15px;
+        /* background-color: blue; */
+        height: 100%;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .right-dashboard-box {
+        border-radius: 5px;
+        /* background-color: yellow; */
+        opacity: 0.4;
+        width: 100%;
+        height: 28%;
+        /* margin: 10px 0; */
+    }
+
+    .left-dashboard-upper {
+        background-color: #3DD9EB;
+        height: 25%;
+        width: 100%;
+        opacity: 0.3;
+        border-radius: 7px;
+        /* padding: 30px; */
+        /* padding-top: 600px; */
+    }
+
+    .left-dashboard-middle {
+        display: flex;
+        height: 60%;
+        /* padding: 20px; */
+    }
+
+    .firstBarGraph {
+        /* margin: 7px 0px; */
+        background-color: transparent;
+        /* border-radius: 6px; */
+        height: 100%;
+        width: 40%;
+        /* border: 1px solid #ECECEC; */
+        /* box-shadow: 0 0 5px rgba(236, 236, 236, 0.5); /* Very light shadow */ */
+        /* box-shadow: 0 0 8px #525252; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+    }
+
+    .Graph-Canvas {
+        width: 100%;
+        height: 100%;
+        border: 2px solid #ECECEC;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* padding: 30px; */
+    }
+
+        .Graph-Canvas canvas {
+            text-align: center;
+            /* Add margin to space out the h2 */
+            margin-top: 10px;
+        }
+
+    .secondBarGraph {
+        background-color: white;
+        /* box-shadow: 0 0 8px #525252; */
+        width: 60%;
+        height: 100%;
+        border-radius: 6px;
+        /* margin: 7px; */
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+
+        .secondBarGraph canvas {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+    .left-dashboard-low {
+        height: 20%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .firstBox {
+        width: 30%;
+        border-radius: 6px;
+        /* height: 100px; */
+        height: 100%;
+        background-color: white;
+        box-shadow: 0 0 8px #525252;
+    }
+
+    .firstBox-Upper {
+        height: 50%;
+        width: 100%;
+        /* background-color: red; */
+        display: flex;
+    }
+
+    .firstBox-Lower {
+        height: 50%;
+        width: 100%;
+        /* background-color: blue; */
+        display: flex;
+        /* flex-direction: column;
+            justify-content: flex-start; */
+    }
+
+</style>
+
 <div class="dashboard-Background">
-    <div class="welcome-Dashboard">
-        <h2>Welcome <b>Adnan</b>!</h2>
+    
+    <div class="left-dashboard">
+        <div class="left-dashboard-upper">
+
+        </div>
+        <div class="left-dashboard-middle">
+            <div class="firstBarGraph">
+                <div class="Graph-Canvas">
+                    <div class="text-Design">
+                        <p><b>Average Gym Attendance</b></p>
+                    </div>
+                    <canvas id="entryLogsChart" width="150" height="75"></canvas>
+                </div>
+            </div>
+
+            <div class="secondBarGraph">
+                <div class="Graph-Canvas">
+                    <p>Joining vs Leaving Members</p>
+                    <canvas id="joiningLeavingMembersChart" width="110" height="44"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="left-dashboard-low">
+            <div class="firstBox">
+                <div class="firstBox-Upper">
+                    <div class="imageContent">
+                        <h1><b>Img</b></h1>
+                    </div>
+                    <div class="textContent">
+                        <h1>21</h1>
+                    </div>
+                    <div class="textContentDescription">
+                        <p>Members</p>
+                    </div>
+                </div>
+                <div class="firstBox-Lower">
+                    <div class="textContentLower">
+                        <h4><b>Cancellation</b></h4>
+                    </div>
+                    <div class="textContentDescriptionLower">
+                        <p><b>Today</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="firstBox">
+                <div class="firstBox-Upper">
+                    <div class="imageContent">
+                        <h1><b>Img</b></h1>
+                    </div>
+                    <div class="textContent">
+                        <h1>21</h1>
+                    </div>
+                    <div class="textContentDescription">
+                        <p>Members</p>
+                    </div>
+                </div>
+                <div class="firstBox-Lower">
+                    <div class="textContentLower">
+                        <h4><b>Cancellation</b></h4>
+                    </div>
+                    <div class="textContentDescriptionLower">
+                        <p><b>Today</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="firstBox">
+                <div class="firstBox-Upper">
+                    <div class="imageContent">
+                        <h1><b>Img</b></h1>
+                    </div>
+                    <div class="textContent">
+                        <h1>21</h1>
+                    </div>
+                    <div class="textContentDescription">
+                        <p>Members</p>
+                    </div>
+                </div>
+                <div class="firstBox-Lower">
+                    <div class="textContentLower">
+                        <h4><b>Cancellation</b></h4>
+                    </div>
+                    <div class="textContentDescriptionLower">
+                        <p><b>Today</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="right-dashboard">
+        <div class="right-dashboard-box" style="background-color: #3DD9EB">
+
+        </div>
+
+        <div class="right-dashboard-box" style="background-color: #FF3131">
+
+        </div>
+
+        <div class="right-dashboard-box" style="background-color: #FFD803">
+
+        </div>
+    </div>
+
+    @* <div class="welcome-Dashboard">
+        <h2>Welcome <b>fullName</b>!</h2>
         <p>@DateTime.Today.ToString("dd MMMM yyyy")</p>
 
     </div>
@@ -295,7 +491,6 @@
                     <img src="~/images/DollarSign.png"/>
                 </div>
                 <div class="BarBox-Values">
-                    @* <h1>£@Model.TotalFeesAmount</h1> *@
                     <h1>£@Model.TotalFeesAmount</h1>
                     <p>Fees Amount</p>
                 </div>
@@ -305,7 +500,6 @@
                     <img src="~/images/NewMembers.png" />
                 </div>
                 <div class="BarBox-Values">
-                    @* <h1>@Model.NewMembersCount</h1> *@
                     <h1>@Model.NewMembersCount</h1>
                     <p>New Members</p>
                 </div>
@@ -315,7 +509,6 @@
                     <img src="~/images/TotalMembers.png" />
                 </div>
                 <div class="BarBox-Values">
-                    @* <h1>@Model.ActiveAdmissionMembersCount</h1> *@
                     <h1>@Model.ActiveAdmissionMembersCount</h1>
                     <p>Active Admissions</p>
                 </div>
@@ -409,8 +602,8 @@
                     <p><b>Today</b></p>
                 </div>
             </div>
-        </div>
-    </div>
+        </div> *@
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
@@ -442,10 +635,10 @@
                     label: 'Number of Entries',
                     data: entryLogsPerDayData,
                     // data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data data: entryCounts,
-                    backgroundColor: '#FFD803',
-                    borderColor: '#FFD803',
+                    backgroundColor: '#304D70',
+                    borderColor: '#304D70',
                     borderWidth: 1,
-                    borderRadius: 12,
+                    borderRadius: 7,
                     borderSkipped: false,
                 }]
             };
@@ -511,11 +704,7 @@
 
 
 
-
-
-
         <script>
-            // Explanatory data for the line graph
             var monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
             function rotateArray(arr, count) {
@@ -525,30 +714,40 @@
             var currentMonthIndex = new Date().getMonth() + 1;
             var rotatedMonths = rotateArray(monthsOfYear, currentMonthIndex);
 
+            var gradientJoining = ctx.createLinearGradient(0, 0, 0, 300);
+            gradientJoining.addColorStop(0, 'rgba(255, 216, 3, 1)'); // Starting color
+            gradientJoining.addColorStop(1, 'rgba(255, 216, 3, 0)'); // Ending color
+
+            var gradientLeaving = ctx.createLinearGradient(0, 0, 0, 300);
+            gradientLeaving.addColorStop(0, 'rgba(82, 82, 82, 1)'); // Starting color
+            gradientLeaving.addColorStop(1, 'rgba(82, 82, 82, 0)'); // Ending color
+
             var data = {
                 labels: rotatedMonths,
                 datasets: [
                     {
                         label: 'Joining Members',
-                        data: [/* Your actual data here */],
-                        borderColor: '#FFD803',
-                        backgroundColor: 'transparent',
-                        borderWidth: 3,
+                        data: [@string.Join(",", @Model.MembersJoinedPerMonth.Values.Reverse().Select(entry => entry.Count))],
+                        borderColor: '#304D70',
+                        backgroundColor: gradientJoining,
+                        borderWidth: 1,
                         pointRadius: 0,
                         tension: 0.4,
                         hoverRadius: 8,
                         hitRadius: 10,
+                        fill: true,
                     },
                     {
                         label: 'Leaving Members',
-                        data: [/* Your actual data here */],
-                        borderColor: '#525252',
-                        backgroundColor: 'transparent',
-                        borderWidth: 3,
+                        data: [@string.Join(",", @Model.MembersLeftPerMonth.Values.Reverse().Select(entry => entry.Count))],
+                        borderColor: '#41B8D5',
+                        backgroundColor: gradientLeaving,
+                        borderWidth: 1,
                         pointRadius: 0,
                         tension: 0.4,
                         hoverRadius: 8,
                         hitRadius: 10,
+                        fill: true,
                     }
                 ]
             };
@@ -588,24 +787,7 @@
                     tooltip: {
                         enabled: true,
                         intersect: false,
-                    },
-                    annotation: {
-                        annotations: [
-                            {
-                                type: 'line',
-                                mode: 'horizontal',
-                                scaleID: 'y',
-                                value: 0,
-                                borderColor: {
-                                    stops: [
-                                        [0, 'rgba(255, 216, 3, 0.8)'],
-                                        [1, 'rgba(255, 216, 3, 0)']
-                                    ]
-                                },
-                                borderWidth: 3,
-                            },
-                        ],
-                    },
+                    }
                 },
                 interaction: {
                     mode: 'nearest',
@@ -619,122 +801,5 @@
                 options: options
             });
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       @*  <script>
-            // Explanatory data for the line graph
-            // Explanatory data for the line graph
-            var monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-            // Function to rotate array to position current month at the end
-            function rotateArray(arr, count) {
-                return arr.slice(count, arr.length).concat(arr.slice(0, count));
-            }
-
-            // Get the current month index (0 for January, 1 for February, etc.)
-            var currentMonthIndex = new Date().getMonth() + 1;
-
-            // Rotate the monthsOfYear array to position the current month at the end
-            var rotatedMonths = rotateArray(monthsOfYear, currentMonthIndex);
-
-            var data = {
-                labels: rotatedMonths,
-                datasets: [
-                    {
-                        label: 'Joining Members',
-                        data: [@string.Join(",", @Model.MembersJoinedPerMonth.Values.Reverse().Select(entry => entry.Count))], // Use C# to insert the actual data
-                        borderColor: '#FFD803',
-                        backgroundColor: 'transparent',
-                        borderWidth: 3,
-                        pointRadius: 0,
-                        tension: 0.4, // Adjust the tension for a curvy line
-                        hoverRadius: 8, // Adjust the hover radius for a larger tooltip area
-                        hitRadius: 10,
-                    },
-                    {
-                        label: 'Leaving Members',
-                        data: [@string.Join(",", @Model.MembersLeftPerMonth.Values.Reverse().Select(entry => entry.Count))], // Use C# to insert the actual data
-                        borderColor: '#525252',
-                        backgroundColor: 'transparent',
-                        borderWidth: 3,
-                        pointRadius: 0,
-                        tension: 0.4, // Adjust the tension for a curvy line
-                        hoverRadius: 8, // Adjust the hover radius for a larger tooltip area
-                        hitRadius: 10,
-                    }
-                ]
-            };
-
-            // Line graph options
-            var options = {
-                scales: {
-                    x: {
-                        type: 'category',
-                        position: 'bottom',
-                        grid: {
-                            display: false,
-                        },
-                        ticks: {
-                            color: 'black'
-                        },
-                        border: {
-                            display: false
-                        },
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            display: false
-                        },
-                        grid: {
-                            display: true,
-                        },
-                        border: {
-                            display: false
-                        },
-                    },
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        enabled: true, // Enable tooltips
-                        intersect: false, // Allow tooltips to overlap each other
-                    }
-                },
-                interaction: {
-                    mode: 'nearest', // Display tooltips for all datasets at the same index
-                },
-            };
-
-            // Create line graph
-            var ctx = document.getElementById('joiningLeavingMembersChart').getContext('2d');
-            var joiningLeavingMembersChart = new Chart(ctx, {
-                type: 'line',
-                data: data,
-                options: options
-            });
-        </script> *@
     }
 </div>

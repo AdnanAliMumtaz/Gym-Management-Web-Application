@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
 });
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Home/LoginRegister";
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -43,6 +49,10 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+
+
 
 app.UseEndpoints(endpoints =>
 {

@@ -9,9 +9,11 @@ using WebApplication1.Models.ViewModels;
 using WebApplication1.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+/*using WebApplication1.Attributes;*/
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -22,8 +24,7 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
         }
 
-
-        [Authorize]
+        /*[Authorize]*/
         public async Task<IActionResult> Index()
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);

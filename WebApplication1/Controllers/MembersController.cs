@@ -9,6 +9,7 @@ using WebApplication1.Models.ViewModels;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class MembersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
