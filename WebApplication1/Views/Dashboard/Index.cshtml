@@ -17,6 +17,7 @@
         padding: 30px;
         display: flex;
         height: 100%;
+        /* background-color: white; */
     }
 
     .welcome-Dashboard h2 {
@@ -122,21 +123,6 @@
         width: 100%;
         display: flex;
     }
-
-    /* .firstBarGraph {
-        margin: 7px 0px;
-        background-color: transparent;
-        border-radius: 6px;
-        height: 100%;
-        width: 40%;
-        box-shadow: 0 0 8px #525252;
-        
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    } */
-
    
     .text-Design {
         text-align:left;
@@ -149,21 +135,6 @@
         display: flex;
         justify-content: space-between;
     }
-
-    /* .firstBox {
-        width: 30%;
-        border-radius: 6px;
-        height: 170px;
-        background-color: white;
-        box-shadow: 0 0 8px #525252;
-    }
-
-    .firstBox-Upper {
-        height: 50%;
-        width: 100%;
-        /* background-color: red; */
-        display: flex;
-    } */
 
     .imageContent {
         height: 100%;
@@ -252,15 +223,7 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-    }
-
-    .right-dashboard-box {
-        border-radius: 5px;
-        /* background-color: yellow; */
-        opacity: 0.4;
-        width: 100%;
-        height: 28%;
-        /* margin: 10px 0; */
+        text-align: center;
     }
 
     .left-dashboard-upper {
@@ -275,7 +238,7 @@
 
     .left-dashboard-middle {
         display: flex;
-        height: 60%;
+        height: 50%;
         /* padding: 20px; */
     }
 
@@ -344,29 +307,32 @@
     }
 
     .firstBox {
-        width: 30%;
+        width: 32%;
         border-radius: 6px;
-        /* height: 100px; */
         height: 100%;
         background-color: white;
-        box-shadow: 0 0 8px #525252;
+        /* box-shadow: 0 0 8px #525252; */
     }
 
     .firstBox-Upper {
         height: 50%;
         width: 100%;
-        /* background-color: red; */
         display: flex;
     }
 
     .firstBox-Lower {
         height: 50%;
         width: 100%;
-        /* background-color: blue; */
         display: flex;
-        /* flex-direction: column;
-            justify-content: flex-start; */
     }
+
+
+    .left-dashboard-upper h1 {
+        color: black; 
+    }
+
+
+    
 
 </style>
 
@@ -374,7 +340,7 @@
     
     <div class="left-dashboard">
         <div class="left-dashboard-upper">
-
+            <h1>Welcome back</h1>
         </div>
         <div class="left-dashboard-middle">
             <div class="firstBarGraph">
@@ -461,83 +427,112 @@
         </div>
     </div>
 
+    <style>
+        .right-dashboard-box {
+            /* width: 200px; */
+            /* height: 200px; */
+            /* padding: 80px; */
+            /* padding: 20px; */
+            /* padding: ; */
+            /* padding: 1%; */
+            /* height: 100%; */
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
+            font-weight: bolder;
+            /* justify-content: center; */
+            /* align-content: center; */
+            /* display: flex; */
+            /* display: grid; */
+        }
+
+        /* .right-dashboard-icon, .right-dashboard-info, .right-dashboard-content {
+            margin: 0px;
+        } */
+
+        .right-dashboard-icon img {
+            height: 50px;
+        }
+
+        .right-dashboard-box {
+            border-radius: 5px;
+            width: 100%;
+            height: 28%;
+            text-align: center;
+            /* display: grid; */
+        }
+        
+        .right-dashboard-info {
+            /* background-color: blue; */
+            height: fit-content;
+        }
+
+        .right-dashboard-info p {
+            margin: 0;
+        }
+
+        .right-dashboard-content{
+            /* background-color: red; */
+            height: fit-content;
+        }
+        
+        .right-dashboard-content h2 {
+            margin: 0;
+        }
+
+    </style>
+
+    
     <div class="right-dashboard">
-        <div class="right-dashboard-box" style="background-color: #3DD9EB">
-
+        <div class="right-dashboard-box" style="background-color: rgba(48, 77, 112, 0.2); color: rgba(48, 77, 112, 1);  ">
+            <dic class="right-dashboard-icon">
+                <img src="~/images/newMembers (2).png" />
+            </dic>
+            <div class="right-dashboard-info">
+                <p>New Members</p>
+            </div>
+            <div class="right-dashboard-content">
+                <h2>@Model.NewMembersCount</h2>
+            </div>
         </div>
 
-        <div class="right-dashboard-box" style="background-color: #FF3131">
-
+        <div class="right-dashboard-box" style="background-color:  rgba(255, 49, 49, 0.2); color:rgba(255, 49, 49, 1);">
+            <dic class="right-dashboard-icon">
+                <img src="/images/activeMembers.png" />
+            </dic>
+            <div class="right-dashboard-info">
+                <p>Active Admissions</p>
+            </div>
+            <div class="right-dashboard-content">
+                <h2>@Model.ActiveAdmissionMembersCount</h2>
+            </div>
         </div>
 
-        <div class="right-dashboard-box" style="background-color: #FFD803">
-
+        <div class="right-dashboard-box" style="background-color: rgba(61, 217, 235, 0.2); color: rgba(61, 217, 235, 1);">
+            <dic class="right-dashboard-icon">
+                <img src="/images/pound.png" />
+            </dic>
+            <div class="right-dashboard-info">
+                <p>Fees Amount</p>
+            </div>
+            <div class="right-dashboard-content">
+                <h2>@Model.TotalFeesAmount</h2>
+            </div>
         </div>
+
     </div>
+
+
 
     @* <div class="welcome-Dashboard">
         <h2>Welcome <b>fullName</b>!</h2>
         <p>@DateTime.Today.ToString("dd MMMM yyyy")</p>
 
     </div>
-    <div class="upperLayer-Dashboard">
-        <div class="headingDashboard">
-            <h3>Dashboard</h3>
-        </div>
-        <div class="upperDashboardBar">
-            <div class="BarBox">
-                <div class="BarBox-Icon">
-                    <img src="~/images/DollarSign.png"/>
-                </div>
-                <div class="BarBox-Values">
-                    <h1>£@Model.TotalFeesAmount</h1>
-                    <p>Fees Amount</p>
-                </div>
-            </div>
-            <div class="BarBox">
-                <div class="BarBox-Icon">
-                    <img src="~/images/NewMembers.png" />
-                </div>
-                <div class="BarBox-Values">
-                    <h1>@Model.NewMembersCount</h1>
-                    <p>New Members</p>
-                </div>
-            </div>
-            <div class="BarBox">
-                <div class="BarBox-Icon">
-                    <img src="~/images/TotalMembers.png" />
-                </div>
-                <div class="BarBox-Values">
-                    <h1>@Model.ActiveAdmissionMembersCount</h1>
-                    <p>Active Admissions</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="middleLayer-Dashboard">
-        <div class="firstBarGraph">
-            <div class="Graph-Canvas">
-                <div class="text-Design">
-                    <p><b>Average Gym Attendance</b></p>
-                </div>
-                <canvas id="entryLogsChart" width="150" height="75"></canvas>
-            </div>
-        </div>
-
-
-        <div class="secondBarGraph">
-            <div class="Graph-Canvas">
-                <p>Joining vs Leaving Members</p>
-                <canvas id="joiningLeavingMembersChart" width="110" height="44"></canvas>
-            </div>
-        </div>
-    </div>
-
-
-
-
+   
 
     <div class="lastLayer-Dashboard">
         <div class="firstBox">
@@ -635,8 +630,8 @@
                     label: 'Number of Entries',
                     data: entryLogsPerDayData,
                     // data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data data: entryCounts,
-                    backgroundColor: '#304D70',
-                    borderColor: '#304D70',
+                backgroundColor: '#3DD9EB',
+                borderColor: '#3DD9EB',
                     borderWidth: 1,
                     borderRadius: 7,
                     borderSkipped: false,
@@ -713,13 +708,13 @@
 
             var currentMonthIndex = new Date().getMonth() + 1;
             var rotatedMonths = rotateArray(monthsOfYear, currentMonthIndex);
-
+            
             var gradientJoining = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientJoining.addColorStop(0, 'rgba(255, 216, 3, 1)'); // Starting color
+            gradientJoining.addColorStop(0, 'rgba(48, 77, 112, 1)'); // Starting color (same as borderColor)
             gradientJoining.addColorStop(1, 'rgba(255, 216, 3, 0)'); // Ending color
-
+            
             var gradientLeaving = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientLeaving.addColorStop(0, 'rgba(82, 82, 82, 1)'); // Starting color
+            gradientLeaving.addColorStop(0, 'rgba(65, 184, 213, 1)'); // Starting color (same as borderColor)
             gradientLeaving.addColorStop(1, 'rgba(82, 82, 82, 0)'); // Ending color
 
             var data = {
@@ -752,47 +747,48 @@
                 ]
             };
 
-            var options = {
-                scales: {
-                    x: {
-                        type: 'category',
-                        position: 'bottom',
-                        grid: {
-                            display: false,
-                        },
-                        ticks: {
-                            color: 'black'
-                        },
-                        border: {
-                            display: false
-                        },
+        var options = {
+            scales: {
+                x: {
+                    type: 'category',
+                    position: 'bottom',
+                    grid: {
+                        display: false,
                     },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            display: false
-                        },
-                        grid: {
-                            display: true,
-                        },
-                        border: {
-                            display: false
-                        },
+                    ticks: {
+                        color: 'black'
                     },
-                },
-                plugins: {
-                    legend: {
+                    border: {
                         display: false
                     },
-                    tooltip: {
-                        enabled: true,
-                        intersect: false,
-                    }
                 },
-                interaction: {
-                    mode: 'nearest',
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        display: false, // Set display to false to remove y-axis grid lines
+                    },
+                    border: {
+                        display: false
+                    },
                 },
-            };
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    intersect: false,
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+            },
+        };
+
 
             var ctx = document.getElementById('joiningLeavingMembersChart').getContext('2d');
             var joiningLeavingMembersChart = new Chart(ctx, {

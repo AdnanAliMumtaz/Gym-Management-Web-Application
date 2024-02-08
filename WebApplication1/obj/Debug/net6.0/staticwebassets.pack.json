@@ -45,6 +45,10 @@
       "PackagePath": "staticwebassets\\images\\TotalMembers.png"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\activeMembers.png",
+      "PackagePath": "staticwebassets\\images\\activeMembers.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\backgroung.png.png",
       "PackagePath": "staticwebassets\\images\\backgroung.png.png"
     },
@@ -69,16 +73,20 @@
       "PackagePath": "staticwebassets\\images\\messages.png"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\newMembers (2).png",
+      "PackagePath": "staticwebassets\\images\\newMembers (2).png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\pound.png",
+      "PackagePath": "staticwebassets\\images\\pound.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\resource.png",
       "PackagePath": "staticwebassets\\images\\resource.png"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\settings.png",
       "PackagePath": "staticwebassets\\images\\settings.png"
-    },
-    {
-      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\useless.png",
-      "PackagePath": "staticwebassets\\images\\useless.png"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\dashboard.js",
