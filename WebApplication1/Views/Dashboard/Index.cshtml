@@ -8,339 +8,11 @@
 }
 
 
-<style>
-    .dashboard-Background {
-        width: 100%;
-        /* margin: 2%; */
-        /* margin-top: 2.5%; */
-        /* margin-left: 2.3%; */
-        padding: 30px;
-        display: flex;
-        height: 100%;
-        /* background-color: white; */
-    }
-
-    .welcome-Dashboard h2 {
-        margin-bottom: 0px;
-    }
-
-    .welcome-Dashboard p {
-        opacity: 0.7;
-    }
-
-    .upperDashboardBar {
-        height: 20%;
-        width: 95%;
-        display: flex;
-        justify-content: space-between;
-        color: #525252;
-    }
-
-    .headingDashboard h3{
-        font-weight: bolder;
-    }
-
-    .BarBox {
-        background-color: white;
-        width: 30%;
-        height: 85px;
-        border-radius: 6px;
-        box-shadow: 0 0 8px #525252;
-        display: flex;
-        transition: background 0.5s; /* Use transition on background property */
-        position: relative;
-        overflow: hidden;
-        z-index: 1;    
-    }
-
-        .BarBox::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 100%; /* Initially position it outside the container on the right */
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to left, #525252, #525252); /* Solid color */
-            transition: right 0.5s; /* Use transition on right property */
-            background-size: 200% 100%; /* Double the width of the gradient */
-        }
-
-        .BarBox:hover::before {
-            right: 0; /* Slide in from the right on hover */
-        }
-
-        .BarBox:hover {
-            transition: 0.5s;
-            color: white;
-        }
-
-
-    .BarBox-Icon {
-        z-index: 2;
-        width: 30%;
-        height: 100%;
-        border-radius: 6px;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 0 8px #525252;
-    }
-
-    .BarBox-Icon img {
-        width: 45%;
-    }
-
-    .BarBox-Values {
-        z-index: 2;
-        display: grid;
-        align-items: center;
-        justify-content: center;
-        width: 65%;
-        text-align: center;
-    }
-
-        
-
-    .BarBox-Values h1 {
-        margin-top: 8px;
-        margin-bottom: 0px;
-        font-weight: bold;
-    }
-
-    .BarBox-Values p {
-        opacity: 0.9;
-        border-radius: 5px;
-        padding: 0px 5px;
-        margin-top: 0px;
-        font-weight: bold;
-    }
-
-
-    /*Second Box*/
-    .middleLayer-Dashboard {
-        height: 30%;
-        width: 100%;
-        display: flex;
-    }
-   
-    .text-Design {
-        text-align:left;
-    }
-
-    .lastLayer-Dashboard {
-        width: 95%;
-        height: 30%;
-        background-color: transparent;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .imageContent {
-        height: 100%;
-        width: 50%;
-        margin: 0 20px;
-        /* background-color: yellow; */
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    .imageContent h1 {
-        margin: 0px;
-    }
-
-    .textContent {
-        height: 100%;
-        width: 30%;
-        margin: 0;
-        text-align: right;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    .textContent h1 {
-        margin: 0px;
-    }
-
-    .textContentDescription{ 
-        margin: 0px;
-        margin-right: 20px;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    .textContentDescription p {
-        margin: 0px;
-    }
-
-    .textContentLower {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    .textContentLower h4 {
-        margin: 0;
-        margin-left: 20px;
-    }
-
-    .textContentDescriptionLower {
-        width: 50%;
-        text-align: center;
-    }
-
-    .textContentDescriptionLower p {
-        margin: 0px;
-        margin-left: 38px;
-        color: #FFCC00;
-            background-color: #ffeb98;
-        padding: 1px 22px;
-        border-radius: 15px;
-        display: inline-block;
-    }
-
-</style>
-
-<style>
-    .left-dashboard { 
-        /* background-color: red; */
-        height: 100%;
-        width: 80%;
-        padding: 15px;
-    }
-
-    .right-dashboard {
-        padding: 15px;
-        /* background-color: blue; */
-        height: 100%;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-    }
-
-    .left-dashboard-upper {
-        background-color: #3DD9EB;
-        height: 25%;
-        width: 100%;
-        opacity: 0.3;
-        border-radius: 7px;
-        /* padding: 30px; */
-        /* padding-top: 600px; */
-    }
-
-    .left-dashboard-middle {
-        display: flex;
-        height: 50%;
-        /* padding: 20px; */
-    }
-
-    .firstBarGraph {
-        /* margin: 7px 0px; */
-        background-color: transparent;
-        /* border-radius: 6px; */
-        height: 100%;
-        width: 40%;
-        /* border: 1px solid #ECECEC; */
-        /* box-shadow: 0 0 5px rgba(236, 236, 236, 0.5); /* Very light shadow */ */
-        /* box-shadow: 0 0 8px #525252; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-right: 10px;
-    }
-
-    .Graph-Canvas {
-        width: 100%;
-        height: 100%;
-        border: 2px solid #ECECEC;
-        border-radius: 6px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        /* padding: 30px; */
-    }
-
-        .Graph-Canvas canvas {
-            text-align: center;
-            /* Add margin to space out the h2 */
-            margin-top: 10px;
-        }
-
-    .secondBarGraph {
-        background-color: white;
-        /* box-shadow: 0 0 8px #525252; */
-        width: 60%;
-        height: 100%;
-        border-radius: 6px;
-        /* margin: 7px; */
-        text-align: right;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-    }
-
-        .secondBarGraph canvas {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-    .left-dashboard-low {
-        height: 20%;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .firstBox {
-        width: 32%;
-        border-radius: 6px;
-        height: 100%;
-        background-color: white;
-        /* box-shadow: 0 0 8px #525252; */
-    }
-
-    .firstBox-Upper {
-        height: 50%;
-        width: 100%;
-        display: flex;
-    }
-
-    .firstBox-Lower {
-        height: 50%;
-        width: 100%;
-        display: flex;
-    }
-
-
-    .left-dashboard-upper h1 {
-        color: black; 
-    }
-
-
-    
-
-</style>
-
 <div class="dashboard-Background">
     
     <div class="left-dashboard">
         <div class="left-dashboard-upper">
-            <h1>Welcome back</h1>
+            <h2><b>Welcome back</b></h2>
         </div>
         <div class="left-dashboard-middle">
             <div class="firstBarGraph">
@@ -364,10 +36,10 @@
             <div class="firstBox">
                 <div class="firstBox-Upper">
                     <div class="imageContent">
-                        <h1><b>Img</b></h1>
+                        <h2><b>Img</b></h2>
                     </div>
                     <div class="textContent">
-                        <h1>21</h1>
+                        <h2>21</h2>
                     </div>
                     <div class="textContentDescription">
                         <p>Members</p>
@@ -385,10 +57,10 @@
             <div class="firstBox">
                 <div class="firstBox-Upper">
                     <div class="imageContent">
-                        <h1><b>Img</b></h1>
+                        <h2><b>Img</b></h2>
                     </div>
                     <div class="textContent">
-                        <h1>21</h1>
+                        <h2>21</h2>
                     </div>
                     <div class="textContentDescription">
                         <p>Members</p>
@@ -406,10 +78,10 @@
             <div class="firstBox">
                 <div class="firstBox-Upper">
                     <div class="imageContent">
-                        <h1><b>Img</b></h1>
+                        <h2><b>Img</b></h2>
                     </div>
                     <div class="textContent">
-                        <h1>21</h1>
+                        <h2>21</h2>
                     </div>
                     <div class="textContentDescription">
                         <p>Members</p>
@@ -427,64 +99,7 @@
         </div>
     </div>
 
-    <style>
-        .right-dashboard-box {
-            /* width: 200px; */
-            /* height: 200px; */
-            /* padding: 80px; */
-            /* padding: 20px; */
-            /* padding: ; */
-            /* padding: 1%; */
-            /* height: 100%; */
-            
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            font-weight: bolder;
-            /* justify-content: center; */
-            /* align-content: center; */
-            /* display: flex; */
-            /* display: grid; */
-        }
-
-        /* .right-dashboard-icon, .right-dashboard-info, .right-dashboard-content {
-            margin: 0px;
-        } */
-
-        .right-dashboard-icon img {
-            height: 50px;
-        }
-
-        .right-dashboard-box {
-            border-radius: 5px;
-            width: 100%;
-            height: 28%;
-            text-align: center;
-            /* display: grid; */
-        }
-        
-        .right-dashboard-info {
-            /* background-color: blue; */
-            height: fit-content;
-        }
-
-        .right-dashboard-info p {
-            margin: 0;
-        }
-
-        .right-dashboard-content{
-            /* background-color: red; */
-            height: fit-content;
-        }
-        
-        .right-dashboard-content h2 {
-            margin: 0;
-        }
-
-    </style>
-
+    
     
     <div class="right-dashboard">
         <div class="right-dashboard-box" style="background-color: rgba(48, 77, 112, 0.2); color: rgba(48, 77, 112, 1);  ">
@@ -532,72 +147,8 @@
         <p>@DateTime.Today.ToString("dd MMMM yyyy")</p>
 
     </div>
-   
+    *@
 
-    <div class="lastLayer-Dashboard">
-        <div class="firstBox">
-            <div class="firstBox-Upper">
-                <div class="imageContent">
-                    <h1><b>Img</b></h1>
-                </div>
-                <div class="textContent">
-                    <h1>21</h1>
-                </div>
-                <div class="textContentDescription">
-                    <p>Members</p>
-                </div>
-            </div>
-            <div class="firstBox-Lower">
-                <div class="textContentLower">
-                    <h4><b>Cancellation</b></h4>
-                </div>
-                <div class="textContentDescriptionLower">
-                    <p><b>Today</b></p>
-                </div>
-            </div>
-        </div>
-        <div class="firstBox">
-            <div class="firstBox-Upper">
-                <div class="imageContent">
-                    <h1><b>Img</b></h1>
-                </div>
-                <div class="textContent">
-                    <h1>21</h1>
-                </div>
-                <div class="textContentDescription">
-                    <p>Members</p>
-                </div>
-            </div>
-            <div class="firstBox-Lower">
-                <div class="textContentLower">
-                    <h4><b>Cancellation</b></h4>
-                </div>
-                <div class="textContentDescriptionLower">
-                    <p><b>Today</b></p>
-                </div>
-            </div>
-        </div>
-        <div class="firstBox">
-            <div class="firstBox-Upper">
-                <div class="imageContent">
-                    <h1><b>Img</b></h1>
-                </div>
-                <div class="textContent">
-                    <h1>21</h1>
-                </div>
-                <div class="textContentDescription">
-                    <p>Members</p>
-                </div>
-            </div>
-            <div class="firstBox-Lower">
-                <div class="textContentLower">
-                    <h4><b>Cancellation</b></h4>
-                </div>
-                <div class="textContentDescriptionLower">
-                    <p><b>Today</b></p>
-                </div>
-            </div>
-        </div> *@
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

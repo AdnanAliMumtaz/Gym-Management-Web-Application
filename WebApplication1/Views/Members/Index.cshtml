@@ -7,15 +7,19 @@
 
 
 <style>
+
     .memberBody {
         height: 100%;
         padding: 20px;
     }
 
+
     .upperBody {
         border-radius: 7px;
         padding: 20px;
-        background-color: #D9D9D9;
+        /* background-color: #D9D9D9; */
+        /* background-color: rgba(61, 217, 235, 1); */
+        background-color: rgba(61, 217, 235, 0.2);
         margin: 0px 10px;
     }
 
@@ -160,40 +164,6 @@
 
     <div class="middleBody">
 
-
-        <!-- Button to trigger the pop-up -->
-        <button id="openPopupButton">Open Pop-up</button>
-
-        <!-- Hidden pop-up form -->
-        <div id="popupFormContainer" class="popup-container">
-            <form method="post" asp-controller="Members" asp-action="AddDummyData" class="popup-form">
-                <!-- Member information fields -->
-                <label for="FirstName">First Name:</label>
-                <input type="text" id="FirstName" name="FirstName" required>
-
-                <label for="LastName">Last Name:</label>
-                <input type="text" id="LastName" name="LastName" required>
-
-                <label for="Email">Email:</label>
-                <input type="text" id="Email" name="Email" required>
-
-                <label for="PhoneNumber">PhoneNumber:</label>
-                <input type="text" id="PhoneNumber" name="PhoneNumber" required>
-
-                <!-- TransactionFee information fields -->
-                <label for="Amount">Transaction Amount:</label>
-                <input type="text" id="Amount" name="Amount" required>
-
-                <label for="DatePaid">Date Paid:</label>
-                <input type="date" id="DatePaid" name="DatePaid" required>
-
-                <button type="submit">Add Dummy Data</button>
-            </form>
-        </div>
-
-
-
-
         <div class="middleBodyLeft">
                 <form asp-controller="Members" asp-action="Index" method="get">
                     <label for="search">Search:</label>
@@ -201,9 +171,39 @@
 
                 </form>
 
+            <!-- Button to trigger the pop-up -->
+            <button id="openPopupButton">Open Pop-up</button>
+
+            <!-- Hidden pop-up form -->
+            <div id="popupFormContainer" class="popup-container">
+                <form method="post" asp-controller="Members" asp-action="AddDummyData" class="popup-form">
+                    <!-- Member information fields -->
+                    <label for="FirstName">First Name:</label>
+                    <input type="text" id="FirstName" name="FirstName" required>
+
+                    <label for="LastName">Last Name:</label>
+                    <input type="text" id="LastName" name="LastName" required>
+
+                    <label for="Email">Email:</label>
+                    <input type="text" id="Email" name="Email" required>
+
+                    <label for="PhoneNumber">PhoneNumber:</label>
+                    <input type="text" id="PhoneNumber" name="PhoneNumber" required>
+
+                    <!-- TransactionFee information fields -->
+                    <label for="Amount">Transaction Amount:</label>
+                    <input type="text" id="Amount" name="Amount" required>
+33
+                    <label for="DatePaid">Date Paid:</label>
+                    <input type="date" id="DatePaid" name="DatePaid" required>
+
+                    <button type="submit">Add Dummy Data</button>
+                </form>
+            </div>
+
                 <div id="search-results">
                     <!-- Display search results here -->
-                </div>            
+                </div>
         </div>
 
 
@@ -266,8 +266,8 @@
             </tbody>
         </table>
     </div>
-</div> *@
-
+</div>
+ *@
 
 
 
