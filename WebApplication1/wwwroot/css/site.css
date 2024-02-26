@@ -21,21 +21,6 @@ html, body {
     }
 }
 
-/*Login Register CSS*/
-/*.background-Login {
-    background: white;
-    height: 100%;
-    display: flex;
-}*/
-
-
-.main-Background {
-    background-color: white;
-    height: 100%;
-    width: 100%;
-    display: flex;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 .main-Content {

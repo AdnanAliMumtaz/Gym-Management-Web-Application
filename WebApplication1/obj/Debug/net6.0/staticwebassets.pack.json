@@ -89,8 +89,12 @@
       "PackagePath": "staticwebassets\\images\\settings.png"
     },
     {
-      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\dashboard.js",
-      "PackagePath": "staticwebassets\\js\\Views\\dashboard.js"
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\Dashboard\\barGraph.js",
+      "PackagePath": "staticwebassets\\js\\Views\\Dashboard\\barGraph.js"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\Dashboard\\lineGraph.js",
+      "PackagePath": "staticwebassets\\js\\Views\\Dashboard\\lineGraph.js"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\home.js",
