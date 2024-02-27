@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fihbwlpDizRjit7zNryKjbYEhKJP1WHjxKGspQDZCvQ=",
+  "Hash": "NA/ceyf9qA6QP5eHmYn981EfOn0drJ0tHHSdF0GL7+Y=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -1105,12 +1105,12 @@
       "OriginalItemSpec": "wwwroot\\css\\Views\\dashboard.css"
     },
     {
-      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\home.css",
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Home\\index.css",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
       "BasePath": "_content/WebApplication1",
-      "RelativePath": "css/Views/home.css",
+      "RelativePath": "css/Views/Home/index.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1119,7 +1119,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Views\\home.css"
+      "OriginalItemSpec": "wwwroot\\css\\Views\\Home\\index.css"
+    },
+    {
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Home\\loginRegister.css",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "css/Views/Home/loginRegister.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Views\\Home\\loginRegister.css"
     },
     {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\members.css",
@@ -1479,12 +1496,12 @@
       "OriginalItemSpec": "wwwroot\\js\\Views\\Dashboard\\lineGraph.js"
     },
     {
-      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\home.js",
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\Home\\home.js",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
       "BasePath": "_content/WebApplication1",
-      "RelativePath": "js/Views/home.js",
+      "RelativePath": "js/Views/Home/home.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1493,7 +1510,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Views\\home.js"
+      "OriginalItemSpec": "wwwroot\\js\\Views\\Home\\home.js"
     },
     {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\members.js",

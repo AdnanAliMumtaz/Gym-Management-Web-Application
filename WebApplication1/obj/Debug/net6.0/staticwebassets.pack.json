@@ -5,12 +5,16 @@
       "PackagePath": "staticwebassets\\WebApplication1.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\dashboard.css",
-      "PackagePath": "staticwebassets\\css\\Views\\dashboard.css"
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Home\\index.css",
+      "PackagePath": "staticwebassets\\css\\Views\\Home\\index.css"
     },
     {
-      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\home.css",
-      "PackagePath": "staticwebassets\\css\\Views\\home.css"
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Home\\loginRegister.css",
+      "PackagePath": "staticwebassets\\css\\Views\\Home\\loginRegister.css"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\dashboard.css",
+      "PackagePath": "staticwebassets\\css\\Views\\dashboard.css"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\members.css",
@@ -97,8 +101,8 @@
       "PackagePath": "staticwebassets\\js\\Views\\Dashboard\\lineGraph.js"
     },
     {
-      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\home.js",
-      "PackagePath": "staticwebassets\\js\\Views\\home.js"
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\Home\\home.js",
+      "PackagePath": "staticwebassets\\js\\Views\\Home\\home.js"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\Views\\members.js",

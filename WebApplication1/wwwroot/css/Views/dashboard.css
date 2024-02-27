@@ -1,5 +1,4 @@
 ﻿.left-dashboard {
-    /* background-color: red; */
     height: 100%;
     width: 80%;
     padding: 15px;
@@ -7,7 +6,6 @@
 
 .right-dashboard {
     padding: 15px;
-    /* background-color: blue; */
     height: 100%;
     width: 20%;
     display: flex;
@@ -27,18 +25,12 @@
 .left-dashboard-middle {
     display: flex;
     height: 50%;
-    /* padding: 20px; */
 }
 
 .firstBarGraph {
-    /* margin: 7px 0px; */
     background-color: transparent;
-    /* border-radius: 6px; */
     height: 100%;
     width: 40%;
-    /* border: 1px solid #ECECEC; */
-    /* box-shadow: 0 0 5px rgba(236, 236, 236, 0.5); /* Very light shadow */ */
-    /* box-shadow: 0 0 8px #525252; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,12 +48,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* padding: 30px; */
 }
 
     .Graph-Canvas canvas {
         text-align: center;
-        /* Add margin to space out the h2 */
         margin-top: 10px;
     }
 
@@ -99,7 +89,6 @@
     height: 100%;
     background-color: white;
     border: 2px solid #ECECEC;
-    /* box-shadow: 0 0 8px #525252; */
 }
 
 .firstBox-Upper {

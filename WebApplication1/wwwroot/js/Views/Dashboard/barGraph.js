@@ -1,50 +1,39 @@
-﻿var monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+﻿
+// Code for the Bar Graph
+// Explanatory data for the bar graph
+var daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+// Function to rotate array to position current day at the end
 function rotateArray(arr, count) {
     return arr.slice(count, arr.length).concat(arr.slice(0, count));
 }
 
-var currentMonthIndex = new Date().getMonth() + 1;
-var rotatedMonths = rotateArray(monthsOfYear, currentMonthIndex);
+// Get the current day index (0 for Sunday, 1 for Monday, etc.)
+var currentDayIndex = new Date().getDay() - 6;
 
-var gradientJoining = ctx.createLinearGradient(0, 0, 0, 300);
-gradientJoining.addColorStop(0, 'rgba(48, 77, 112, 1)'); // Starting color (same as borderColor)
-gradientJoining.addColorStop(1, 'rgba(255, 216, 3, 0)'); // Ending color
+// Rotate the daysOfWeek array to position the current day at the end
+var rotatedDays = rotateArray(daysOfWeek, currentDayIndex);
 
-var gradientLeaving = ctx.createLinearGradient(0, 0, 0, 300);
-gradientLeaving.addColorStop(0, 'rgba(65, 184, 213, 1)'); // Starting color (same as borderColor)
-gradientLeaving.addColorStop(1, 'rgba(82, 82, 82, 0)'); // Ending color
+var entryLogsPerDayData = @Html.Raw(entryLogsPerDayJson);
+
+
 
 var data = {
-    labels: rotatedMonths,
-    datasets: [
-        {
-            label: 'Joining Members',
-            data: [@string.Join(",", @Model.MembersJoinedPerMonth.Values.Reverse().Select(entry => entry.Count))],
-            borderColor: '#304D70',
-            backgroundColor: gradientJoining,
-            borderWidth: 1,
-            pointRadius: 0,
-            tension: 0.4,
-            hoverRadius: 8,
-            hitRadius: 10,
-            fill: true,
-        },
-        {
-            label: 'Leaving Members',
-            data: [@string.Join(",", @Model.MembersLeftPerMonth.Values.Reverse().Select(entry => entry.Count))],
-            borderColor: '#41B8D5',
-            backgroundColor: gradientLeaving,
-            borderWidth: 1,
-            pointRadius: 0,
-            tension: 0.4,
-            hoverRadius: 8,
-            hitRadius: 10,
-            fill: true,
-        }
-    ]
+    labels: rotatedDays,
+    datasets: [{
+        label: 'Number of Entries',
+        data: entryLogsPerDayData,
+        // data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data data: entryCounts,
+        backgroundColor: '#3DD9EB',
+        borderColor: '#3DD9EB',
+        borderWidth: 1,
+        borderRadius: 7,
+        borderSkipped: false,
+    }]
 };
 
+
+// Bar graph options
 var options = {
     scales: {
         x: {
@@ -66,7 +55,7 @@ var options = {
                 display: false
             },
             grid: {
-                display: false, // Set display to false to remove y-axis grid lines
+                display: false,
             },
             border: {
                 display: false
@@ -75,14 +64,17 @@ var options = {
     },
     plugins: {
         legend: {
-            display: false
-        },
-        tooltip: {
-            enabled: true,
-            intersect: false,
+            display: false // Set to false to hide legend
         }
     },
-    interaction: {
-        mode: 'nearest',
-    },
+    indexAxis: 'x', // Set the axis for barPercentage and categoryPercentage
+    barPercentage: 0.9, // Adjust the bar width (0.5 means 50% of the available space)
+    // categoryPercentage: 0.01 // Adjust the space between bars (0.7 means 70% of the available space)
 };
+
+var ctx = document.getElementById('entryLogsChart').getContext('2d');
+var entryLogsChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+});

@@ -153,23 +153,188 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.10/chartjs-plugin-annotation.min.js"></script>
 
-    @section Scripts {
+@section Scripts {
 
-    <script src="~/js/Views/Dashboard/lineGraph.js" asp-append-version="true"></script>
+@*      <script src="~/js/Views/Dashboard/barGraph.js" asp-append-version="true"></script>
+ *@
+
+
     <script>
+
+        // Code for the Bar Graph
+        // Explanatory data for the bar graph
+        var daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        // Function to rotate array to position current day at the end
+        function rotateArray(arr, count) {
+            return arr.slice(count, arr.length).concat(arr.slice(0, count));
+        }
+
+        // Get the current day index (0 for Sunday, 1 for Monday, etc.)
+        var currentDayIndex = new Date().getDay() - 6;
+
+        // Rotate the daysOfWeek array to position the current day at the end
+        var rotatedDays = rotateArray(daysOfWeek, currentDayIndex);
+
+        var entryLogsPerDayData = @Html.Raw(entryLogsPerDayJson);
+
+
+
+        var data = {
+            labels: rotatedDays,
+            datasets: [{
+                label: 'Number of Entries',
+                data: entryLogsPerDayData,
+                // data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data data: entryCounts,
+                backgroundColor: '#3DD9EB',
+                borderColor: '#3DD9EB',
+                borderWidth: 1,
+                borderRadius: 7,
+                borderSkipped: false,
+            }]
+        };
+
+
+        // Bar graph options
+        var options = {
+            scales: {
+                x: {
+                    type: 'category',
+                    position: 'bottom',
+                    grid: {
+                        display: false,
+                    },
+                    ticks: {
+                        color: 'black'
+                    },
+                    border: {
+                        display: false
+                    },
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        display: false,
+                    },
+                    border: {
+                        display: false
+                    },
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false // Set to false to hide legend
+                }
+            },
+            indexAxis: 'x', // Set the axis for barPercentage and categoryPercentage
+            barPercentage: 0.9, // Adjust the bar width (0.5 means 50% of the available space)
+            // categoryPercentage: 0.01 // Adjust the space between bars (0.7 means 70% of the available space)
+        };
+
         var ctx = document.getElementById('entryLogsChart').getContext('2d');
         var entryLogsChart = new Chart(ctx, {
             type: 'bar',
             data: data,
             options: options
         });
-
     </script>
 
 
-
-    <script src="~/js/Views/Dashboard/barGraph.js" asp-append-version="true"></script>
+    @* <script src="~/js/Views/Dashboard/lineGraph.js" asp-append-version="true"></script> *@
     <script>
+
+        var monthsOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        function rotateArray(arr, count) {
+            return arr.slice(count, arr.length).concat(arr.slice(0, count));
+        }
+
+        var currentMonthIndex = new Date().getMonth() + 1;
+        var rotatedMonths = rotateArray(monthsOfYear, currentMonthIndex);
+
+        var gradientJoining = ctx.createLinearGradient(0, 0, 0, 300);
+        gradientJoining.addColorStop(0, 'rgba(48, 77, 112, 1)'); // Starting color (same as borderColor)
+        gradientJoining.addColorStop(1, 'rgba(255, 216, 3, 0)'); // Ending color
+
+        var gradientLeaving = ctx.createLinearGradient(0, 0, 0, 300);
+        gradientLeaving.addColorStop(0, 'rgba(65, 184, 213, 1)'); // Starting color (same as borderColor)
+        gradientLeaving.addColorStop(1, 'rgba(82, 82, 82, 0)'); // Ending color
+
+        var data = {
+            labels: rotatedMonths,
+            datasets: [
+                {
+                    label: 'Joining Members',
+                    data: [@string.Join(",", @Model.MembersJoinedPerMonth.Values.Reverse().Select(entry => entry.Count))],
+                    borderColor: '#304D70',
+                    backgroundColor: gradientJoining,
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    tension: 0.4,
+                    hoverRadius: 8,
+                    hitRadius: 10,
+                    fill: true,
+                },
+                {
+                    label: 'Leaving Members',
+                    data: [@string.Join(",", @Model.MembersLeftPerMonth.Values.Reverse().Select(entry => entry.Count))],
+                    borderColor: '#41B8D5',
+                    backgroundColor: gradientLeaving,
+                    borderWidth: 1,
+                    pointRadius: 0,
+                    tension: 0.4,
+                    hoverRadius: 8,
+                    hitRadius: 10,
+                    fill: true,
+                }
+            ]
+        };
+
+        var options = {
+            scales: {
+                x: {
+                    type: 'category',
+                    position: 'bottom',
+                    grid: {
+                        display: false,
+                    },
+                    ticks: {
+                        color: 'black'
+                    },
+                    border: {
+                        display: false
+                    },
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        display: false
+                    },
+                    grid: {
+                        display: false, // Set display to false to remove y-axis grid lines
+                    },
+                    border: {
+                        display: false
+                    },
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    intersect: false,
+                }
+            },
+            interaction: {
+                mode: 'nearest',
+            },
+        };
+
 
         var ctx = document.getElementById('joiningLeavingMembersChart').getContext('2d');
         var joiningLeavingMembersChart = new Chart(ctx, {
@@ -178,5 +343,5 @@
             options: options
         });
     </script>
+
     }
-</div>

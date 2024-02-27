@@ -2,52 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-
-    .fullBackground {
-        background-color: white;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-    }
-
-    .title-Wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        /* background-color: #525252; */
-        border-radius: 7px;
-        text-align: center;
-        height: 300px;
-        width: 500px;
-    }
-        .image-Logo img {
-            height: 50px;
-            margin-bottom: -5px;
-    }
-
-    .main-Title {
-        text-align: left;
-        font-family: 'Writing Signature', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center; 
-        background-color: #304D70;
-        border-radius: 7px;
-        word-spacing: 4px; 
-        padding-bottom: 7px;
-    }
-
-        .main-Title h1,
-        .main-Title h3 {
-            margin: 0;
-            letter-spacing: 1px;
-        }
-</style>
-
 <div class="fullBackground">
     <div class="title-Wrapper">
         <div class="inner-Content">
@@ -61,8 +15,5 @@
     </div>
 </div>
 
-<script>
-    setTimeout(function () {
-        window.location.href = "/Home/LoginRegister";
-    }, 1000) 
-</script> 
+
+<script src="~/js/Views/Home/home.js" asp-append-version="true"></script>
