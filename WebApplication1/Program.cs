@@ -15,10 +15,12 @@ builder.Services.AddDbContext<WebDbContext>(options =>
 /*var managingDbContextConnectionString = builder.Configuration.GetConnectionString("ManagingDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ManagingDbContext' not found.");
 builder.Services.AddDbContext<ManagingDbContext>(options =>
 options.UseSqlServer(managingDbContextConnectionString));*/
- 
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<WebDbContext>();
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<WebDbContext>()
+    .AddDefaultUI()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
