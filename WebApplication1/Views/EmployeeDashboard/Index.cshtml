@@ -1,0 +1,51 @@
+﻿@using System.Security.Claims;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.EntityFrameworkCore;
+@using WebApplication1.Areas.Identity.Data;
+@using WebApplication1.Data;
+@* @inject UserManager<ApplicationUser> UserManager
+ *@
+@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "EmployeeDashboard";
+    Layout = "/Pages/_Layout.cshtml";
+}
+
+<h2>Employee</h2>
+
+<h2>All Owners</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <!-- Add more columns as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var owner in Model)
+        {
+
+            <tr>
+                <td>@owner.UserName</td>
+                <td>@owner.Email</td>
+                <!-- Add more columns as needed -->
+                <td>
+                    <form asp-controller="ConnectionRequests" asp-action="SendRequest" method="post">
+                        <input type="hidden" name="ownerId" value="@owner.Id" />
+                        <button type="submit" class="btn btn-primary">Send Request</button>
+                    </form>
+                </td>
+
+                <td>
+
+                    <form asp-controller="ConnectionRequests" asp-action="WithdrawRequest" method="post">
+                        <input type="hidden" name="ownerId" value="@owner.Id" />
+                        <button type="submit" class="btn btn-danger">Withdraw Request</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

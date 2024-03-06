@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 
-
     <link rel="stylesheet" href="~/css/Views/dashboard.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Views/members.css" asp-append-version="true" />
 </head>
@@ -190,30 +189,63 @@
                 <div class="sideBarHeadings">
                     <p><b>HOME</b></p>
                 </div>
-                <li class="btn-style @(currentController == "Dashboard" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/dashboard.png" alt="Dashboard Icon" />
-                    <a href="/Dashboard/Index">Dashboard</a>
-                </li>
-                <li class="btn-style @(currentController == "Members" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/members.png" alt="Members Icon" />
-                    <a href="/Members/Index">Members</a>
-                </li>
-                <li class="btn-style @(currentController == "Resource" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/resource.png" alt="Resource Icon" />
-                    <a href="/Resource/Index">Resource</a>
-                </li>
-                <li class="btn-style @(currentController == "Messages" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/messages.png" alt="Message Icon" />
-                    <a href="/Messages/Index">Messages</a>
-                </li>
-                <li class="btn-style @(currentController == "Classes" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/classes.png" alt="Classes Icon" />
-                    <a href="/Classes/Index">Classes</a>
-                </li>
-                <li class="btn-style @(currentController == "Roles" && currentAction == "Index" ? "active" : "")">
-                    <img src="/images/classes.png" alt="Classes Icon" />
-                    <a href="/Roles/Index">Roles</a>
-                </li>
+                @if (User.IsInRole("Employee"))
+                {
+                    <li class="btn-style @(currentController == "EmployeeDashboard" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/resource.png" alt="Resource Icon" />
+                        <a href="/EmployeeDashboard/Index">Employee Dashboard</a>
+                    </li>
+                }
+                @if (User.IsInRole("Owner"))
+                {
+                    <li class="btn-style @(currentController == "Dashboard" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/dashboard.png" alt="Dashboard Icon" />
+                        <a href="/Dashboard/Index">Dashboard</a>
+                    </li>
+                }
+                @if (User.IsInRole("Owner"))
+                {
+                    <li class="btn-style @(currentController == "Members" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/members.png" alt="Members Icon" />
+                        <a href="/Members/Index">Members</a>
+                    </li>
+                }
+                @if (User.IsInRole("Owner"))
+                {
+                    <li class="btn-style @(currentController == "Resource" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/resource.png" alt="Resource Icon" />
+                        <a href="/Resource/Index">Resource</a>
+                    </li>
+                }
+                @if (User.IsInRole("Owner"))
+                {
+                    <li class="btn-style @(currentController == "Employee" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/classes.png" alt="Employee Icon" />
+                        <a href="/Employee/Index">Employee</a>
+                    </li>
+                }
+                @if (User.IsInRole("Owner") || User.IsInRole("Employee"))
+                {
+                    <li class="btn-style @(currentController == "Messages" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/messages.png" alt="Message Icon" />
+                        <a href="/Messages/Index">Messages</a>
+                    </li>
+                }
+                @if (User.IsInRole("Owner"))
+                {
+                    <li class="btn-style @(currentController == "Classes" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/classes.png" alt="Classes Icon" />
+                        <a href="/Classes/Index">Classes</a>
+                    </li>
+                }
+                
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="btn-style @(currentController == "Roles" && currentAction == "Index" ? "active" : "")">
+                        <img src="/images/classes.png" alt="Classes Icon" />
+                        <a href="/Roles/Index">Roles</a>
+                    </li>
+                }
             </ul>
 
             <ul class="list-Navigation">
@@ -225,7 +257,6 @@
                     <a href="/Settings/Index">Settings</a>
                 </li>
             </ul>
-
 
             <div class="logoutBox">
                 <div class="iconPerson">
@@ -250,7 +281,6 @@
                             <p>You have successfully logged out of the application.</p>
                         }
                     }
-
                 </div>
             </div>
         </div>
