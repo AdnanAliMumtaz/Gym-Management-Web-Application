@@ -8,13 +8,16 @@ using WebApplication1.Data;
 namespace WebApplication1.Controllers
 {
     [Authorize(Roles = "Owner")]
+
     public class EmployeeController : Controller
     {
         private readonly WebDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public EmployeeController(WebDbContext context)
+        public EmployeeController(WebDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -30,6 +33,7 @@ namespace WebApplication1.Controllers
             // Pass the filtered collection to the view
             return View(connectionRequests);
         }
+
         /*public async Task<IActionResult> EmployeeAsync()
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);

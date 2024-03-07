@@ -54,6 +54,7 @@
     <partial name="_ValidationScriptsPartial" />
 } *@
 @* @model IEnumerable<WebApplication1.Models.ConnectionRequest> *@
+
 @using WebApplication1.Models;
 @model IEnumerable<ConnectionRequest> // Change the model type
 
@@ -74,6 +75,21 @@
                 <td>@request.SenderId</td>
                 <td>@request.ReceiverId</td>
                 <td>@request.Status</td>
+
+                <td>
+                    <form asp-controller="ConnectionRequests" asp-action="AcceptRequest" method="post">
+                        <input type="hidden" name="receiverId" value="@request.SenderId" />
+                        <button type="submit" class="btn btn-primary">Accept Request</button>
+                    </form>
+                </td>
+
+                <td>
+
+                    <form asp-controller="ConnectionRequests" asp-action="WithdrawRequest" method="post">
+                        <input type="hidden" name="requestId" value="@request.Id" />
+                        <button type="submit" class="btn btn-danger">Withdraw Request</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

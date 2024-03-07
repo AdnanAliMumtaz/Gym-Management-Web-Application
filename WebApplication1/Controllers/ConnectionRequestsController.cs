@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebApplication1.Data;
 using WebApplication1.Models;
@@ -6,6 +7,8 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+ /*   [Authorize(Roles = "Employee")]*/
+    [Authorize(Roles = "Employee,Owner")]
     public class ConnectionRequestsController : Controller
     {
         private readonly WebDbContext _context;
@@ -76,21 +79,59 @@ namespace WebApplication1.Controllers
         }
 
 
-        public IActionResult AcceptRequest(int requestId)
+        /*public IActionResult AcceptRequest(int requestId)
         {
             var request = _context.ConnectionRequests.FirstOrDefault(r => r.Id == requestId);
 
             if (request == null)
             {
                 // Request not found, handle accordingly (maybe show an error message)
-                return RedirectToAction("Index", "OwnerDashboard");
+                return RedirectToAction("Index", "Employee");
             }
 
             request.Status = "Accepted";
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "OwnerDashboard");
+            return RedirectToAction("Index", "Employee");
+        }*/
+
+
+        public IActionResult AcceptRequest(string receiverId)
+        {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var request = _context.ConnectionRequests.FirstOrDefault(r => r.SenderId == receiverId && r.ReceiverId == currentUserId);
+
+            if (request == null)
+            {
+                // Request not found, handle accordingly (maybe show an error message)
+                return RedirectToAction("Index", "Employee");
+            }
+
+            request.Status = "Accepted";
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Employee");
         }
+
+
+        /*public IActionResult AcceptRequest(int requestId)
+        {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var request = _context.ConnectionRequests.FirstOrDefault(r => r.Id == requestId && r.ReceiverId == currentUserId);
+
+            if (request == null)
+            {
+                // Request not found or current user is not the receiver, handle accordingly
+                return RedirectToAction("Index", "Employee");
+            }
+
+            request.Status = "Accepted";
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "EmployeeDashboa");
+        }*/
 
         public IActionResult RejectRequest(int requestId)
         {
@@ -99,18 +140,13 @@ namespace WebApplication1.Controllers
             if (request == null)
             {
                 // Request not found, handle accordingly (maybe show an error message)
-                return RedirectToAction("Index", "OwnerDashboard");
+                return RedirectToAction("Index", "Employee");
             }
 
             request.Status = "Rejected";
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "OwnerDashboard");
+            return RedirectToAction("Index", "Employee");
         }
-
-        /*public IActionResult Index()
-        {
-            return View();
-        }*/
     }
 }
