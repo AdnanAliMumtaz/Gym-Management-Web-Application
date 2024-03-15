@@ -39,6 +39,10 @@
                 </td>
 
                 <td>
+                  @*   <form asp-controller="ConnectionRequests" asp-action="RejectRequest" method="post">
+                        <input type="hidden" name="ownerId" value="@owner.Id" />
+                        <button type="submit" class="btn btn-danger">Reject Request</button>
+                    </form> *@
 
                     <form asp-controller="ConnectionRequests" asp-action="WithdrawRequest" method="post">
                         <input type="hidden" name="ownerId" value="@owner.Id" />

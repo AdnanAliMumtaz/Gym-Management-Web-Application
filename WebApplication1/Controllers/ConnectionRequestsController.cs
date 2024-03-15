@@ -133,7 +133,51 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "EmployeeDashboa");
         }*/
 
-        public IActionResult RejectRequest(int requestId)
+
+
+        public IActionResult RejectRequest(string receiverId)
+        {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var request = _context.ConnectionRequests.FirstOrDefault(r => r.ReceiverId == currentUserId && r.SenderId == receiverId);
+
+            if (request == null)
+            {
+                // Request not found, handle accordingly (maybe show an error message)
+                return RedirectToAction("Index", "Employee");
+            }
+
+            _context.ConnectionRequests.Remove(request); // Remove the request from the database
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Employee");
+        }
+
+
+
+
+
+
+        /*public IActionResult RejectRequest(string receiverId)
+        {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var request = _context.ConnectionRequests.FirstOrDefault(r => r.ReceiverId == currentUserId && r.SenderId == receiverId);
+
+            if (request == null)
+            {
+                // Request not found, handle accordingly (maybe show an error message)
+                return RedirectToAction("Index", "Employee");
+            }
+
+            _context.ConnectionRequests.Remove(request); // Remove the request from the database
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Employee");
+        }
+*/
+
+        /*public IActionResult RejectRequest(int requestId)
         {
             var request = _context.ConnectionRequests.FirstOrDefault(r => r.Id == requestId);
 
@@ -147,6 +191,6 @@ namespace WebApplication1.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Employee");
-        }
+        }*/
     }
 }
