@@ -140,32 +140,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/ResourcePrev/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VQcmV2XEVkaXQuY3NodG1s
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resource/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/ResourcePrev/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VQcmV2XEluZGV4LmNzaHRtbA==
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resource/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resources/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXENyZWF0ZS5jc2h0bWw=
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resource/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resources/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXERlbGV0ZS5jc2h0bWw=
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resource/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resources/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resources/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resources/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VzXEluZGV4LmNzaHRtbA==
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Resource/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzb3VyY2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Roles/Create.cshtml]

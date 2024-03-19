@@ -234,7 +234,6 @@ namespace WebApplication1.Controllers
             _context.SaveChanges();
 
             // Redirect to the member details page or another appropriate page
-            // return RedirectToAction("Edit", new { id = existingMember.MemberID });
 
             // If the model state is not valid, return to the edit view with validation errors
             return RedirectToAction(nameof(Index));

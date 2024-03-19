@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Humanizer.Localisation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Areas.Identity.Data;
 using WebApplication1.Data;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class ResourcesController : Controller
+    public class ResourceController : Controller
     {
         private readonly WebDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ResourcesController(WebDbContext context)
+        public ResourceController(WebDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Resources
@@ -52,75 +57,94 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        // POST: Resources/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ResourceID,ItemName,ItemType,ItemQuantity,PurchasedDate,ItemPrice,ItemNotes,UserId")] Resource resource)
+        public async Task<IActionResult> Create(String itemName, String itemType, int itemQuantity, DateTime PurchasedDate, int itemPrice, String itemNotes)
         {
-            if (ModelState.IsValid)
+
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Create a new resource instance
+            var newResource = new Resource
             {
-                _context.Add(resource);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", resource.UserId);
-            return View(resource);
+                ItemName = itemName,
+                ItemType = itemType,
+                ItemQuantity = itemQuantity,
+                PurchasedDate = PurchasedDate,
+                ItemPrice = itemPrice,
+                ItemNotes = itemNotes,
+                ApplicationUser = user
+            };
+
+            // Add the new resource to the DbSet and save changes
+            _context.Resources.Add(newResource);
+
+            await _context.SaveChangesAsync();
+
+            return View(newResource);
+            // return RedirectToAction(nameof(Index)); // Assuming you have an Index action to display resources
         }
 
-        // GET: Resources/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Resources == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var resource = await _context.Resources.FindAsync(id);
-            if (resource == null)
+            var item = await _context.Resources
+                .FirstOrDefaultAsync(m => m.ResourceID == id);
+
+            if (item == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", resource.UserId);
-            return View(resource);
+
+            return View(item);
         }
 
-        // POST: Resources/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ResourceID,ItemName,ItemType,ItemQuantity,PurchasedDate,ItemPrice,ItemNotes,UserId")] Resource resource)
+        public IActionResult EditConfirmed(Resource editedResource)
         {
-            if (id != resource.ResourceID)
+            /*if (ModelState.IsValid)
             {
+            }*/
+
+            // Check if the member exists in the database
+            var originalResource = _context.Resources.Find(editedResource.ResourceID);
+
+            if (originalResource == null)
+            {
+                // If the member is not found, return a 404 Not Found result
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(resource);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ResourceExists(resource.ResourceID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", resource.UserId);
-            return View(resource);
+            // Update the existing member's properties with the edited values
+            originalResource.ItemName = editedResource.ItemName;
+            originalResource.ItemType = editedResource.ItemType;
+            originalResource.ItemQuantity = editedResource.ItemQuantity;
+            originalResource.PurchasedDate = editedResource.PurchasedDate;
+            originalResource.ItemPrice = editedResource.ItemPrice;
+            originalResource.ItemNotes = editedResource.ItemNotes;
+
+            // Update the existing member's properties with the edited values
+            /*_context.Update(updatedMember);*/
+
+            _context.Entry(originalResource).State = EntityState.Modified;
+
+
+            // Save changes to the database
+            _context.SaveChanges();
+
+            // Redirect to the member details page or another appropriate page
+            // return RedirectToAction("Edit", new { id = existingMember.MemberID });
+
+            // If the model state is not valid, return to the edit view with validation errors
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: Resources/Delete/5
         public async Task<IActionResult> Delete(int? id)

@@ -28,7 +28,7 @@ namespace WebApplication1.Models
 
 
         [Required]
-        [MaxLength(50)]
+        /*[MaxLength(50)]*/
         public int ItemPrice { get; set; }
 
         [StringLength(500)]
