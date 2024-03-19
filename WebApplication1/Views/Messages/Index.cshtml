@@ -1,6 +1,193 @@
-﻿@{
+﻿@model List<Message>
+@using WebApplication1.Models.ViewModels
+
+@{
     ViewData["Title"] = "Messages";
     Layout = "/Pages/_Layout.cshtml";
 }
 
 <h1>Messages</h1>
+
+<style>
+    .messaging-container {
+        display: flex;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+
+    .message-area {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .user-list {
+        list-style: none;
+        padding: 0;
+    }
+
+        .user-list li {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+            .user-list li:hover {
+                background-color: #e0e0e0;
+            }
+
+    .message-list {
+        height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .message-input textarea {
+        width: calc(100% - 70px);
+        height: 50px;
+        resize: none;
+        padding: 5px;
+    }
+
+    .message-input button {
+        width: 60px;
+        height: 50px;
+    }
+
+
+</style>
+
+
+
+
+
+
+
+
+@* <div class="messaging-container">
+    <div class="sidebar">
+        <h2>Users</h2>
+        <ul class="user-list">
+            <!-- Iterate over users from the model and display them -->
+            @foreach (var message in Model)
+            {
+                <li class="user">@message.</li>
+            }
+        </ul>
+    </div>
+    <div class="message-area">
+        <h2>Messages</h2>
+        <div class="message-list">
+            <!-- Messages will be displayed here -->
+        </div>
+        <div class="message-input">
+            <textarea placeholder="Type your message here"></textarea>
+            <button>Send</button>
+        </div>
+    </div>
+</div> *@
+
+
+
+
+
+
+
+
+
+<h2>All Received Messages</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sender</th>
+            <th>Content</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.SenderId</td>
+                <td>@message.Content</td>
+                <td>@message.Timestamp</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+@* <form asp-controller="Messages" asp-action="SendMessage" method="post">
+    <div class="form-group">
+        <label for="receiverId">Receiver:</label>
+        <select class="form-control" id="receiverId" name="receiverId" required>
+            <option value="">Select Receiver</option>
+            @foreach (var connection in Model.AcceptedConnections)
+            {
+                <option value="@connection.ReceiverId">@connection.ReceiverId</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="content">Message:</label>
+        <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form> *@
+
+
+
+
+
+
+<div class="messaging-container">
+    <div class="sidebar">
+        <h2>Users</h2>
+        <ul class="user-list">
+            <!-- List of users -->
+            <li class="user">User 1</li>
+            <li class="user">User 2</li>
+            <li class="user">User 3</li>
+            <!-- Add more users as needed -->
+        </ul>
+    </div>
+    <div class="message-area">
+        <h2>Messages</h2>
+        <div class="message-list">
+            <!-- Messages will be displayed here -->
+        </div>
+        <div class="message-input">
+            <textarea placeholder="Type your message here"></textarea>
+            <button>Send</button>
+        </div>
+    </div>
+</div>
+
+
+
+ 
+
+
+
+
+
+@* <form asp-controller="Messages" asp-action="SendMessage" method="post">
+    <input type="hidden" name="receiverId" value="" />
+    <div class="form-group">
+        <label for="content">Message:</label>
+        <textarea id="content" name="content" class="form-control" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+ *@

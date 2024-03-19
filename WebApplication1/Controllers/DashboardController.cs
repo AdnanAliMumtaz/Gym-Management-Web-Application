@@ -13,7 +13,7 @@ using System.Security.Claims;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize]
+    /*[Authorize]*/
     public class DashboardController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Owner")]
+    /*[Authorize(Roles = "Owner")]*/
     public class ClassesController : Controller
     {
         public IActionResult Index()

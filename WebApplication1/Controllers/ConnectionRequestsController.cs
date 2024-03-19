@@ -7,8 +7,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
- /*   [Authorize(Roles = "Employee")]*/
-    [Authorize(Roles = "Employee,Owner")]
+    /*[Authorize(Roles = "Employee,Owner")]*/
     public class ConnectionRequestsController : Controller
     {
         private readonly WebDbContext _context;
@@ -44,22 +43,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "EmployeeDashboard");
         }
 
-        /*public IActionResult WithdrawRequest(int requestId)
-        {
-            var request = _context.ConnectionRequests.FirstOrDefault(r => r.Id == requestId);
-
-            if (request == null)
-            {
-                // Request not found, handle accordingly (maybe show an error message)
-                return RedirectToAction("Index", "EmployeeDashboard");
-            }
-
-            _context.ConnectionRequests.Remove(request);
-            _context.SaveChanges();
-
-            return RedirectToAction("Index", "EmployeeDashboard");
-        }*/
-
         public IActionResult WithdrawRequest(string ownerId)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -78,10 +61,11 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "EmployeeDashboard");
         }
 
-
-        /*public IActionResult AcceptRequest(int requestId)
+        /*public IActionResult AcceptRequest(string receiverId)
         {
-            var request = _context.ConnectionRequests.FirstOrDefault(r => r.Id == requestId);
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var request = _context.ConnectionRequests.FirstOrDefault(r => r.SenderId == receiverId && r.ReceiverId == currentUserId);
 
             if (request == null)
             {
@@ -108,30 +92,29 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("Index", "Employee");
             }
 
-            request.Status = "Accepted";
-            _context.SaveChanges();
-
-            return RedirectToAction("Index", "Employee");
-        }
-
-
-        /*public IActionResult AcceptRequest(int requestId)
-        {
-            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var request = _context.ConnectionRequests.FirstOrDefault(r => r.Id == requestId && r.ReceiverId == currentUserId);
-
-            if (request == null)
+            if (request.Status == "Accepted")
             {
-                // Request not found or current user is not the receiver, handle accordingly
+                // Request is already accepted, do not update
                 return RedirectToAction("Index", "Employee");
             }
 
             request.Status = "Accepted";
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "EmployeeDashboa");
-        }*/
+            // Send a message to the employee informing them about the connection
+            var message = new Message
+            {
+                SenderId = currentUserId,
+                ReceiverId = receiverId,
+                Content = "You are now connected with the owner.",
+                Timestamp = DateTime.Now,
+            };
+            _context.Messages.Add(message);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Employee");
+        }
+
 
 
 
@@ -139,7 +122,7 @@ namespace WebApplication1.Controllers
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var request = _context.ConnectionRequests.FirstOrDefault(r => r.ReceiverId == currentUserId && r.SenderId == receiverId);
+            var request = _context.ConnectionRequests.FirstOrDefault(r => r.SenderId == receiverId && r.ReceiverId == currentUserId);
 
             if (request == null)
             {
@@ -152,45 +135,5 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("Index", "Employee");
         }
-
-
-
-
-
-
-        /*public IActionResult RejectRequest(string receiverId)
-        {
-            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            var request = _context.ConnectionRequests.FirstOrDefault(r => r.ReceiverId == currentUserId && r.SenderId == receiverId);
-
-            if (request == null)
-            {
-                // Request not found, handle accordingly (maybe show an error message)
-                return RedirectToAction("Index", "Employee");
-            }
-
-            _context.ConnectionRequests.Remove(request); // Remove the request from the database
-            _context.SaveChanges();
-
-            return RedirectToAction("Index", "Employee");
-        }
-*/
-
-        /*public IActionResult RejectRequest(int requestId)
-        {
-            var request = _context.ConnectionRequests.FirstOrDefault(r => r.Id == requestId);
-
-            if (request == null)
-            {
-                // Request not found, handle accordingly (maybe show an error message)
-                return RedirectToAction("Index", "Employee");
-            }
-
-            request.Status = "Rejected";
-            _context.SaveChanges();
-
-            return RedirectToAction("Index", "Employee");
-        }*/
     }
 }

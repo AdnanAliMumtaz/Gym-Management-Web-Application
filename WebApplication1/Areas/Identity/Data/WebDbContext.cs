@@ -15,11 +15,8 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ConnectionRequest> ConnectionRequests { get; set; }
     public IEnumerable<object> ApplicationUsers { get; internal set; }
 
-    // Navigation property for the connection requests sent by this user
-    /*public virtual ICollection<ConnectionRequest> SentConnectionRequests { get; set; }*/
-
-    // Navigation property for the connection requests received by this user
-    /*public virtual ICollection<ConnectionRequest> ReceivedConnectionRequests { get; set; }*/
+    public DbSet<Message> Messages { get; set; }
+    public DbSet<Resource> Resources { get; set; }
 
 
     public WebDbContext(DbContextOptions<WebDbContext> options)

@@ -21,5 +21,6 @@ public class ApplicationUser : IdentityUser
 
     public List<Member> Member { get; set; } = new List<Member>();
 
+    public List<Resource> Resource { get; set; } = new List<Resource>();
 }
 

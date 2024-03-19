@@ -22,31 +22,6 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
         }
 
-        /*public async Task<IActionResult> Index()
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            // Filter members based on the user's ID
-            var members = await _context.Members
-                .Where(m => m.UserId == user.Id)
-                .ToListAsync();
-
-            // Retrieve entry logs for the specific user
-            var entryLogs = _context.EntryLogs
-                .Where(el => el.Member.UserId == user.Id)
-                .ToList();
-
-            // Create a DashboardViewModel instance and set its Members property
-            var viewModel = new WebApplication1.Models.ViewModels.DashboardViewModel
-            {
-                Members = members,
-                EntryLogs =  entryLogs
-            };
-
-            return View(viewModel);
-        }*/
-
-
         [HttpGet]
         public IActionResult Search(string search)
         {

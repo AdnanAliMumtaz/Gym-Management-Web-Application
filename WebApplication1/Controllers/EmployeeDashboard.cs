@@ -10,7 +10,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Employee")]
+    /*[Authorize(Roles = "Employee")]*/
     public class EmployeeDashboard : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

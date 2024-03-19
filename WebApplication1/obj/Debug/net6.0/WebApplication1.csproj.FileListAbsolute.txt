@@ -856,3 +856,20 @@ C:\Users\adnan\This is Important\Gym-Management-Web-Application\WebApplication1\
 C:\Users\adnan\This is Important\Gym-Management-Web-Application\WebApplication1\obj\Debug\net6.0\WebApplication1.pdb
 C:\Users\adnan\This is Important\Gym-Management-Web-Application\WebApplication1\obj\Debug\net6.0\WebApplication1.genruntimeconfig.cache
 C:\Users\adnan\This is Important\Gym-Management-Web-Application\WebApplication1\obj\Debug\net6.0\ref\WebApplication1.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.Owin.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Microsoft.Owin.Security.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\Owin.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\adnan\Gym-Management-Web-Application\WebApplication1\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

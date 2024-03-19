@@ -320,6 +320,77 @@ namespace WebApplication1.Migrations
                     b.ToTable("Member");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Message", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MessageId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Resource", b =>
+                {
+                    b.Property<int>("ResourceID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResourceID"), 1L, 1);
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ItemNotes")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("ItemPrice")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ItemType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("PurchasedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ResourceID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Resource");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
                 {
                     b.Property<int>("TransactionFeeID")
@@ -417,6 +488,17 @@ namespace WebApplication1.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Resource", b =>
+                {
+                    b.HasOne("WebApplication1.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("Resource")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
                 {
                     b.HasOne("WebApplication1.Models.Member", "Member")
@@ -431,6 +513,8 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Areas.Identity.Data.ApplicationUser", b =>
                 {
                     b.Navigation("Member");
+
+                    b.Navigation("Resource");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Member", b =>

@@ -7,7 +7,7 @@ using WebApplication1.Data;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Owner")]
+    /*[Authorize(Roles = "Owner")]*/
 
     public class EmployeeController : Controller
     {
