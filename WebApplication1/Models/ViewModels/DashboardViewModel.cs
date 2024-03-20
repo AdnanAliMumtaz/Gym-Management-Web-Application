@@ -19,22 +19,13 @@
         // Additional Variable
         public List<EntryLog> EntryLogs { get; set; }
 
-
-
-
         // Editing Part
         public Dictionary<DateTime, EntryCount> MembersJoinedPerMonth { get; set; }
         public Dictionary<DateTime, EntryCount> MembersLeftPerMonth { get; set; }
 
-
-
-
-
-
-
         public List<Member> Members { get; set; }
         public Dictionary<DateTime, int> EntryLogsPerDay { get; set; }
-
-
     }
+
+    
 }

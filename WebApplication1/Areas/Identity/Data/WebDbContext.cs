@@ -18,6 +18,7 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Message> Messages { get; set; }
     public DbSet<Resource> Resources { get; set; }
 
+    public DbSet<Employee> Employees { get; set; }
 
     public WebDbContext(DbContextOptions<WebDbContext> options)
         : base(options)
