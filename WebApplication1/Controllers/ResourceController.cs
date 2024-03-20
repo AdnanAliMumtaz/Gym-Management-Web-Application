@@ -25,11 +25,35 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Resources
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             var webDbContext = _context.Resources.Include(r => r.ApplicationUser);
             return View(await webDbContext.ToListAsync());
         }
+*/
+
+        // GET: Resources
+        public async Task<IActionResult> Index()
+        {
+            // Get the currently logged-in user
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser == null)
+            {
+                // Redirect to login or handle the case when the user is not logged in
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Retrieve only the resources associated with the current user
+            var resources = _context.Resources
+                .Include(r => r.ApplicationUser)
+                .Where(r => r.UserId == currentUser.Id)
+                .ToList();
+
+            return View(resources);
+        }
+
+
 
         // GET: Resources/Details/5
         public async Task<IActionResult> Details(int? id)

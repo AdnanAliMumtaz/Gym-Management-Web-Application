@@ -26,10 +26,31 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             var webDbContext = _context.Employees.Include(e => e.ApplicationUser);
             return View(await webDbContext.ToListAsync());
+        }
+*/
+        // GET: Employees
+        public async Task<IActionResult> Index()
+        {
+            // Get the currently logged-in user
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser == null)
+            {
+                // Redirect to login or handle the case when the user is not logged in
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Retrieve only the employees associated with the current user
+            var employees = _context.Employees
+                .Include(e => e.ApplicationUser)
+                .Where(e => e.UserId == currentUser.Id)
+                .ToList();
+
+            return View(employees);
         }
 
         // GET: Employees/Details/5
@@ -60,7 +81,7 @@ namespace WebApplication1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Edit(int id, [Bind("EmployeeID,FirstName,LastName,DateOfBirth,Gender,Address,PhoneNumber,Email,UserId")] Employee employee)
+        //        public async Task<IActionResult> Edit(int id, [Bind("EmployeeID,FirstName,LastName,DateOfBirth,Gender,Address,PhoneNumber,Email,UserId")] Employee employee)
 
         public async Task<IActionResult> Create(String FirstName, String LastName, DateTime DateOfBirth, Gender Gender, String Address, String PhoneNumber, String Email)
         {
@@ -109,8 +130,9 @@ namespace WebApplication1.Controllers
         }
 
         // POST: Employees/Edit/5
-/*        public async Task<IActionResult> Edit(int id, [Bind("EmployeeID,FirstName,LastName,DateOfBirth,Gender,Address,PhoneNumber,Email,UserId")] Employee employee)
-*/        [HttpPost, ActionName("Edit")]
+        /*        public async Task<IActionResult> Edit(int id, [Bind("EmployeeID,FirstName,LastName,DateOfBirth,Gender,Address,PhoneNumber,Email,UserId")] Employee employee)
+        */
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public IActionResult EditConfirmed(Employee editedEmployee)
         {
@@ -182,14 +204,14 @@ namespace WebApplication1.Controllers
             {
                 _context.Employees.Remove(employee);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmployeeExists(int id)
         {
-          return (_context.Employees?.Any(e => e.EmployeeID == id)).GetValueOrDefault();
+            return (_context.Employees?.Any(e => e.EmployeeID == id)).GetValueOrDefault();
         }
     }
 }
