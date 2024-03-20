@@ -20,6 +20,7 @@
     height: 25%;
     width: 100%;
     border-radius: 7px;
+    display: flex;
 }
 
 .left-dashboard-middle {
@@ -243,8 +244,9 @@
     justify-content: flex-end;
 }
 
-    .imageContent h1 {
+    .imageContent img {
         margin: 0px;
+        width: 65%;
     }
 
 .textContent {
@@ -294,10 +296,10 @@
     .textContentDescriptionLower p {
         margin: 0px;
         margin-left: 38px;
-         color: #FFCC00; 
+        color: #FFCC00;
         color: rgba(61, 217, 235, 1);
-         /*background-color: #ffeb98; */
-        background-color: rgba(61, 217, 235, 0.2);
+        /*background-color: #ffeb98; 
+        /*background-color: rgba(61, 217, 235, 0.2);*/
         padding: 1px 22px;
         border-radius: 15px;
         display: inline-block;

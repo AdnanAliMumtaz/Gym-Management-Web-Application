@@ -29,19 +29,25 @@
     }
 
     .side-Bar {
-        background-color: #525252;
-        background-color: white;
+        /* background-color: #304D70; */
+        background-color: rgba(48, 77, 112, 0.2);
+        color: black;
         width: 17%;
         height: 100%;
-        border-right: 2px solid #ECECEC;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        /* border-right: 2px solid #ECECEC; */
         text-align: center;
-    }
+    } 
         .side-Bar .image-Logo img {
             margin-top: 50px;
         }
 
+        /* Default styling */
+
 
     .list-Navigation {
+        width: 78%;
         margin-top: 40%;
         margin-left: 10%;
         margin-right: 5%;
@@ -52,7 +58,7 @@
         justify-content: center;
         padding: 0px;
         list-style-type: none;
-    }
+    } 
 
         .list-Navigation li {
             width: 100%;
@@ -78,9 +84,7 @@
     .btn-style {
         display: flex;
         align-items: center;
-        height: 45px;
-        /*background-color: white;*/
-        /*color: black;*/
+        height: 43px;
         color: #525252;
         border: 1px solid transparent;
         font-size: 18px;
@@ -96,6 +100,7 @@
         .btn-style:hover {
             /* color: white; */
             background-color: #ECECEC;
+            /* background-color: rgba(48, 77, 112, 0.2); */
             border-radius: 6px;
             transition: 0.5s;
         }
@@ -212,10 +217,6 @@
                 }
                 @if (User.IsInRole("Owner"))
                 {
-                    @* <li class="btn-style @(currentController == "Resource" && currentAction == "Index" ? "active" : "")">
-                        <img src="/images/resource.png" alt="Resource Icon" />
-                        <a href="/Resource/Index">Resource</a>
-                    </li> *@
                     <li class="btn-style @(currentController == "Resource" && currentAction == "Index" ? "active" : "")">
                         <img src="/images/resource.png" alt="Resource Icon" />
                         <a href="/Resource/Index">Resource</a>
@@ -228,13 +229,13 @@
                         <a href="/Employee/Index">Employee</a>
                     </li>
                 }
-                @if (User.IsInRole("Owner") || User.IsInRole("Employee"))
+                @* @if (User.IsInRole("Owner") || User.IsInRole("Employee"))
                 {
                     <li class="btn-style @(currentController == "Messages" && currentAction == "Index" ? "active" : "")">
                         <img src="/images/messages.png" alt="Message Icon" />
                         <a href="/Messages/Index">Messages</a>
                     </li>
-                }
+                } *@
                 @if (User.IsInRole("Owner"))
                 {
                     <li class="btn-style @(currentController == "Classes" && currentAction == "Index" ? "active" : "")">

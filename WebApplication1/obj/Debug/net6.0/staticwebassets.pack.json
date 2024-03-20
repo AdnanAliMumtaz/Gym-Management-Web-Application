@@ -29,6 +29,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Cancellation_Icon.png",
+      "PackagePath": "staticwebassets\\images\\Cancellation_Icon.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Classes_Icon.png",
+      "PackagePath": "staticwebassets\\images\\Classes_Icon.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\DollarSign.png",
       "PackagePath": "staticwebassets\\images\\DollarSign.png"
     },
@@ -45,8 +53,16 @@
       "PackagePath": "staticwebassets\\images\\SofaGuy.png"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\StaffMember_Icon.png",
+      "PackagePath": "staticwebassets\\images\\StaffMember_Icon.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\TotalMembers.png",
       "PackagePath": "staticwebassets\\images\\TotalMembers.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\WelcomeBar_Icon.png",
+      "PackagePath": "staticwebassets\\images\\WelcomeBar_Icon.png"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\activeMembers.png",

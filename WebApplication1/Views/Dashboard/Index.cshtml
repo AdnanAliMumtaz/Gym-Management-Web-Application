@@ -6,11 +6,22 @@
     var entryLogsPerDayJson = Newtonsoft.Json.JsonConvert.SerializeObject(Model.EntryLogsPerDay.Values);
 }
 
+<style>
+    .left-dashboard-upper .left-welcome {
+        width: 40%;
+    }
+</style>
+
 <div class="dashboard-Background">
     
     <div class="left-dashboard">
         <div class="left-dashboard-upper">
-            <h2><b>Welcome back</b></h2>
+            <div class="right-welcome">
+                <h2><b>Welcome back</b></h2>
+            </div>
+            <div class="left-welcome">
+                <img src="/images/WelcomeBar_Icon.png" />
+            </div>
         </div>
         <div class="left-dashboard-middle">
             <div class="firstBarGraph">
@@ -34,7 +45,8 @@
             <div class="firstBox">
                 <div class="firstBox-Upper">
                     <div class="imageContent">
-                        <h2><b>Img</b></h2>
+                        @* <h2><b>Img</b></h2> *@
+                        <img src="/images/Cancellation_Icon.png" />
                     </div>
                     <div class="textContent">
                         <h2>21</h2>
@@ -45,17 +57,18 @@
                 </div>
                 <div class="firstBox-Lower">
                     <div class="textContentLower">
-                        <h4><b>Cancellation</b></h4>
+                        <h4><b>Employees</b></h4>
                     </div>
                     <div class="textContentDescriptionLower">
-                        <p><b>Today</b></p>
+                        <p style="background-color: rgba(48, 77, 112, 0.2); color: rgba(48, 77, 112, 1);"><b>Today</b></p>
                     </div>
                 </div>
             </div>
             <div class="firstBox">
                 <div class="firstBox-Upper">
                     <div class="imageContent">
-                        <h2><b>Img</b></h2>
+                        @* <h2><b>Img</b></h2> *@
+                        <img src="/images/Classes_Icon.png" />
                     </div>
                     <div class="textContent">
                         <h2>21</h2>
@@ -66,17 +79,18 @@
                 </div>
                 <div class="firstBox-Lower">
                     <div class="textContentLower">
-                        <h4><b>Cancellation</b></h4>
+                        <h4><b>Classes</b></h4>
                     </div>
                     <div class="textContentDescriptionLower">
-                        <p><b>Today</b></p>
+                        <p style="background-color:  rgba(255, 49, 49, 0.2); color:rgba(255, 49, 49, 1);"><b>Today</b></p>
                     </div>
                 </div>
             </div>
             <div class="firstBox">
                 <div class="firstBox-Upper">
                     <div class="imageContent">
-                        <h2><b>Img</b></h2>
+                        @* <h2><b>Img</b></h2> *@
+                        <img src="/images/StaffMember_Icon.png" />
                     </div>
                     <div class="textContent">
                         <h2>21</h2>
@@ -87,10 +101,10 @@
                 </div>
                 <div class="firstBox-Lower">
                     <div class="textContentLower">
-                        <h4><b>Cancellation</b></h4>
+                        <h5><b>Staff Members</b></h5>
                     </div>
                     <div class="textContentDescriptionLower">
-                        <p><b>Today</b></p>
+                        <p style="background-color: rgba(61, 217, 235, 0.2); color: rgba(61, 217, 235, 1);"><b>Today</b></p>
                     </div>
                 </div>
             </div>

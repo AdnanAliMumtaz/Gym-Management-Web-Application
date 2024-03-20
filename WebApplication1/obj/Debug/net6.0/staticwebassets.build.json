@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NA/ceyf9qA6QP5eHmYn981EfOn0drJ0tHHSdF0GL7+Y=",
+  "Hash": "X8P8hu9uOgOj7ng9iCSeM6WsKPNlXYCjHJ77PoSP+UU=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -1207,6 +1207,23 @@
       "OriginalItemSpec": "wwwroot\\images\\backgroung.png.png"
     },
     {
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Cancellation_Icon.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/Cancellation_Icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Cancellation_Icon.png"
+    },
+    {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\classes.png",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
@@ -1222,6 +1239,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\classes.png"
+    },
+    {
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Classes_Icon.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/Classes_Icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Classes_Icon.png"
     },
     {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\dashboard.png",
@@ -1428,6 +1462,23 @@
       "OriginalItemSpec": "wwwroot\\images\\SofaGuy.png"
     },
     {
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\StaffMember_Icon.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/StaffMember_Icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\StaffMember_Icon.png"
+    },
+    {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\TotalMembers.png",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
@@ -1443,6 +1494,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\TotalMembers.png"
+    },
+    {
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\WelcomeBar_Icon.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/WelcomeBar_Icon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\WelcomeBar_Icon.png"
     },
     {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\js\\site.js",
