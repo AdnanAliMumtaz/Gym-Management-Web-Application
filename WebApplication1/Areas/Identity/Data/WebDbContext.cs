@@ -20,6 +20,8 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<Employee> Employees { get; set; }
 
+    //public DbSet<Classes> Classes { get; set; }
+
     public WebDbContext(DbContextOptions<WebDbContext> options)
         : base(options)
     {

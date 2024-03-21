@@ -250,7 +250,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ConnectionRequests");
+                    b.ToTable("ConnectionRequests", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Employee", b =>
@@ -297,7 +297,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.EntryLog", b =>
@@ -323,7 +323,7 @@ namespace WebApplication1.Migrations
                     b.HasIndex("MemberId", "EntryDate")
                         .IsUnique();
 
-                    b.ToTable("EntryLogs");
+                    b.ToTable("EntryLogs", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Member", b =>
@@ -364,7 +364,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Member");
+                    b.ToTable("Member", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Message", b =>
@@ -392,7 +392,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("MessageId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Resource", b =>
@@ -434,7 +434,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Resource");
+                    b.ToTable("Resource", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
@@ -458,7 +458,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("MemberID");
 
-                    b.ToTable("TransactionFee");
+                    b.ToTable("TransactionFee", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

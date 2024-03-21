@@ -24,5 +24,6 @@ public class ApplicationUser : IdentityUser
     public List<Resource> Resource { get; set; } = new List<Resource>();
     public List<Employee> Employee { get; set; } = new List<Employee>();
 
+    //public List<Classes> Classes { get; set; } = new List<Classes>();
 }
 
