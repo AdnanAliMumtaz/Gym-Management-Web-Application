@@ -20,11 +20,8 @@ namespace WebApplication1.Models
         public TimeSpan Duration { get; set; }
 
         // Navigation properties for related entities
-        //public ICollection<Member> Members { get; set; }
-        //public ICollection<Employee> Trainers { get; set; }
-
-        public List<Member> Members { get; set; }
-        public List<Employee> Trainers { get; set; }
+        public ICollection<ClassMember> ClassMember { get; set; }
+        public ICollection<ClassEmployee> ClassEmployee { get; set; }
 
         // Foreign Key
         public string UserId { get; set; }

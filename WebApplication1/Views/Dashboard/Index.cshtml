@@ -1,20 +1,87 @@
-﻿@model WebApplication1.Models.ViewModels.DashboardViewModel
+﻿@using Microsoft.AspNetCore.Identity;
+@using WebApplication1.Areas.Identity.Data;
+@using WebApplication1.Data;
+@model WebApplication1.Models.ViewModels.DashboardViewModel
+@inject UserManager<ApplicationUser> UserManager
+@inject WebDbContext dbContext
+
 
 @{
     ViewData["Title"] = "Dashboard";
     Layout = "/Pages/_Layout.cshtml";
+}
+
+@{
     var entryLogsPerDayJson = Newtonsoft.Json.JsonConvert.SerializeObject(Model.EntryLogsPerDay.Values);
+    var currentUser = await UserManager.GetUserAsync(User);
+    var currentDate = DateTime.Now.ToString("dd MMMM yyyy");
+
+   
+    string currentUserId = currentUser.Id;
+
+    int leftMemberCount = dbContext.Members.Count(m => m.UserId == currentUserId && m.MemberDateLeft != null);
+    int totalEmployeeCount = dbContext.Employees.Count(e => e.UserId == currentUserId);
+
 }
 
 <style>
+    .dashboard-Background {
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        height: 100%;
+        background-color: #FAFAFA;
+    }
+
     .right-welcome {
-        width: 90%;
+        width: 80%;
+        height: 100%;
+        padding: 20px;
+    }
+
+    .right-welcome p {
+        margin-top: -10px;
+        margin-left: 5px;
+            color: #737373;
+        }
+
+    .left-welcome {
+        width: 20%;
+        height: 100%;
+        padding-right: 5px;
     }
  
     .left-welcome img{
-        margin: 0;
-        width: 40%;
+        margin-top: -5px;
+        width: 90%;
     }
+
+    .right-welcome-middle {
+        margin-top: 30px;
+    }
+
+    .right-welcome-middle p {
+        color: black;
+    }
+
+    .explore-button {
+        border-radius: 5px;
+        background-color: #41B8D5;
+        color: white;
+        padding: 6px 20px;
+        
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        text-decoration: none; /* Remove underline */
+        display: inline-block;
+    }
+
+        .explore-button:hover {
+            color: white;
+            transition: 0.5s;
+            transform: scale(1.1);
+        }
 </style>
 
 <div class="dashboard-Background">
@@ -22,25 +89,47 @@
     <div class="left-dashboard">
         <div class="left-dashboard-upper">
             <div class="right-welcome">
-                <h2><b>Welcome back</b></h2>
+                @if (currentUser != null)
+                {
+                    <h2><b>Welcome back @currentUser.FirstName @currentUser.LastName!</b></h2>
+                }
+
+                <p>@currentDate</p>
+
+                <div class="right-welcome-middle">
+                    <a href="/Members/Index" class="explore-button">Explore</a>
+                </div>
+
             </div>
             <div class="left-welcome">
                 <img src="/images/WelcomeBar_Icon.png" />
             </div>
         </div>
+
+        <!--Graphs-->
         <div class="left-dashboard-middle">
             <div class="firstBarGraph">
-                <div class="Graph-Canvas">
+                <div class="Graph-Canvass">
                     <div class="text-Design">
-                        <p><b>Average Gym Attendance</b></p>
+                        <div class="text-Design-left">
+                            <p><b>Average Gym Attendance</b></p>
+                        </div>
+                        <div class="text-Design-right">
+                            <p>Weekly</p>
+                        </div>
                     </div>
                     <canvas id="entryLogsChart" width="150" height="75"></canvas>
                 </div>
             </div>
+            
 
             <div class="secondBarGraph">
-                <div class="Graph-Canvas">
-                    <p>Joining vs Leaving Members</p>
+                <div class="Graph-Canvass">
+                    <div class="text-Design">
+                    <div class="text-Design-left">
+                        <p><b>Joining vs Leaving Members</b></p>
+                    </div>
+                    </div>
                     <canvas id="joiningLeavingMembersChart" width="110" height="44"></canvas>
                 </div>
             </div>
@@ -54,7 +143,7 @@
                         <img src="/images/Cancellation_Icon.png" />
                     </div>
                     <div class="textContent">
-                        <h2>21</h2>
+                        <h2>@leftMemberCount</h2>
                     </div>
                     <div class="textContentDescription">
                         <p>Members</p>
@@ -62,7 +151,7 @@
                 </div>
                 <div class="firstBox-Lower">
                     <div class="textContentLower">
-                        <h4><b>Employees</b></h4>
+                        <h4><b>Leaving</b></h4>
                     </div>
                     <div class="textContentDescriptionLower">
                         <p style="background-color: rgba(48, 77, 112, 0.2); color: rgba(48, 77, 112, 1);"><b>Today</b></p>
@@ -98,15 +187,15 @@
                         <img src="/images/StaffMember_Icon.png" />
                     </div>
                     <div class="textContent">
-                        <h2>21</h2>
+                        <h2>@totalEmployeeCount</h2>
                     </div>
                     <div class="textContentDescription">
-                        <p>Members</p>
+                        <p>Employees</p>
                     </div>
                 </div>
                 <div class="firstBox-Lower">
                     <div class="textContentLower">
-                        <h5><b>Staff Members</b></h5>
+                        <h4><b>Staff</b></h4>
                     </div>
                     <div class="textContentDescriptionLower">
                         <p style="background-color: rgba(61, 217, 235, 0.2); color: rgba(61, 217, 235, 1);"><b>Today</b></p>
@@ -119,7 +208,7 @@
     
     
     <div class="right-dashboard">
-        <div class="right-dashboard-box" style="background-color: rgba(48, 77, 112, 0.2); color: rgba(48, 77, 112, 1);  ">
+        <div class="right-dashboard-box" style="background-color: rgba(48, 77, 112, 0.2); color: rgba(48, 77, 112, 1); box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);  ">
             <dic class="right-dashboard-icon">
                 <img src="~/images/newMembers (2).png" />
             </dic>
@@ -131,7 +220,7 @@
             </div>
         </div>
 
-        <div class="right-dashboard-box" style="background-color:  rgba(255, 49, 49, 0.2); color:rgba(255, 49, 49, 1);">
+        <div class="right-dashboard-box" style="background-color:  rgba(255, 49, 49, 0.2); color:rgba(255, 49, 49, 1); box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);">
             <dic class="right-dashboard-icon">
                 <img src="/images/activeMembers.png" />
             </dic>
@@ -143,7 +232,7 @@
             </div>
         </div>
 
-        <div class="right-dashboard-box" style="background-color: rgba(61, 217, 235, 0.2); color: rgba(61, 217, 235, 1);">
+        <div class="right-dashboard-box" style="background-color: rgba(61, 217, 235, 0.2); color: rgba(61, 217, 235, 1); box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);">
             <dic class="right-dashboard-icon">
                 <img src="/images/pound.png" />
             </dic>
@@ -205,8 +294,8 @@
                 label: 'Number of Entries',
                 data: entryLogsPerDayData,
                 // data: [4, 8, 12, 6, 10, 18, 7], // Replace with your actual data data: entryCounts,
-                backgroundColor: '#3DD9EB',
-                borderColor: '#3DD9EB',
+                backgroundColor: '#304D70',
+                borderColor: '#304D70',
                 borderWidth: 1,
                 borderRadius: 7,
                 borderSkipped: false,
@@ -276,11 +365,13 @@
 
         var gradientJoining = ctx.createLinearGradient(0, 0, 0, 300);
         gradientJoining.addColorStop(0, 'rgba(48, 77, 112, 1)'); // Starting color (same as borderColor)
-        gradientJoining.addColorStop(1, 'rgba(255, 216, 3, 0)'); // Ending color
+        gradientJoining.addColorStop(1, 'rgba(255, 216, 3, 0)'); // Ending color with alpha channel 0
 
         var gradientLeaving = ctx.createLinearGradient(0, 0, 0, 300);
         gradientLeaving.addColorStop(0, 'rgba(65, 184, 213, 1)'); // Starting color (same as borderColor)
-        gradientLeaving.addColorStop(1, 'rgba(82, 82, 82, 0)'); // Ending color
+        gradientLeaving.addColorStop(1, 'rgba(65, 184, 213, 0)'); // Ending color with alpha channel 0
+
+
 
         var data = {
             labels: rotatedMonths,

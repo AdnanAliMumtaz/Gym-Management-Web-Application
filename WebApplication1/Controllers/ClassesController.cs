@@ -1,49 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Hubs;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Areas.Identity.Data;
 using WebApplication1.Data;
 using WebApplication1.Models;
-using WebApplication1.Models.ViewModels;
 
 namespace WebApplication1.Controllers
 {
     public class ClassesController : Controller
     {
         private readonly WebDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public ClassesController(WebDbContext context, UserManager<ApplicationUser> userManager)
+
+        public ClassesController(WebDbContext context)
         {
             _context = context;
-            _userManager = userManager; 
         }
 
         // GET: Classes
         public async Task<IActionResult> Index()
         {
-            // Get the currently logged-in user
-            var currentUser = await _userManager.GetUserAsync(User);
-
-            if (currentUser == null)
-            {
-                // Redirect to login or handle the case when the user is not logged in
-                return RedirectToAction("Login", "Account");
-            }
-
-            // Retrieve only the employees associated with the current user
-            var classes = _context.Classes
-                .Include(e => e.ApplicationUser)
-                .Where(e => e.UserId == currentUser.Id)
-                .ToList();
-
-            return View(classes);
+            var webDbContext = _context.Classes.Include(c => c.ApplicationUser);
+            return View(await webDbContext.ToListAsync());
         }
 
         // GET: Classes/Details/5
@@ -77,29 +57,16 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("ClassID,ClassName,Description,Date,Duration,UserId")] Classes classes)
-        public async Task<IActionResult> Create(String ClassName, String Description, DateTime Date, TimeSpan Duration)
+        public async Task<IActionResult> Create([Bind("ClassID,ClassName,Description,Date,Duration,UserId")] Classes classes)
         {
-
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            // Create a new resource instance
-            var newResource = new Classes
+            if (ModelState.IsValid)
             {
-                ClassName = ClassName,
-                Description = Description,
-                Date = Date,
-                Duration = Duration,
-                ApplicationUser = user
-            };
-
-            // Add the new resource to the DbSet and save changes
-            _context.Classes.Add(newResource);
-
-            await _context.SaveChangesAsync();
-
-            return View(newResource);
-            // return RedirectToAction(nameof(Index)); // Assuming you have an Index action to display resources
+                _context.Add(classes);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", classes.UserId);
+            return View(classes);
         }
 
         // GET: Classes/Edit/5
@@ -122,7 +89,7 @@ namespace WebApplication1.Controllers
         // POST: Classes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ClassID,ClassName,Description,Date,Duration,UserId")] Classes classes)
         {
@@ -153,53 +120,7 @@ namespace WebApplication1.Controllers
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", classes.UserId);
             return View(classes);
-        }*/
-
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public IActionResult EditConfirmed(Classes editedClasses)
-        {
-            /*if (ModelState.IsValid)
-            {
-            }*/
-
-            // Check if the member exists in the database
-            var originalClasses = _context.Classes.Find(editedClasses.ClassID);
-
-            if (originalClasses == null)
-            {
-                // If the member is not found, return a 404 Not Found result
-                return NotFound();
-            }
-
-            // Update the existing member's properties with the edited values
-/*            ClassName = ClassName,
-                Description = Description,
-                Date = Date,
-                Duration = Duration,
-                ApplicationUser = user*/
-
-
-
-            originalClasses.ClassName = editedClasses.ClassName;
-            originalClasses.Description = editedClasses.Description;
-            originalClasses.Date = editedClasses.Date;
-            originalClasses.Duration = editedClasses.Duration;
-
-            // Update the existing member's properties with the edited values
-            /*_context.Update(updatedMember);*/
-
-            _context.Entry(originalClasses).State = EntityState.Modified;
-
-
-            // Save changes to the database
-            _context.SaveChanges();
-
-            // If the model state is not valid, return to the edit view with validation errors
-            return RedirectToAction(nameof(Index));
         }
-
-
 
         // GET: Classes/Delete/5
         public async Task<IActionResult> Delete(int? id)

@@ -228,6 +228,85 @@ namespace WebApplication1.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.ClassEmployee", b =>
+                {
+                    b.Property<int>("ClassEmployeeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassEmployeeID"), 1L, 1);
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClassEmployeeID");
+
+                    b.HasIndex("ClassID");
+
+                    b.HasIndex("EmployeeID");
+
+                    b.ToTable("ClassEmployees");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Classes", b =>
+                {
+                    b.Property<int>("ClassID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassID"), 1L, 1);
+
+                    b.Property<string>("ClassName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ClassID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.ClassMember", b =>
+                {
+                    b.Property<int>("ClassMemberID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassMemberID"), 1L, 1);
+
+                    b.Property<int>("ClassID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClassMemberID");
+
+                    b.HasIndex("ClassID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("ClassMembers");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.ConnectionRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -250,7 +329,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ConnectionRequests", (string)null);
+                    b.ToTable("ConnectionRequests");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Employee", b =>
@@ -297,7 +376,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.EntryLog", b =>
@@ -323,7 +402,7 @@ namespace WebApplication1.Migrations
                     b.HasIndex("MemberId", "EntryDate")
                         .IsUnique();
 
-                    b.ToTable("EntryLogs", (string)null);
+                    b.ToTable("EntryLogs");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Member", b =>
@@ -364,7 +443,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Member", (string)null);
+                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Message", b =>
@@ -392,7 +471,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("MessageId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Resource", b =>
@@ -434,7 +513,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Resource", (string)null);
+                    b.ToTable("Resource");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.TransactionFee", b =>
@@ -458,7 +537,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("MemberID");
 
-                    b.ToTable("TransactionFee", (string)null);
+                    b.ToTable("TransactionFee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -510,6 +589,55 @@ namespace WebApplication1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.ClassEmployee", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Classes", "Class")
+                        .WithMany("ClassEmployee")
+                        .HasForeignKey("ClassID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Classes", b =>
+                {
+                    b.HasOne("WebApplication1.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("Classes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.ClassMember", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Classes", "Class")
+                        .WithMany("ClassMember")
+                        .HasForeignKey("ClassID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Employee", b =>
@@ -569,11 +697,20 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Areas.Identity.Data.ApplicationUser", b =>
                 {
+                    b.Navigation("Classes");
+
                     b.Navigation("Employee");
 
                     b.Navigation("Member");
 
                     b.Navigation("Resource");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Classes", b =>
+                {
+                    b.Navigation("ClassEmployee");
+
+                    b.Navigation("ClassMember");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Member", b =>

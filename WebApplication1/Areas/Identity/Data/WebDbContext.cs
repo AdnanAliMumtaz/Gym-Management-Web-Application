@@ -20,6 +20,12 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<Employee> Employees { get; set; }
 
+    public DbSet<Classes> Classes { get; set; }
+    
+    public DbSet<ClassMember> ClassMembers { get; set; }
+
+    public DbSet<ClassEmployee> ClassEmployees { get; set; }
+
     //public DbSet<Classes> Classes { get; set; }
 
     public WebDbContext(DbContextOptions<WebDbContext> options)
@@ -42,5 +48,35 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<EntryLog>()
         .HasIndex(e => new { e.MemberId, e.EntryDate })
         .IsUnique();
+
+        // Configure foreign key for ClassMember
+        builder.Entity<ClassMember>()
+            .HasOne(cm => cm.Class)
+            .WithMany(c => c.ClassMember)
+            .HasForeignKey(cm => cm.ClassID)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
+
+        builder.Entity<ClassMember>()
+            .HasOne(cm => cm.Member)
+            .WithMany()
+            .HasForeignKey(cm => cm.MemberID)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
+
+        // Configure foreign key for ClassEmployee
+        builder.Entity<ClassEmployee>()
+            .HasOne(cm => cm.Class)
+            .WithMany(c => c.ClassEmployee)
+            .HasForeignKey(cm => cm.ClassID)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
+
+        builder.Entity<ClassEmployee>()
+            .HasOne(cm => cm.Employee)
+            .WithMany()
+            .HasForeignKey(cm => cm.EmployeeID)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
     }
 }
