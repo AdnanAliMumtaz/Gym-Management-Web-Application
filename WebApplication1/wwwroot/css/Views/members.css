@@ -1,51 +1,55 @@
 ﻿
-.memberBody {
+/*.memberBody {
     height: 100%;
+    width: 100%;
     padding: 5px;
+    background-color: #FAFAFA;
 }
 
 
-.upperBody {
-    border-radius: 7px;
-    padding: 20px;
-    /* background-color: #D9D9D9; */
-    /* background-color: rgba(61, 217, 235, 1); */
-    background-color: rgba(61, 217, 235, 0.2);
-    margin: 0px 10px;
-}
 
-.middleBody {
+*/
+/*.upperBody {
+    border-radius: 5px;
+    height: 10%;
+    padding: 15px;
+    background-color: #D9D9D9;*/
+    /*box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);*/
+/*}*/
+
+/*.middleBody {
     display: flex;
-    padding: 25px 5px;
-    height: 70%;
+    padding-top: 20px;
+    height: 80%;
+    width: 100%;
 }
-
-.middleBodyLeft {
+*/
+/*.middleBodyLeft {
     width: 70%;
     border-radius: 5px;
-    border: 2px solid #ECECEC;
-    margin: 0px 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    border: 2px solid #ECECEC;*/
+    /*margin: 0px 10px;*/
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+/*}
 
     .middleBodyLeft table {
         width: 100%;
-    }
+    }*/
 
 
 
 
 
 
-.middleBodyRight {
+/*.middleBodyRight {
     width: 30%;
     height: 100%;
     background-color: #304D70;
-    border-radius: 7px;
+    border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    /* padding: 25px 5px; */
+     padding: 25px 5px; 
     margin: 0px 10px;
-    /* margin: 15px; */
+     margin: 15px; 
     text-align: center;
     position: relative;
 }
@@ -61,10 +65,12 @@
     .middleMiddle img {
         height: 300px;
     }
+*/
+
 
 
 /*Testing*/
-.middleBodyLeft table {
+/*.middleBodyLeft table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -73,12 +79,12 @@
 .middleBodyLeft th, .middleBodyLeft td {
     padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd; /* Add a bottom border */
-}
+    border-bottom: 1px solid #ddd;*/ /* Add a bottom border */
+/*}
 
-.middleBodyLeft th {
+.middleBodyLeft th {*/
     /* background-color: #f2f2f2; */
-}
+/*}
 
 .middleBodyLeft tr:hover {
     background-color: #f5f5f5;
@@ -92,7 +98,7 @@
     background-color: #007bff;
     color: #fff;
     border-radius: 4px;
-}
+}*/
 
 
 
@@ -103,7 +109,7 @@
 
 
 /* Styling for the pop-up container */
-.popup-container {
+/*.popup-container {
     display: none;
     position: fixed;
     top: 50%;
@@ -113,15 +119,15 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-}
+}*/
 
 /* Styling for the pop-up form */
-.popup-form {
+/*.popup-form {*/
     /* Add your form styling here */
-}
+/*}*/
 
 /* Styling for the overlay/background behind the pop-up */
-.overlay {
+/*.overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -139,10 +145,10 @@
     margin-top: -40px;
     border-radius: 7px;
     background-color: red;
-    z-index: 2; /* Set a higher z-index to bring it to the front */
-}
+    z-index: 2;*/ /* Set a higher z-index to bring it to the front */
+/*}
 
 .middleMiddle {
-    position: relative; /* Make sure position is set to relative or absolute */
-    z-index: 1; /* Set a lower z-index compared to .middleBottom */
-}
+    position: relative;*/ /* Make sure position is set to relative or absolute */
+    /*z-index: 1;*/ /* Set a lower z-index compared to .middleBottom */
+/*}*/

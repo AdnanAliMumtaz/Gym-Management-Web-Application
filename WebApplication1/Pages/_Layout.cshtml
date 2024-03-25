@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using WebApplication1.Areas.Identity.Data;
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,7 +24,11 @@
 @{
     var currentController = ViewContext.RouteData.Values["controller"] as string;
     var currentAction = ViewContext.RouteData.Values["action"] as string;
+
+    var currentUser = await UserManager.GetUserAsync(User);
+
 }
+
 
 <style>
 
@@ -174,7 +182,7 @@
 
 
     .main-Background {
-        background-color: white;
+        background-color: #FAFAFA;
         height: 100%;
         width: 100%;
         display: flex;
@@ -268,7 +276,10 @@
                     <img src="/images/members.png" alt="Settings Icon" />
                 </div>
                 <div class="detailsPerson">
-                    <p><b>Adnan Ali</b></p>
+                    @if (currentUser != null)
+                    {
+                        <p><b>@currentUser.FirstName @currentUser.LastName</b></p>
+                    }
                     <p>Owner</p>
                 </div>
                 <div class="buttonLogout">

@@ -1,4 +1,72 @@
-﻿.left-dashboard {
+﻿.dashboard-Background {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    height: 100%;
+    background-color: #FAFAFA;
+}
+
+.right-welcome {
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+}
+
+    .right-welcome p {
+        margin-top: -10px;
+        margin-left: 5px;
+        color: #737373;
+    }
+
+.left-welcome {
+    width: 20%;
+    height: 100%;
+    padding-right: 5px;
+}
+
+    .left-welcome img {
+        margin-top: -5px;
+        width: 90%;
+    }
+
+.right-welcome-middle {
+    margin-top: 30px;
+}
+
+    .right-welcome-middle p {
+        color: black;
+    }
+
+.explore-button {
+    border-radius: 5px;
+    background-color: #41B8D5;
+    color: white;
+    padding: 6px 20px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+}
+
+    .explore-button:hover {
+        color: white;
+        transition: 0.5s;
+        transform: scale(1.1);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+.left-dashboard {
     height: 100%;
     width: 80%;
     padding: 15px;

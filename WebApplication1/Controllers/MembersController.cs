@@ -46,6 +46,7 @@ namespace WebApplication1.Controllers
             return PartialView("_SearchResultsPartial", members);
         }
 
+
         public async Task<IActionResult> Index(string search)
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
