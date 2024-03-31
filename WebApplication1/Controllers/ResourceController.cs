@@ -1,8 +1,10 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Humanizer.Localisation;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,29 +32,90 @@ namespace WebApplication1.Controllers
             var webDbContext = _context.Resources.Include(r => r.ApplicationUser);
             return View(await webDbContext.ToListAsync());
         }
-*/
+        */
 
-        // GET: Resources
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public IActionResult Search(string search)
         {
-            // Get the currently logged-in user
-            var currentUser = await _userManager.GetUserAsync(User);
+            ApplicationUser user = _userManager.GetUserAsync(User).Result;
 
-            if (currentUser == null)
+            // Filter members based on the user's ID and the search query
+            var resourcesQuery = _context.Resources
+                .Where(m => m.UserId == user.Id);
+
+            if (!string.IsNullOrEmpty(search))
             {
-                // Redirect to login or handle the case when the user is not logged in
-                return RedirectToAction("Login", "Account");
+                search = search.ToLower();
+                resourcesQuery = resourcesQuery.Where(m =>
+                    m.ItemName.ToLower().Contains(search) ||
+                    m.ItemType.ToLower().Contains(search) ||
+                    m.ItemQuantity.ToString().Contains(search) ||
+                    m.PurchasedDate.ToString().Contains(search) ||
+                    m.ItemPrice.ToString().Contains(search) ||
+                    m.ItemNotes.Contains(search));
             }
 
-            // Retrieve only the resources associated with the current user
-            var resources = _context.Resources
-                .Include(r => r.ApplicationUser)
-                .Where(r => r.UserId == currentUser.Id)
-                .ToList();
+            var resource = resourcesQuery.ToList();
 
-            return View(resources);
+            return PartialView("searchResults", resource);
         }
 
+        // GET: Resources
+        public async Task<IActionResult> Index(string search)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Filter members based on the user's ID and the search query
+            var resourcesQuery = _context.Resources
+                .Where(m => m.UserId == user.Id);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                resourcesQuery = resourcesQuery.Where(m =>
+                    m.ItemName.ToLower().Contains(search) ||
+                    m.ItemType.ToLower().Contains(search) ||
+                    m.ItemQuantity.ToString().Contains(search) ||
+                    m.PurchasedDate.ToString().Contains(search) ||
+                    m.ItemPrice.ToString().Contains(search) ||
+                    m.ItemNotes.Contains(search));
+            }
+
+            var resource = resourcesQuery.ToList();
+
+            return View(resource);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddResource(string ItemName, string ItemType, int ItemQuantity, DateTime PurchasedDate, int ItemPrice, string ItemNotes)
+        {
+            // Get the currently logged-in user
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Create a new Member with the UserId set to the current user's Id
+            var newResource = new Resource
+            {
+                ItemName = ItemName,
+                ItemType = ItemType,
+                ItemQuantity = ItemQuantity,
+                PurchasedDate = PurchasedDate,
+                ItemPrice = ItemPrice,
+                ItemNotes = ItemNotes,
+                ApplicationUser = user,
+            };
+
+
+            // Add the new Member and TransactionFee to the database
+            _context.Resources.Add(newResource);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            // Redirect to a success page or back to the Members page
+            return RedirectToAction(nameof(Index));
+        }
 
 
         // GET: Resources/Details/5

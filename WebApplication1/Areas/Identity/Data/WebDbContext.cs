@@ -21,7 +21,7 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Employee> Employees { get; set; }
 
     public DbSet<Classes> Classes { get; set; }
-    
+
     public DbSet<ClassMember> ClassMembers { get; set; }
 
     public DbSet<ClassEmployee> ClassEmployees { get; set; }
@@ -49,7 +49,7 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
         .HasIndex(e => new { e.MemberId, e.EntryDate })
         .IsUnique();
 
-        // Configure foreign key for ClassMember
+        /*// Configure foreign key for ClassMember
         builder.Entity<ClassMember>()
             .HasOne(cm => cm.Class)
             .WithMany(c => c.ClassMember)
@@ -77,6 +77,24 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
             .WithMany()
             .HasForeignKey(cm => cm.EmployeeID)
             .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
+            .IsRequired();*/
+
+        builder.Entity<ClassMember>()
+       .HasOne(cm => cm.Class)
+       .WithMany(c => c.ClassMember)
+       .HasForeignKey(cm => cm.ClassID)
+       .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<ClassEmployee>()
+            .HasOne(ce => ce.Class)
+            .WithMany(c => c.ClassEmployee)
+            .HasForeignKey(ce => ce.ClassID)
+            .OnDelete(DeleteBehavior.Cascade)
+            ;
+
+        /*modelBuilder.Entity<Classes>()
+        .HasMany(c => c.ClassMembers)
+        .WithOne(cm => cm.Class)
+        .OnDelete(DeleteBehavior.Cascade);*/
     }
 }

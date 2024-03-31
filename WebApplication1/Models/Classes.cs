@@ -16,12 +16,20 @@ namespace WebApplication1.Models
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        //[DataType(DataType.Time)]
         public TimeSpan Duration { get; set; }
 
         // Navigation properties for related entities
         public ICollection<ClassMember> ClassMember { get; set; }
         public ICollection<ClassEmployee> ClassEmployee { get; set; }
+
+
+        // Additional properties for storing selected EmployeeIDs and MemberIDs
+        [NotMapped] // Exclude from database mapping
+        public List<int> EmployeeIDs { get; set; } = new List<int>();
+
+        [NotMapped] // Exclude from database mapping
+        public List<int> MemberIDs { get; set; } = new List<int>();
+
 
         // Foreign Key
         public string UserId { get; set; }

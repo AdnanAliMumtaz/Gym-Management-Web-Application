@@ -602,7 +602,7 @@ namespace WebApplication1.Migrations
                     b.HasOne("WebApplication1.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Class");
@@ -632,7 +632,7 @@ namespace WebApplication1.Migrations
                     b.HasOne("WebApplication1.Models.Member", "Member")
                         .WithMany()
                         .HasForeignKey("MemberID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Class");

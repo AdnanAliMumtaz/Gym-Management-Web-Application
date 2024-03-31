@@ -68,6 +68,8 @@ namespace WebApplication1.Controllers
 
             var members = await membersQuery.ToListAsync();
 
+
+
             // Retrieve entry logs for the specific user
             var entryLogs = _context.EntryLogs
                 .Where(el => el.Member.UserId == user.Id)

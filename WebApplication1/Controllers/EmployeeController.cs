@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Owin.BuilderProperties;
 using WebApplication1.Areas.Identity.Data;
 using WebApplication1.Data;
 using WebApplication1.Models;
@@ -26,31 +22,96 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Employees
-        /*public async Task<IActionResult> Index()
-        {
-            var webDbContext = _context.Employees.Include(e => e.ApplicationUser);
-            return View(await webDbContext.ToListAsync());
-        }
-*/
-        // GET: Employees
-        public async Task<IActionResult> Index()
-        {
-            // Get the currently logged-in user
-            var currentUser = await _userManager.GetUserAsync(User);
 
-            if (currentUser == null)
+        /*
+         employeesQuery = employeesQuery.Where(m =>
+                            m.FirstName.ToLower().Contains(search) ||
+                            m.LastName.ToLower().Contains(search) ||
+                            m.DateOfBirth.ToString().Contains(search) ||
+                            m.Gender.ToString().Contains(search) ||
+                            m.Address.ToLower().Contains(search) || 
+                            m.PhoneNumber.ToLower().Contains(search) ||
+                            m.Email.ToLower().Contains(search));
+
+
+        [HttpGet]
+        public IActionResult Search(string search)
+        {
+            ApplicationUser user = _userManager.GetUserAsync(User).Result;
+
+            // Filter members based on the user's ID and the search query
+            var resourcesQuery = _context.Resources
+                .Where(m => m.UserId == user.Id);
+
+            if (!string.IsNullOrEmpty(search))
             {
-                // Redirect to login or handle the case when the user is not logged in
-                return RedirectToAction("Login", "Account");
+                search = search.ToLower();
+                resourcesQuery = resourcesQuery.Where(m =>
+                    m.ItemName.ToLower().Contains(search) ||
+                    m.ItemType.ToLower().Contains(search) ||
+                    m.ItemQuantity.ToString().Contains(search) ||
+                    m.PurchasedDate.ToString().Contains(search) ||
+                    m.ItemPrice.ToString().Contains(search) ||
+                    m.ItemNotes.Contains(search));
             }
 
-            // Retrieve only the employees associated with the current user
-            var employees = _context.Employees
-                .Include(e => e.ApplicationUser)
-                .Where(e => e.UserId == currentUser.Id)
-                .ToList();
+            var resource = resourcesQuery.ToList();
 
-            return View(employees);
+            return PartialView("searchResults", resource);
+        }
+         */
+
+        [HttpGet]
+        public IActionResult Search(string search)
+        {
+            ApplicationUser user = _userManager.GetUserAsync(User).Result;
+
+            // Filter members based on the user's ID and the search query
+            var employeesQuery = _context.Employees
+                .Where(m => m.UserId == user.Id);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                employeesQuery = employeesQuery.Where(m =>
+                m.FirstName.ToLower().Contains(search) ||
+                m.LastName.ToLower().Contains(search) ||
+                m.DateOfBirth.ToString().Contains(search));
+            }
+
+            var employee = employeesQuery.ToList();
+
+            return PartialView("searchResults", employee);
+        }
+
+
+
+
+        // GET: Employees
+        public async Task<IActionResult> Index(string search)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Filter members based on the user's ID and the search query
+            var employeesQuery = _context.Employees
+                .Where(m => m.UserId == user.Id);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                employeesQuery = employeesQuery.Where(m =>
+                    m.FirstName.ToLower().Contains(search) ||
+                    m.LastName.ToLower().Contains(search) ||
+                    m.DateOfBirth.ToString().Contains(search) ||
+                    m.Gender.ToString().Contains(search) ||
+                    m.Address.ToLower().Contains(search) ||
+                    m.PhoneNumber.ToLower().Contains(search) /*||
+                    m.Email.ToLower().Contains(search)*/);
+            }
+
+            var employee = employeesQuery.ToList();
+
+            return View(employee);
         }
 
         // GET: Employees/Details/5
@@ -79,11 +140,9 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        //        public async Task<IActionResult> Edit(int id, [Bind("EmployeeID,FirstName,LastName,DateOfBirth,Gender,Address,PhoneNumber,Email,UserId")] Employee employee)
-
-        public async Task<IActionResult> Create(String FirstName, String LastName, DateTime DateOfBirth, Gender Gender, String Address, String PhoneNumber, String Email)
+        public async Task<IActionResult> AddEmployee(String FirstName, String LastName, DateTime DateOfBirth, Gender Gender, String Address, String PhoneNumber, String Email)
         {
 
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -106,9 +165,40 @@ namespace WebApplication1.Controllers
 
             await _context.SaveChangesAsync();
 
-            return View(newEmployees);
+            return RedirectToAction(nameof(Index));
             // return RedirectToAction(nameof(Index)); // Assuming you have an Index action to display resources
         }
+
+        /*[Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddResource(string ItemName, string ItemType, int ItemQuantity, DateTime PurchasedDate, int ItemPrice, string ItemNotes)
+        {
+            // Get the currently logged-in user
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            // Create a new Member with the UserId set to the current user's Id
+            var newResource = new Resource
+            {
+                ItemName = ItemName,
+                ItemType = ItemType,
+                ItemQuantity = ItemQuantity,
+                PurchasedDate = PurchasedDate,
+                ItemPrice = ItemPrice,
+                ItemNotes = ItemNotes,
+                ApplicationUser = user,
+            };
+
+
+            // Add the new Member and TransactionFee to the database
+            _context.Resources.Add(newResource);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            // Redirect to a success page or back to the Members page
+            return RedirectToAction(nameof(Index));
+        }*/
+
 
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
