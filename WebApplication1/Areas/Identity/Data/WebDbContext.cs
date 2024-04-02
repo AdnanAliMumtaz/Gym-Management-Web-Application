@@ -15,7 +15,9 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ConnectionRequest> ConnectionRequests { get; set; }
     public IEnumerable<object> ApplicationUsers { get; internal set; }
 
-    public DbSet<Message> Messages { get; set; }
+    public DbSet<WhatsappMessage> WhatsappMessages { get; set; }
+
+
     public DbSet<Resource> Resources { get; set; }
 
     public DbSet<Employee> Employees { get; set; }
@@ -26,7 +28,6 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<ClassEmployee> ClassEmployees { get; set; }
 
-    //public DbSet<Classes> Classes { get; set; }
 
     public WebDbContext(DbContextOptions<WebDbContext> options)
         : base(options)
@@ -62,39 +63,34 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
             .WithMany()
             .HasForeignKey(cm => cm.MemberID)
             .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
-
-        // Configure foreign key for ClassEmployee
-        builder.Entity<ClassEmployee>()
-            .HasOne(cm => cm.Class)
-            .WithMany(c => c.ClassEmployee)
-            .HasForeignKey(cm => cm.ClassID)
-            .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
-
-        builder.Entity<ClassEmployee>()
-            .HasOne(cm => cm.Employee)
-            .WithMany()
-            .HasForeignKey(cm => cm.EmployeeID)
-            .OnDelete(DeleteBehavior.Restrict)
             .IsRequired();*/
+
+        /* // Configure foreign key for ClassEmployee
+         builder.Entity<ClassEmployee>()
+             .HasOne(cm => cm.Class)
+             .WithMany(c => c.ClassEmployee)
+             .HasForeignKey(cm => cm.ClassID)
+             .OnDelete(DeleteBehavior.Restrict)
+             .IsRequired();
+
+         builder.Entity<ClassEmployee>()
+             .HasOne(cm => cm.Employee)
+             .WithMany()
+             .HasForeignKey(cm => cm.EmployeeID)
+             .OnDelete(DeleteBehavior.Restrict)
+             .IsRequired();*/
 
         builder.Entity<ClassMember>()
        .HasOne(cm => cm.Class)
        .WithMany(c => c.ClassMember)
        .HasForeignKey(cm => cm.ClassID)
-       .OnDelete(DeleteBehavior.Cascade);
+       .OnDelete(DeleteBehavior.ClientSetNull);
 
         builder.Entity<ClassEmployee>()
             .HasOne(ce => ce.Class)
             .WithMany(c => c.ClassEmployee)
             .HasForeignKey(ce => ce.ClassID)
-            .OnDelete(DeleteBehavior.Cascade)
+            .OnDelete(DeleteBehavior.ClientSetNull)
             ;
-
-        /*modelBuilder.Entity<Classes>()
-        .HasMany(c => c.ClassMembers)
-        .WithOne(cm => cm.Class)
-        .OnDelete(DeleteBehavior.Cascade);*/
     }
 }

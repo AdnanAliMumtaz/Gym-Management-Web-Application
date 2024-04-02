@@ -38,6 +38,23 @@
     .actions {
         margin-top: 10px;
     }
+
+       
+
+
+
+    
+
+
+
+    .description {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limit to 3 lines */
+        -webkit-box-orient: vertical;
+        height: 57px;
+    }
+
 </style>
 
 <div class="flex-container">
@@ -48,13 +65,17 @@
             <div class="box ">
                 @* <p><strong>Class ID:</strong> @resource.ClassID</p> *@
                 <h3><strong>@resource.ClassName</strong></h3>
-                <p>@resource.Description</p>
+
+                <p class="description">@resource.Description</p>
+
+                @* <p>@resource.Description</p> *@
                 <p>@resource.Date.ToString("dd MMMM yyyy")</p>
-                <p> @(resource.Duration.Hours) hour @(resource.Duration.Minutes) minutes</p>
+                @* <p> @(resource.Duration.Hours) hour @(resource.Duration.Minutes) minutes</p> *@
 
                 <div class="actions">
-                    <a asp-controller="Classes" asp-action="Edit" asp-route-id="@resource.ClassID">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@resource.ClassID">Delete</a>
+@*                     <a asp-controller="Classes" asp-action="Edit" asp-route-id="@resource.ClassID">Edit</a>
+ *@                    <a asp-action="Delete" asp-route-id="@resource.ClassID">Delete</a>
+                    <a asp-action="Details" asp-route-id="@resource.ClassID">View</a> 
                 </div>
             </div>
         }

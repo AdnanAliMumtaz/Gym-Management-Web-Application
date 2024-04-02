@@ -237,6 +237,7 @@
                         <a href="/Employee/Index">Employee</a>
                     </li>
                 }
+                
                 @* @if (User.IsInRole("Owner") || User.IsInRole("Employee"))
                 {
                     <li class="btn-style @(currentController == "Messages" && currentAction == "Index" ? "active" : "")">
@@ -244,6 +245,8 @@
                         <a href="/Messages/Index">Messages</a>
                     </li>
                 } *@
+
+
                 @if (User.IsInRole("Owner"))
                 {
                     <li class="btn-style @(currentController == "Classes" && currentAction == "Index" ? "active" : "")">
@@ -251,14 +254,20 @@
                         <a href="/Classes/Index">Classes</a>
                     </li>
                 }
+
+                <li class="btn-style @(currentController == "WhatsappMessages" && currentAction == "Index" ? "active" : "")">
+                    <img src="/images/classes.png" alt="Classes Icon" />
+                    <a href="/WhatsappMessages/Index">Chat</a>
+                </li>
                 
-                @if (User.IsInRole("Admin"))
+                @* @if (User.IsInRole("Admin"))
                 {
                     <li class="btn-style @(currentController == "Roles" && currentAction == "Index" ? "active" : "")">
                         <img src="/images/classes.png" alt="Classes Icon" />
                         <a href="/Roles/Index">Roles</a>
                     </li>
                 }
+ *@
             </ul>
 
             <ul class="list-Navigation">

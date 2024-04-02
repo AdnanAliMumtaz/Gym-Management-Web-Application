@@ -62,7 +62,9 @@ namespace WebApplication1.Controllers
             {
                 search = search.ToLower();
                 resourcesQuery = resourcesQuery.Where(m =>
-                    m.ClassName.ToLower().Contains(search) /*||
+                    m.ClassName.ToLower().Contains(search)  /* ||
+                    m.ItemType.ToLower().Contains(search)
+                   ||
                     m.ItemType.ToLower().Contains(search) ||
                     m.ItemQuantity.ToString().Contains(search) ||
                     m.PurchasedDate.ToString().Contains(search) ||
