@@ -128,6 +128,30 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Emails/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Emails/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Emails/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Emails/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Emails/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Emails/ReceiveEmails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxzXFJlY2VpdmVFbWFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Employee/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -216,6 +240,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Shared/_MemberList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NZW1iZXJMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Shared/_RegisterPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9SZWdpc3RlclBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -226,26 +254,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/WhatsappMessages/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNhcHBNZXNzYWdlc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/WhatsappMessages/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNhcHBNZXNzYWdlc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/WhatsappMessages/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNhcHBNZXNzYWdlc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/WhatsappMessages/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNhcHBNZXNzYWdlc1xFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/WhatsappMessages/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2hhdHNhcHBNZXNzYWdlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/adnan/Gym-Management-Web-Application/WebApplication1/Views/_ViewImports.cshtml]

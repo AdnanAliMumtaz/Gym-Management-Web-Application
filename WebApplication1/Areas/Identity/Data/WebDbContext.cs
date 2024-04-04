@@ -15,7 +15,7 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ConnectionRequest> ConnectionRequests { get; set; }
     public IEnumerable<object> ApplicationUsers { get; internal set; }
 
-    public DbSet<WhatsappMessage> WhatsappMessages { get; set; }
+    public DbSet<Email> Emails { get; set; }
 
 
     public DbSet<Resource> Resources { get; set; }
