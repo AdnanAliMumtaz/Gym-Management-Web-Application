@@ -228,6 +228,40 @@ namespace WebApplication1.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.CalorieEntry", b =>
+                {
+                    b.Property<int>("CalorieID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CalorieID"), 1L, 1);
+
+                    b.Property<int>("BreakfastCalories")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DinnerCalories")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LunchCalories")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SnackCalories")
+                        .HasColumnType("int");
+
+                    b.HasKey("CalorieID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("CalorieEntry");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.ClassEmployee", b =>
                 {
                     b.Property<int>("ClassEmployeeID")
@@ -550,6 +584,31 @@ namespace WebApplication1.Migrations
                     b.ToTable("TransactionFee");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.WeightEntry", b =>
+                {
+                    b.Property<int>("WeigthID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WeigthID"), 1L, 1);
+
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("WeigthID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("WeightEntry");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -599,6 +658,17 @@ namespace WebApplication1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.CalorieEntry", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Member", "Member")
+                        .WithMany("CalorieEntry")
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.ClassEmployee", b =>
@@ -714,6 +784,17 @@ namespace WebApplication1.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.WeightEntry", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Member", "Member")
+                        .WithMany("WeightEntry")
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("WebApplication1.Areas.Identity.Data.ApplicationUser", b =>
                 {
                     b.Navigation("Classes");
@@ -734,9 +815,13 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.Member", b =>
                 {
+                    b.Navigation("CalorieEntry");
+
                     b.Navigation("EntryLog");
 
                     b.Navigation("TransactionFee");
+
+                    b.Navigation("WeightEntry");
                 });
 #pragma warning restore 612, 618
         }

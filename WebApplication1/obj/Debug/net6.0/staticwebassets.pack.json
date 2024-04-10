@@ -13,6 +13,18 @@
       "PackagePath": "staticwebassets\\css\\Views\\Home\\loginRegister.css"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Pages\\Layout.css",
+      "PackagePath": "staticwebassets\\css\\Views\\Pages\\Layout.css"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Register&Login\\Login.css",
+      "PackagePath": "staticwebassets\\css\\Views\\Register&Login\\Login.css"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Register&Login\\Register.css",
+      "PackagePath": "staticwebassets\\css\\Views\\Register&Login\\Register.css"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\dashboard.css",
       "PackagePath": "staticwebassets\\css\\Views\\dashboard.css"
     },
@@ -31,6 +43,10 @@
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Cancellation_Icon.png",
       "PackagePath": "staticwebassets\\images\\Cancellation_Icon.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Class.png",
+      "PackagePath": "staticwebassets\\images\\Class.png"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Classes_Icon.png",
@@ -73,8 +89,8 @@
       "PackagePath": "staticwebassets\\images\\backgroung.png.png"
     },
     {
-      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\classes.png",
-      "PackagePath": "staticwebassets\\images\\classes.png"
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\chat.png",
+      "PackagePath": "staticwebassets\\images\\chat.png"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\dashboard.png",

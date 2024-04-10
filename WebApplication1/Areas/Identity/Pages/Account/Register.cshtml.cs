@@ -117,8 +117,8 @@ namespace WebApplication1.Areas.Identity.Pages.Account
 
 
             //Adding Roles Section
-            public string Role {  get; set; }
-            public IEnumerable<SelectListItem> RolesList { get; set; }
+           /* public string Role {  get; set; }
+            public IEnumerable<SelectListItem> RolesList { get; set; }*/
 
 
         }
@@ -129,14 +129,14 @@ namespace WebApplication1.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            Input = new InputModel
+           /* Input = new InputModel
             {
                 RolesList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
                 })
-            };
+            };*/
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -159,7 +159,7 @@ namespace WebApplication1.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
 
-                    await _userManager.AddToRoleAsync(user, Input.Role);
+                    /*await _userManager.AddToRoleAsync(user, Input.Role);*/
 
 
                     var userId = await _userManager.GetUserIdAsync(user);

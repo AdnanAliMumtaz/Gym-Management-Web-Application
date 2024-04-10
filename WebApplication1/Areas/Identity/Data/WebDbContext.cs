@@ -28,6 +28,9 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<ClassEmployee> ClassEmployees { get; set; }
 
+    public DbSet<CalorieEntry> CalorieEntries { get; set; }
+
+    public DbSet<WeightEntry> WeightEntries { get; set; }
 
     public WebDbContext(DbContextOptions<WebDbContext> options)
         : base(options)
@@ -49,21 +52,6 @@ public class WebDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<EntryLog>()
         .HasIndex(e => new { e.MemberId, e.EntryDate })
         .IsUnique();
-
-        /*// Configure foreign key for ClassMember
-        builder.Entity<ClassMember>()
-            .HasOne(cm => cm.Class)
-            .WithMany(c => c.ClassMember)
-            .HasForeignKey(cm => cm.ClassID)
-            .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();
-
-        builder.Entity<ClassMember>()
-            .HasOne(cm => cm.Member)
-            .WithMany()
-            .HasForeignKey(cm => cm.MemberID)
-            .OnDelete(DeleteBehavior.Restrict)
-            .IsRequired();*/
 
         /* // Configure foreign key for ClassEmployee
          builder.Entity<ClassEmployee>()

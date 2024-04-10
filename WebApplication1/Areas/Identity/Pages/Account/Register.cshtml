@@ -39,18 +39,6 @@
         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
     </div>
 
-
-    
-    <div class="form-floating">
-        <select asp-for="Input.Role" class="form-select" asp-items="@Model.Input.RolesList" aria-required="true">
-            <option disabled selected>Select Role</option>
-        </select>
-        <span asp-validation-for="Input.Role" class="text-danger"></span>
-    </div>
-
-
-
-
     <button id="registerSubmit" type="submit" class="login-Button"><b>Register</b></button>
 </form>
 

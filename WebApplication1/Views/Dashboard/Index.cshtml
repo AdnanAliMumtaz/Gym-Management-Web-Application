@@ -16,11 +16,13 @@
     var currentUser = await UserManager.GetUserAsync(User);
     var currentDate = DateTime.Now.ToString("dd MMMM yyyy");
 
-   
+
     string currentUserId = currentUser.Id;
 
     int leftMemberCount = dbContext.Members.Count(m => m.UserId == currentUserId && m.MemberDateLeft != null);
     int totalEmployeeCount = dbContext.Employees.Count(e => e.UserId == currentUserId);
+    int totalClasses = dbContext.Classes.Count(e => e.UserId == currentUserId);
+
 
 }
 
@@ -104,7 +106,7 @@
                         <img src="/images/Classes_Icon.png" />
                     </div>
                     <div class="textContent">
-                        <h2>21</h2>
+                        <h2>@totalClasses</h2>
                     </div>
                     <div class="textContentDescription">
                         <p>Members</p>

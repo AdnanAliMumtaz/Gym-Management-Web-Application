@@ -4,11 +4,14 @@
     ViewData["Title"] = "LoginRegister";
 }
 
+
+<style>
+    
+</style>
+
 <div class="container" id="container">
     <div class="form-container sign-up">
-        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-
-        @* @Html.Partial("_RegisterPartial") *@
+        @Html.Partial("_RegisterPartial")
     </div>
     <div class="form-container sign-in">
         @Html.Partial("_LoginPartial")
@@ -22,7 +25,8 @@
                 <button class="hidden" id="login">Sign In</button>
             </div>
             <div class="toggle-panel toggle-right">
-                <h1>Hello, Friend!</h1>
+
+                <h1>Hey, there!</h1>
                 <p>Register with your personal details to use all of site features</p>
                 <button class="hidden" id="register">Sign Up</button>
             </div>

@@ -23,7 +23,18 @@ html, body {
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 .main-Content {
     width: 100%;
 }
 
+.main-Title {
+    padding: 7px;
+    padding-bottom: 10px;
+}
+
+    .main-Title h3 {
+        font-size: 20px;
+        font-family: 'Sacramento', cursive;
+    }

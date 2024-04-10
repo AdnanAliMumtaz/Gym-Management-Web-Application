@@ -40,5 +40,9 @@ namespace WebApplication1.Models
 
         public ICollection<TransactionFee> TransactionFee {  get; set; }
         public ICollection<EntryLog> EntryLog { get; set; } 
+
+        public ICollection<CalorieEntry> CalorieEntry { get; set;}
+
+        public ICollection<WeightEntry> WeightEntry { get; set; }
     }
 }
