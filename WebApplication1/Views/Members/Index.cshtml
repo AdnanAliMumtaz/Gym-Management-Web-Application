@@ -1,8 +1,34 @@
-﻿@model WebApplication1.Models.ViewModels.DashboardViewModel
+﻿@using Microsoft.AspNetCore.Identity;
+@using WebApplication1.Areas.Identity.Data;
+@using WebApplication1.Data;
+@model WebApplication1.Models.ViewModels.DashboardViewModel
+@inject UserManager<ApplicationUser> UserManager
+@inject WebDbContext dbContext
 
 @{
     ViewData["Title"] = "Members";
     Layout = "/Pages/_Layout.cshtml";
+
+    var currentUser = await UserManager.GetUserAsync(User);
+
+    decimal totalFeesAmount = dbContext.TransactionFees
+                .Where(tf => tf.Member.UserId == currentUser.Id)
+                .Sum(tf => tf.Amount);
+
+
+    // Total number of members
+    int totalMembers = dbContext.Members.Count();
+
+    // Number of members who have paid transactions
+    int membersWithPaidTransactions = dbContext.TransactionFees
+        .Where(tf => tf.Amount > 0)
+        .Select(tf => tf.MemberID) // Assuming MemberId is the foreign key linking TransactionFee to Member
+        .Distinct()
+        .Count();
+
+    // Calculate percentage
+    int percentage = (int)((decimal)membersWithPaidTransactions / totalMembers * 100);
+
 }
 
 <style>
@@ -171,27 +197,9 @@
 
 
 
-
-
-
     .middle-table-bottom a {
-        background-color: #304D70;
-        color: white;
-        padding: 5px 15px;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: 0.5s;
+        color: black;
     }
-
-        .middle-table-bottom a:hover {
-            transition: 0.5s;
-            /* transform: scale(1.1); */
-            box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-        }
-
-
-
-
 
     /* Hide the first column in the search results table */
     #search-results table th:first-child,
@@ -369,7 +377,7 @@
 
                             <div class="inputBox">
                                 <label for="Amount" class="control-label">Transaction Amount:</label>
-                                <input type="text" id="Amount" class="form-control" name="Amount" required>
+                                <input type="text" id="Amount" class="form-control" name="Amount">
                             </div>
 
                             <div class="inputBox">
@@ -393,40 +401,20 @@
 
         </div>
 
+
         <style>
             .middleBody-Right {
-                /* background-color: yellow; */
-                /* border-radius: 5px; */
-                /* box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05); */
                 height: 108%;
-                /* padding: 0px 20px; */
+                width: 30%;
                 padding-left: 20px;
             }
 
-            
             .middleBody-Body {
+                padding-left: 5px;
                 height: 100%;
                 border-radius: 7px;
                 background-color: #304D70;
                 box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
-            }
-
-
-            .progress-container {
-                width: 100%;
-                background-color: #f0f0f0;
-                border-radius: 5px;
-                margin-bottom: 20px;
-            }
-
-            .progress-bar {
-                width: 0%;
-                height: 20px;
-                background-color: #4caf50;
-                border-radius: 5px;
-                text-align: center;
-                line-height: 30px;
-                color: white;
             }
 
             .middleBody-Upper {
@@ -436,174 +424,125 @@
                 height: 15%;
             }
 
-            .middleBody-Upper p {
-                padding-left: 2px;
-                margin-top: -10px;
-            }
+                .middleBody-Upper p {
+                    padding-left: 2px;
+                    margin-top: -10px;
+                }
 
             .middleBody-Middle {
                 height: 60%;
                 width: 100%;
-                /* background-color: red; */
-
-                display: flex;
-                justify-content: center; /* Align content horizontally */
-                align-items: center; /* Align content vertically */
+                position: relative; /* Add this */
             }
 
                 .middleBody-Middle img {
-                    padding-top: 50px;
-                    width: 90%;
+                    padding-top: 20px;
+                    width: 100%;
                 }
+
+            .middleBody-Bottom {
+                background-color: white;
+                border-radius: 5px;
+                border: 0px solid transparent;
+                height: 33%; 
+                width: 90%;
+                margin: 350px auto 0; 
+                box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+                position: absolute; 
+                top: 0; 
+                left: 50%; 
+                transform: translateX(-50%); 
+            }
+
+
+
+
+            /*First Body*/
+            .firstBody {
+                padding: 19px 20px;
+            }
+
+            .Bottom-Upper {
+                /* background-color: red; */
+            }
+
+            .Bottom-Upper p {
+                margin: 0px;
+            }
+
+            .Bottom-Middle {
+                align-items: center;
+                display: flex;
+                margin-top: -7px;
+            }
+            
+            .Bottom-Middle-Left {
+                width: 80%;
+            }
+
+            .Bottom-Middle-Left p {
+                    margin: 0px;
+            }
+
+            .Bottom-Middle-Right {
+                width: 20%;
+                text-align: center;
+                margin: 0px;
+            }
+
+            .Bottom-Middle-Right p {
+                border-radius: 5px;
+                margin: 0px;
+                padding: 3px 8px;
+                    color: rgba(48, 77, 112, 1);
+                    background-color: rgba(48, 77, 112, 0.2);
+                }
+
+
+                .Bottom-Middle-Space {
+                    height: 5px;
+                }
+
+
+            
         </style>
 
-        <!--This is the right side-->
         <div class="middleBody-Right">
-            
             <div class="middleBody-Body">
-
                 <div class="middleBody-Upper">
                     <h4><b>Overall Statistics</b></h4>
                     <p>Overview @DateTime.Now.Year</p>
                 </div>
-  
+
                 <div class="middleBody-Middle">
                     <img src="~/images/member3D.png" />
+                    <div class="middleBody-Bottom">
+                        <div class="firstBody">
+                            <div class="Bottom-Upper">
+                                <p><b>Fees Paid</b></p>
+                            </div>
+                            <div class="Bottom-Middle">
+                                <div class="Bottom-Middle-Left">
+                                    <p>£@totalFeesAmount</p>
+                                </div>
+
+                                <div class="Bottom-Middle-Right">
+                                    <p><b>@percentage%</b></p>
+                                </div>
+                            </div>
+                            <div class="Bottom-Middle-Space">
+                            </div>
+                            <div class="Bottom-Low">
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="progressBar">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="">
-
-                </div>
-
-
-                @* <div class="progress-container">
-                    <div class="progress-bar" id="progressBar">0%</div>
-                </div> *@
-
-
             </div>
         </div>
-
-    </div>
-
-
-
-
-    @* <div class="middleBodyRight">
-    <div class="middleUpper">
-    <h4>Overall Statistics</h4>
-    <p>Overview 2023</p>
-    </div>
-    <div class="middleMiddle">
-    <img src="~/images/member3D.png" />
-    </div>
-    <div class="middleBottom">
-    </div>
-    </div> *@
-
-    @*         <div class="middleSearchBar">
-    <form asp-controller="Members" asp-action="Index" method="get">
-    <label for="search">Search:</label>
-    <input type="text" name="search" id="search" />
-    </form>
-
-    <button id="openPopupButton">Open Pop-up</button>
-
-
-    <!-- Hidden pop-up form -->
-    <div id="popupFormContainer" class="popup-container">
-    <form method="post" asp-controller="Members" asp-action="AddDummyData" class="popup-form">
-    <!-- Member information fields -->
-    <label for="FirstName">First Name:</label>
-    <input type="text" id="FirstName" name="FirstName" required>
-
-    <label for="LastName">Last Name:</label>
-    <input type="text" id="LastName" name="LastName" required>
-
-    <label for="Email">Email:</label>
-    <input type="text" id="Email" name="Email" required>
-
-    <label for="PhoneNumber">PhoneNumber:</label>
-    <input type="text" id="PhoneNumber" name="PhoneNumber" required>
-
-    <!-- TransactionFee information fields -->
-    <label for="Amount">Transaction Amount:</label>
-    <input type="text" id="Amount" name="Amount" required>
-
-    <label for="DatePaid">Date Paid:</label>
-    <input type="date" id="DatePaid" name="DatePaid" required>
-
-    <button type="submit">Add Dummy Data</button>
-    </form>
-    </div>
-
-    <div id="search-results">
-    <!-- Display search results here -->
-    </div>
-    </div>
-
-    <div class="middleBodyLeft">
-
-    </div>
-    </div>
-
-    <div class="middleBodyRight">
-    <div class="middleUpper">
-    <h4>Overall Statistics</h4>
-    <p>Overview 2023</p>
-    </div>
-    <div class="middleMiddle">
-    <img src="~/images/member3D.png" />
-    </div>
-    <div class="middleBottom">
-    </div>
-    </div> *@
 </div>
-
-
-
-
-
-@*  <div class="entryLogs">
-    <!-- Dropdown list to select the member -->
-    <form method="post" asp-action="AddEntry">
-        <label for="memberId">Select Member: </label>
-        <select name="memberId" id="memberId">
-            @foreach (var member in Model.Members)
-            {
-                <option value="@member.MemberID">@($"{member.MemberFirstName} {member.MemberLastName}")</option>
-            }
-        </select>
-        <button type="submit">Add Entry</button>
-    </form>
-
-
-
-    <div class="entryLogs">
-        <h3>Entry Logs</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Entry Date</th>
-                    <th>RFID Tag</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var entryLog in Model.EntryLogs)
-                {
-                    <tr>
-                        <td>@entryLog.EntryLogId</td>
-                        <td>@entryLog.EntryDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                        <td>@entryLog.RfidTag</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
-
- *@
 
 
 <script>
@@ -687,7 +626,6 @@
 
 
 
-
     document.addEventListener("DOMContentLoaded", function () {
         const cancelButton = document.getElementById("cancelButton");
         const popupFormContainer = document.getElementById("popupFormContainer");
@@ -713,7 +651,15 @@
 
 <script>
     // Set progress to 70%
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.width = '70%';
-    progressBar.innerHTML = '70% Completed';
+        const progressBar = document.getElementById('progressBar');
+        progressBar.style.borderRadius = '5px';
+        progressBar.innerHTML = '';
+        progressBar.style.height = '20px';
+
+        // Set the width of the filled portion to 50%
+        progressBar.style.width = '100%';
+
+        // Set the background colors for the filled and remaining portions
+        progressBar.style.background = 'linear-gradient(to right, #304D70 @percentage%, #D9D9D9 90%)';
+
 </script>

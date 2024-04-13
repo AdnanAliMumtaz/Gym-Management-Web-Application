@@ -24,30 +24,7 @@ namespace WebApplication1.Controllers
         {
             _context = context;
             _userManager = userManager;
-
-            // Populate ViewBag with lists of employees and members
-            /*_ = PopulateDropdownLists();*/
         }
-
-        // GET: Classes
-        /*public async Task<IActionResult> Index()
-        {
-            var webDbContext = _context.Classes.Include(c => c.ApplicationUser);
-            return View(await webDbContext.ToListAsync());
-        }
-        
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         AddClass(string ClassName, DateTime Date, TimeSpan Duration, int EmployeeID, int MemberID)
-         */
 
         [HttpGet]
         public IActionResult Search(string search)
@@ -347,51 +324,6 @@ namespace WebApplication1.Controllers
 
             return View(classes);
         }
-
-
-
-
-
-        /*[HttpPost]
-        public async Task<IActionResult> RemoveMember(int classId, int memberId)
-        {
-            // Find the class by ID
-            var classItem = await _context.Classes.FindAsync(classId);
-            if (classItem == null)
-            {
-                return NotFound(); // Class not found
-            }
-
-            // Remove the member from the class
-            var classMember = classItem.ClassMember.FirstOrDefault(cm => cm.MemberID == memberId);
-            if (classMember != null)
-            {
-                _context.ClassMembers.Remove(classMember);
-                await _context.SaveChangesAsync();
-            }
-
-            // Redirect to the edit page for the class
-            return RedirectToAction("Edit", new { id = classId }); // Redirect back to the edit page
-        }*/
-
-        // POST: Classes/Delete/5
-        /*[HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Classes == null)
-            {
-                return Problem("Entity set 'WebDbContext.Classes'  is null.");
-            }
-            var classes = await _context.Classes.FindAsync(id);
-            if (classes != null)
-            {
-                _context.Classes.Remove(classes);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }*/
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -51,6 +51,14 @@ namespace WebApplication1.Controllers
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
 
+
+
+            // Query 1: Total Fees Amount for the specific user's members
+            decimal totalFeesAmount = _context.TransactionFees
+                .Where(tf => tf.Member.UserId == user.Id)
+                .Sum(tf => tf.Amount);
+
+
             // Filter members based on the user's ID
             var membersQuery = _context.Members
                 .Where(m => m.UserId == user.Id);
@@ -85,11 +93,23 @@ namespace WebApplication1.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Members == null)
+            {
+                return NotFound();
+            }
 
+            var member = await _context.Members
+                .Include(r => r.ApplicationUser)
+                .FirstOrDefaultAsync(m => m.MemberID == id);
+            if (member == null)
+            {
+                return NotFound();
+            }
 
-
-
-
+            return View(member);
+        }
 
 
         public IActionResult Members()
@@ -137,6 +157,32 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> AddingCalories(int BreakfastCalories, int LunchCalories, int DinnerCalories, int SnackCalories, int MemberID)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            var member = await _context.Members.FindAsync(MemberID);
+
+            var Calorie = new CalorieEntry
+            {
+                Date = DateTime.Today,
+                BreakfastCalories = BreakfastCalories,
+                LunchCalories = LunchCalories,
+                DinnerCalories = DinnerCalories,
+                SnackCalories = SnackCalories,
+                Member = member
+            };
+
+            _context.CalorieEntries.Add(Calorie);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", "Members", new { id = MemberID });
+        }
+
+
+
 
         [Authorize]
         [HttpPost]
@@ -170,19 +216,31 @@ namespace WebApplication1.Controllers
                     _context.EntryLogs.Add(newEntryLog);
                     _context.SaveChanges();
 
-                    return RedirectToAction(nameof(Index));
+                    /*return RedirectToAction(nameof(Index));*/
+
+                    return RedirectToAction("Details", "Members", new { id = memberId });
                 }
                 else
                 {
                     // Member already has an entry within the past 2 hours
                     // Handle this scenario (e.g., display a message or redirect to an error page)
-                    return RedirectToAction(nameof(Index));
+                    /*return RedirectToAction(nameof(Index));*/
+                    return RedirectToAction("Details", "Members", new { id = memberId });
                 }
             }
 
             // Handle the case where the member is not found
-            return RedirectToAction(nameof(Index));
+            /*return RedirectToAction(nameof(Index));*/
+            return RedirectToAction("Details", "Members", new { id = memberId });
         }
+
+
+
+
+
+
+
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -206,16 +264,10 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditConfirmed(Member updatedMember)
         {
-            /*if (ModelState.IsValid)
-            {
-            }*/
-
-            // Check if the member exists in the database
             var existingMember = _context.Members.Find(updatedMember.MemberID);
 
             if (existingMember == null)
             {
-                // If the member is not found, return a 404 Not Found result
                 return NotFound();
             }
 
@@ -227,18 +279,12 @@ namespace WebApplication1.Controllers
             existingMember.MemberDateJoined = updatedMember.MemberDateJoined;
             existingMember.MemberDateLeft = updatedMember.MemberDateLeft;
 
-            // Update the existing member's properties with the edited values
-            /*_context.Update(updatedMember);*/
+
 
             _context.Entry(existingMember).State = EntityState.Modified;
 
-
-            // Save changes to the database
             _context.SaveChanges();
 
-            // Redirect to the member details page or another appropriate page
-
-            // If the model state is not valid, return to the edit view with validation errors
             return RedirectToAction(nameof(Index));
         }
 

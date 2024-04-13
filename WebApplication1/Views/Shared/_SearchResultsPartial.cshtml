@@ -26,8 +26,11 @@
                     <td>@member.MemberPhoneNumber</td>
                     <td>@member.MemberDateJoined.ToString("yyyy-MM-dd")</td>
                     <td>
-                        <a asp-controller="Members" asp-action="Edit" asp-route-id="@member.MemberID">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@member.MemberID">Delete</a>
+                        <a asp-controller="Members" asp-action="Edit" asp-route-id="@member.MemberID"><i class="fas fa-pen-alt"></i></a>
+                        /
+                        <a asp-action="Delete" asp-route-id="@member.MemberID"><i class="fas fa-trash-alt"></i></a>
+                        /
+                        <a asp-action="Details" asp-route-id="@member.MemberID"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
             }
