@@ -706,8 +706,8 @@
                 height: 60%;
                 width: 100%;
                 display: flex;
-                justify-content: center; /* Align content horizontally */
-                align-items: center; /* Align content vertically */
+                justify-content: center; 
+                align-items: center; 
             }
 
                 .middleBody-Middle img {
@@ -719,14 +719,13 @@
 
             /*Donut Chart*/
             .middleBody-Body-Upper {
-                height: 70%;
+                height: 65%;
                 border-radius: 5px;
                 background-color: white;
                 box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
             }
 
             .middleBody-Body-Upper p {
-                /* padding-top: 25px; */
                 padding-left: 30px;
                 font-size: 18px;
             }
@@ -754,7 +753,7 @@
 
             .upper-flex {
                 display: flex;
-                padding-top: 25px;
+                padding-top: 18px;
                 padding-right: 25px;
             }
 
@@ -766,11 +765,9 @@
             }
 
             .upper-flex-right {
-               /*  height: 100%; */
                 width: 50%;
                 text-align: right;
                 align-items: center;
-                background-color: red;
             }
 
 
@@ -784,7 +781,7 @@
                 top: 50%;
                 left: 50%;
                 width: 60%;
-                height: 92%;
+                height: 65%;
                 transform: translate(-50%, -50%);
                 background-color: white;
                 padding: 20px;
@@ -812,40 +809,26 @@
 
 
 
-           /*  .upper-flex-right button {
-                color: black;
-                border: none;
-                transition: 0.5s;
-            }
-
-                .upper-flex-right:hover {
-                    color: red;
-                    transition: 0.5s;
-                    transform: scale(1.5);
-                } */
-
-
-
-
-
-
-
-
-
-
-
-
             .BTN {
-                color: black;
+                color: white;
                 background-color: #304D70;
                 border: none;
                 width: 100%;
+                border-radius: 5px;
+                height: 10%;
+                transition: 0.5s;
             }
 
                 .BTN:hover {
-                    color: red;
-                    transform: scale(1.1);
+                    color: white;
+                    transition: 0.5s;
+                    transform: scale(1.04);
                 }
+
+
+
+           
+
         </style>
 
         
@@ -860,7 +843,7 @@
                     </div>
                 </div>
                 <canvas id="donutChart" width="300" height="300"></canvas>
-                <button id="openPopupButton" class="BTN"><i class="fas fa-plus"></i></button>
+                <button id="openPopupButton" class="BTN">Add Calories</button>
                 <!-- Hidden pop-up form -->
                 <div id="popupFormContainer" class="popup-container">
                     <form method="post" asp-controller="Members" asp-action="AddingCalories" class="popup-form">
@@ -900,7 +883,148 @@
                 </div>
             </div>
 
+            <style>
+                .middleBody-Body-Low {
+                    height: 41%;
+                    padding-top: 15%;
+                }
+
+                .middleBody-Body-Low-Graph {
+                    border-radius: 5px;
+                    height: 100%;
+                    background-color: white;
+                    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+                }
+
+                .middleBody-Body-Low-Graph p {
+                    padding-left: 30px;
+                    font-size: 18px;
+                }
+
+
+
+                /* .middleBody-Body-Upper {
+                    height: 65%;
+                    border-radius: 5px;
+                    background-color: white;
+                    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+                }
+
+                    .middleBody-Body-Upper p {
+                        padding-left: 30px;
+                        font-size: 18px;
+                    }
+
+                    .middleBody-Body-Upper canvas {
+                        margin-top: -60px;
+                    }
+
+
+
+                                    {
+                            label: 'Data 2',
+                            data: [28, 48, 40, 19, 86, 27],
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            tension: 0.4,
+                            hoverRadius: 8,
+                            hitRadius: 10,
+                            fill: true
+                        }
+ */
+
+               .middleBody-Body-Low-Graph  canvas {
+                   /* background-color:red; */
+               }
+            </style>
+
+            
+
             <div class="middleBody-Body-Low">
+                <div class="middleBody-Body-Low-Graph">
+                    <div class="upper-flex">
+                        <div class="upper-flex-left">
+                            <p><strong>Weight</strong></p>
+                        </div>
+
+
+                        <style>
+                            /* Styling for the pop-up container */
+                            .popup-container {
+                                display: none;
+                                position: fixed;
+                                top: 50%;
+                                left: 50%;
+                                width: 60%;
+                                height: 65%;
+                                transform: translate(-50%, -50%);
+                                background-color: white;
+                                padding: 20px;
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                                z-index: 1000;
+                                border-radius: 7px;
+                            }
+
+                            /* Styling for the pop-up form */
+                            .popup-form {
+                                /* Add your form styling here */
+                            }
+
+                            /* Styling for the overlay/background behind the pop-up */
+                            .overlay {
+                                display: none;
+                                position: fixed;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba(0, 0, 0, 0.5);
+                                z-index: 999;
+                            }
+
+                            
+                            .upper-flex-right {
+                                background-color: red;
+                            }
+
+                            .BTNWeight {
+                                height: 100%
+                            }
+                        </style>
+
+
+
+                        <div class="upper-flex-right">
+                            <button id="openPopupButton" class="BTNWeight">Add Weight</button>
+                            <!-- Hidden pop-up form -->
+                            <div id="popupFormContainer" class="popup-container">
+                                <form method="post" asp-controller="Members" asp-action="AddingWeight" class="popup-form">
+
+                                    <!-- Calories information fields -->
+                                    <div class="inputBox">
+                                        <label for="Weight" class="control-label">Weight</label>
+                                        <input type="text" id="Weight" class="form-control" name="Weight" required>
+                                    </div>
+
+                                    <div class="inputBox">
+                                        <input type="text" id="MemberID" class="form-control" name="MemberID" value="@Model.MemberID" required readonly>
+                                    </div>
+
+                                    <div class="inputBox">
+                                        <button type="submit" class="edit-Button">Add Calories</button>
+                                        <button type="button" id="cancelButton" class="edit-Button">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <canvas id="lineChart" width="200" height="66"></canvas>
+
+                </div>
+
+
 
             </div>
         </div>
@@ -1016,9 +1140,83 @@
                 }
             }
         });
-
-
-
-
     });
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    // Dummy data
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Data 1',
+            data: [65, 59, 80, 81, 56, 55],
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            pointRadius: 0,
+            tension: 0.4,
+            hoverRadius: 8,
+            hitRadius: 10,
+            fill: true
+        },]
+    };
+
+    // Configuration options
+    var options = {
+        scales: {
+            xAxes: [{
+                display: false,
+                gridLines: {
+                    display: false,
+                    color: "rgba(0, 0, 0, 0)",
+                },
+            }],
+            yAxes: [{
+                display: false,
+                gridLines: {
+                    display: false,
+                    color: "rgba(0, 0, 0, 0)",
+                },
+            }],
+        },
+        plugins: {
+            title: {  
+                display: false  
+            },
+            legend: {
+                labels: {
+                display: false,
+                },
+            },
+            tooltip: {
+                enabled: true, 
+                intersect: false,
+            }
+        },
+        interaction: {
+            mode: 'nearest',
+        },
+    };
+
+    // Get the canvas element
+    const ctx = document.getElementById('lineChart').getContext('2d');
+
+    // Create the line chart
+    const lineChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+    });
+    
+
 </script>

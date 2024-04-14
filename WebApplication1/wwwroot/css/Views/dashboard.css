@@ -55,17 +55,6 @@
         transform: scale(1.1);
     }
 
-
-
-
-
-
-
-
-
-
-
-
 .left-dashboard {
     height: 100%;
     width: 80%;
@@ -82,8 +71,6 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
-
-
 }
 
 .left-dashboard-upper {
@@ -92,18 +79,14 @@
     width: 100%;
     border-radius: 7px;
     display: flex;
-    /*box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);*/
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
 }
 
 .left-dashboard-middle {
     display: flex;
     height: 50%;
-    /*padding-top: 10px;*/
     padding-bottom: 10px;
     padding-top: 20px;
-
-    
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -112,8 +95,6 @@
 
 .firstBarGraph {
     border-radius: 7px;
-    /*padding: 20px;*/
-/*    padding-right: 40px;*/
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
     background-color: white;
     height: 100%;
@@ -121,18 +102,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /*padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 10px;*/
 }
 
 .Graph-Canvass {
     background-color: white;
     width: 90%;
     height: 85%;
-    /*border: 2px solid #ECECEC;*/
     border-radius: 6px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;

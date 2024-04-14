@@ -182,6 +182,28 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> AddingWeight(double Weight, int MemberID)
+        {
+            ApplicationUser user = await _userManager.GetUserAsync(User);
+
+            var member = await _context.Members.FindAsync(MemberID);
+
+            var newWeight = new WeightEntry
+            {
+                Date = DateTime.Today,
+                Weight = Weight,
+                Member = member
+            };
+
+            _context.WeightEntries.Add(newWeight);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", "Members", new { id = MemberID });
+        }
+
+
 
 
         [Authorize]
