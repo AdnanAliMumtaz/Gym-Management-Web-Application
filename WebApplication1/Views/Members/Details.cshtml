@@ -43,6 +43,28 @@
     .Where(m => m.MemberID == currentMemberId)
     .Select(m => m.SnackCalories)
     .FirstOrDefault();
+
+
+    // Retrieve all weight entries for the current member
+    var weightEntries = dbContext.WeightEntries
+        .Where(w => w.MemberID == currentMemberId)
+        .Select(m => m.Weight) 
+        .ToList();
+
+
+    var weightEntriesLabel = dbContext.WeightEntries
+    .Where(w => w.MemberID == currentMemberId)
+    .Select(w => w.Date)
+    .ToList();
+
+
+    int? totalCalories = breakfastCalories + LunchCalories + DinnerCalories + SnackCalories;
+    
+    var latestWeightEntry = dbContext.WeightEntries
+    .Where(w => w.MemberID == currentMemberId)
+    .OrderByDescending(w => w.Date)
+    .FirstOrDefault();
+
 }
 
 
@@ -573,14 +595,20 @@
                 </div>
             </div>
 
+            <style>
+                .imageContent img {
+                    width: 40%;
+                }
+            </style>
+
             <div class="under-info-class">
                 <div class="firstBox">
                     <div class="firstBox-Upper">
                         <div class="imageContent">
-                            <img src="/images/Classes_Icon.png" />
+                            <img src="/images/Calories.png" />
                         </div>
                         <div class="textContent">
-                            <h2>21</h2>
+                            <h2>@totalCalories</h2>
                         </div>
                         <div class="textContentDescription">
                             <p>Daily</p>
@@ -598,10 +626,10 @@
                 <div class="firstBox">
                     <div class="firstBox-Upper">
                         <div class="imageContent">
-                            <img src="/images/StaffMember_Icon.png" />
+                            <img src="/images/Weight.png" />
                         </div>
                         <div class="textContent">
-                            <h2>6</h2>
+                            <h2>@(latestWeightEntry?.Weight ?? 0)</h2>
                         </div>
                         <div class="textContentDescription">
                             <p>Kgs</p>
@@ -734,23 +762,6 @@
                 margin-top: -60px;
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             .upper-flex {
                 display: flex;
                 padding-top: 18px;
@@ -769,10 +780,6 @@
                 text-align: right;
                 align-items: center;
             }
-
-
-
-
 
             /* Styling for the pop-up container */
             .popup-container {
@@ -807,8 +814,6 @@
                 z-index: 999;
             }
 
-
-
             .BTN {
                 color: white;
                 background-color: #304D70;
@@ -824,10 +829,6 @@
                     transition: 0.5s;
                     transform: scale(1.04);
                 }
-
-
-
-           
 
         </style>
 
@@ -858,7 +859,6 @@
                             <label for="LunchCalories" class="control-label">Lunch Calories</label>
                             <input type="text" id="LunchCalories" class="form-control" name="LunchCalories" required>
                         </div>
-
 
                         <div class="inputBox">
                             <label for="DinnerCalories" class="control-label">Dinner Calories</label>
@@ -951,7 +951,7 @@
 
                         <style>
                             /* Styling for the pop-up container */
-                            .popup-container {
+                            .popup-container-Weight {
                                 display: none;
                                 position: fixed;
                                 top: 50%;
@@ -972,7 +972,7 @@
                             }
 
                             /* Styling for the overlay/background behind the pop-up */
-                            .overlay {
+                            .overlay-Weight {
                                 display: none;
                                 position: fixed;
                                 top: 0;
@@ -985,23 +985,39 @@
 
                             
                             .upper-flex-right {
-                                background-color: red;
+                                /* background-color: red; */
                             }
 
                             .BTNWeight {
-                                height: 100%
+                                background-color: #304D70;
+                                color:black;
+                                height: 80%;
+                                border: none;
+                                transition: 0.5s;
+                                /* padding: 5px 15px; */
+                                padding: 5px 11px;
+                                border-radius: 50px;
+                                color: white;
                             }
+
+                            .BTNWeight:hover {
+                                transition: 0.5s;
+                                transform: scale(1.05);
+                            }
+
+
+
                         </style>
 
 
 
                         <div class="upper-flex-right">
-                            <button id="openPopupButton" class="BTNWeight">Add Weight</button>
-                            <!-- Hidden pop-up form -->
-                            <div id="popupFormContainer" class="popup-container">
+                            <button id="openPopupButtonWeight" class="BTNWeight">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            
+                            <div id="popupFormContainerWeight" class="popup-container-Weight">
                                 <form method="post" asp-controller="Members" asp-action="AddingWeight" class="popup-form">
-
-                                    <!-- Calories information fields -->
                                     <div class="inputBox">
                                         <label for="Weight" class="control-label">Weight</label>
                                         <input type="text" id="Weight" class="form-control" name="Weight" required>
@@ -1020,8 +1036,13 @@
                         </div>
                     </div>
 
-                    <canvas id="lineChart" width="200" height="66"></canvas>
+                    <style>
+                        #lineChart {
+                            border-radius: 5px;
+                        }
+                    </style>
 
+                    <canvas id="lineChart" width="200" height="67"></canvas>
                 </div>
 
 
@@ -1030,9 +1051,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
@@ -1067,6 +1085,34 @@
 
 
 
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get references to the button, pop-up container, and overlay
+        const openPopupButton = document.getElementById("openPopupButtonWeight");
+        const popupFormContainer = document.getElementById("popupFormContainerWeight");
+        const overlay = document.createElement("div");
+        overlay.className = "overlay-Weight";
+
+        // Function to open the pop-up
+        function openPopup() {
+            popupFormContainer.style.display = "block";
+            document.body.appendChild(overlay);
+        }
+
+        // Function to close the pop-up
+        function closePopup() {
+            popupFormContainer.style.display = "none";
+            overlay.remove();
+        }
+
+        // Event listener for the button click
+        openPopupButton.addEventListener("click", openPopup);
+
+        // Event listener for the overlay click (to close the pop-up)
+        overlay.addEventListener("click", closePopup);
+    });
+
+
+
 
 
 
@@ -1086,22 +1132,13 @@
     });
 
 
-
-
-
-
-
-
-
+    
     $(document).ready(function () {
-       
-
-
         var ctx = document.getElementById('donutChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Breakfast Calories', 'Lunch Calories', 'Dinner Calories', 'SnackCalories'],
+                labels: ['Breakfast Calories', 'Lunch Calories', 'Dinner Calories', 'Snack Calories'],
                 datasets: [{
                     label: '# of Votes',
                     data: [@breakfastCalories, @LunchCalories, @DinnerCalories, @SnackCalories],
@@ -1155,13 +1192,22 @@
 
 
     // Dummy data
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
+    //var gradientLeaving = ctx.createLinearGradient(0, 0, 0, 300);
+    //gradientLeaving.addColorStop(0, 'rgba(65, 184, 213, 1)'); 
+    //gradientLeaving.addColorStop(1, 'rgba(65, 184, 213, 0)'); 
+
+    var weightEntries = @Html.Raw(Json.Serialize(weightEntries));
+    var weightEntriesLabel = @Html.Raw(Json.Serialize(weightEntriesLabel));
+
+    //backgroundColor: gradientLeaving,
+    const labels = weightEntriesLabel;
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Data 1',
-            data: [65, 59, 80, 81, 56, 55],
-            borderColor: 'rgba(255, 99, 132, 1)',
+            label: 'Weight',
+            data: weightEntries,
+            borderColor: '#304D70',
+
             borderWidth: 1,
             pointRadius: 0,
             tension: 0.4,
@@ -1180,6 +1226,9 @@
                     display: false,
                     color: "rgba(0, 0, 0, 0)",
                 },
+                border: {
+                    display: false
+                },
             }],
             yAxes: [{
                 display: false,
@@ -1187,19 +1236,23 @@
                     display: false,
                     color: "rgba(0, 0, 0, 0)",
                 },
+                ticks: {
+                    display: false
+                },
+                grid: {
+                    display: false, // Set display to false to remove y-axis grid lines
+                },
+                border: {
+                    display: false
+                },
             }],
         },
         plugins: {
-            title: {  
-                display: false  
-            },
             legend: {
-                labels: {
-                display: false,
-                },
+                display: false
             },
             tooltip: {
-                enabled: true, 
+                enabled: true,
                 intersect: false,
             }
         },

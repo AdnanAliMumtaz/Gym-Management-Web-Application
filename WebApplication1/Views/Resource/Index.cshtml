@@ -342,30 +342,12 @@
                 padding-left: 20px;
             }
 
-
             .middleBody-Body {
+                padding-left: 5px;
                 height: 100%;
                 border-radius: 7px;
                 background-color: #304D70;
                 box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
-            }
-
-
-            .progress-container {
-                width: 100%;
-                background-color: #f0f0f0;
-                border-radius: 5px;
-                margin-bottom: 20px;
-            }
-
-            .progress-bar {
-                width: 0%;
-                height: 20px;
-                background-color: #4caf50;
-                border-radius: 5px;
-                text-align: center;
-                line-height: 30px;
-                color: white;
             }
 
             .middleBody-Upper {
@@ -383,24 +365,81 @@
             .middleBody-Middle {
                 height: 60%;
                 width: 100%;
-                /* background-color: red; */
-
-                display: flex;
-                justify-content: center; /* Align content horizontally */
-                align-items: center; /* Align content vertically */
+                position: relative; /* Add this */
             }
 
                 .middleBody-Middle img {
-                    padding-top: 50px;
-                    width: 90%;
+                    padding-top: 20px;
+                    width: 100%;
                 }
+
+            .middleBody-Bottom {
+                background-color: white;
+                border-radius: 5px;
+                border: 0px solid transparent;
+                height: 33%;
+                width: 90%;
+                margin: 350px auto 0;
+                box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+
+
+
+            /*First Body*/
+            .firstBody {
+                padding: 19px 20px;
+            }
+
+            .Bottom-Upper {
+                /* background-color: red; */
+            }
+
+                .Bottom-Upper p {
+                    margin: 0px;
+                }
+
+            .Bottom-Middle {
+                align-items: center;
+                display: flex;
+                margin-top: -7px;
+            }
+
+            .Bottom-Middle-Left {
+                width: 80%;
+            }
+
+                .Bottom-Middle-Left p {
+                    margin: 0px;
+                }
+
+            .Bottom-Middle-Right {
+                width: 20%;
+                text-align: center;
+                margin: 0px;
+            }
+
+                .Bottom-Middle-Right p {
+                    border-radius: 5px;
+                    margin: 0px;
+                    padding: 3px 8px;
+                    color: rgba(48, 77, 112, 1);
+                    background-color: rgba(48, 77, 112, 0.2);
+                }
+
+
+            .Bottom-Middle-Space {
+                height: 5px;
+            }
+
         </style>
 
-        <!--This is the right side-->
         <div class="middleBody-Right">
-
             <div class="middleBody-Body">
-
                 <div class="middleBody-Upper">
                     <h4><b>Overall Statistics</b></h4>
                     <p>Overview @DateTime.Now.Year</p>
@@ -408,19 +447,34 @@
 
                 <div class="middleBody-Middle">
                     <img src="~/images/member3D.png" />
+                    <div class="middleBody-Bottom">
+                        <div class="firstBody">
+                            <div class="Bottom-Upper">
+                                <p><b>Fees Paid</b></p>
+                            </div>
+                            <div class="Bottom-Middle">
+                                <div class="Bottom-Middle-Left">
+                                    <p>£5</p>
+                                </div>
+
+                                <div class="Bottom-Middle-Right">
+                                    <p><b>6%</b></p>
+                                </div>
+                            </div>
+                            <div class="Bottom-Middle-Space">
+                            </div>
+                            <div class="Bottom-Low">
+                                <div class="progress-container">
+                                    <div class="progress-bar" id="progressBar">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="">
-                </div>
-
-
-                @* <div class="progress-container">
-                <div class="progress-bar" id="progressBar">0%</div>
-                </div> *@
-
-
             </div>
         </div>
+
+        
     </div>
 </div>
 
@@ -495,4 +549,19 @@
         // Event listener for the cancel button click
         cancelButton.addEventListener("click", closePopup);
     });
+</script>
+
+<script>
+    // Set progress to 70%
+    const progressBar = document.getElementById('progressBar');
+    progressBar.style.borderRadius = '5px';
+    progressBar.innerHTML = '';
+    progressBar.style.height = '20px';
+
+    // Set the width of the filled portion to 50%
+    progressBar.style.width = '100%';
+
+    // Set the background colors for the filled and remaining portions
+    progressBar.style.background = 'linear-gradient(to right, #304D70 50%, #D9D9D9 90%)';
+
 </script>

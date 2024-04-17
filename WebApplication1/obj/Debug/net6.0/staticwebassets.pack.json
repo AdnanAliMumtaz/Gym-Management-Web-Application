@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Calories.png",
+      "PackagePath": "staticwebassets\\images\\Calories.png"
+    },
+    {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Cancellation_Icon.png",
       "PackagePath": "staticwebassets\\images\\Cancellation_Icon.png"
     },
@@ -75,6 +79,10 @@
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\TotalMembers.png",
       "PackagePath": "staticwebassets\\images\\TotalMembers.png"
+    },
+    {
+      "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Weight.png",
+      "PackagePath": "staticwebassets\\images\\Weight.png"
     },
     {
       "Id": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\WelcomeBar_Icon.png",
