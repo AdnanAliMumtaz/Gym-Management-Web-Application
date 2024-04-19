@@ -140,7 +140,8 @@ namespace WebApplication1.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddClass(string ClassName, string Description, DateTime Date, TimeSpan Duration, List<int> MemberIDs, List<int> EmployeeIDs)
+        public async Task<IActionResult> AddClass(string ClassName, string Description, 
+            DateTime Date, TimeSpan Duration, List<int> MemberIDs, List<int> EmployeeIDs)
         {
             // Get the currently logged-in user
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -157,12 +158,10 @@ namespace WebApplication1.Controllers
 
             // Add the new class to the database
             _context.Classes.Add(newClass);
-
           
             // Create ClassMember entries for each selected member
             foreach (var memberID in MemberIDs)
             {
-                /*ApplicationUser user = await _userManager.GetUserAsync(User);*/
                 var member = await _context.Members.FindAsync(memberID);
 
                 if (member != null)
@@ -197,8 +196,6 @@ namespace WebApplication1.Controllers
                     _context.ClassEmployees.Add(newClassEmployee);
                 }
             }
-
-
 
 
             // Save changes to the database

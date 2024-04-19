@@ -33,60 +33,6 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
         }
 
-        /*     public async Task<IActionResult> DisplayAllEmails()
-             {
-                 List<Email> allEmails = await _context.Emails.ToListAsync();
-                 return View(allEmails);
-             }
-     */
-
-        // GET: Emails
-        /*public async Task<IActionResult> Index()
-        {
-            Email email = new Email(); 
-            return View(email);
-        }*/
-
-        // GET: Emails
-        /*public async Task<IActionResult> Index()
-        {
-*//*            ApplicationUser user = _userManager.GetUserAsync(User).Result;*//*
-
-            // Retrieve all members from the database
-            var allMembers = await _context.Members.ToListAsync(); // Replace _context.Members with your actual DbSet for members
-            ViewBag.AllMembers = allMembers; // Pass the list of members to the view
-
-
-            // Retrieve all employees from the database
-            var allEmployees = await _context.Employees.ToListAsync(); // Replace _context.Members with your actual DbSet for members
-            ViewBag.AllEmployees = allEmployees; // Pass the list of members to the view
-
-
-            // Retrieve all emails from the database
-            var allEmails = await _context.Emails.ToListAsync(); // Replace _context.Emails with your actual DbSet for emails
-            ViewBag.AllEmails = allEmails;
-
-            // Create a new instance of Email if needed
-            Email email = new Email(); // Assuming you're creating a new instance of Email
-
-            return View(email);
-        }
-
-
-
-
-
-
-
-        ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            // Query 1: Total Fees Amount for the specific user's members
-            decimal totalFeesAmount = _context.TransactionFees
-                .Where(tf => tf.Member.UserId == user.Id)
-                .Sum(tf => tf.Amount);
-*/
-
-
         public async Task<IActionResult> Index(string emailAddress)
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -115,38 +61,6 @@ namespace WebApplication1.Controllers
         }
 
 
-        /*public async Task<IActionResult> Index()
-        {
-            // Retrieve the current user's ID
-            var userId = _userManager.GetUserId(User);
-
-            // Retrieve members associated with the current user
-            var userMembers = await _context.Members.Where(m => m.UserId == userId).ToListAsync();
-
-            // Retrieve employees associated with the current user
-            var userEmployees = await _context.Employees.Where(e => e.UserId == userId).ToListAsync();
-
-            // Retrieve all emails associated with the current user
-            var userEmails = await _context.Emails
-                .Where(e => e.SenderId == userId || e.ReceiverId == userId)
-                .ToListAsync();
-
-            // Set ViewBag with filtered members, employees, and emails
-            ViewBag.UserMembers = userMembers;
-            ViewBag.UserEmployees = userEmployees;
-            ViewBag.UserEmails = userEmails;
-
-            // Create a new instance of Email if needed
-            Email email = new Email(); // Assuming you're creating a new instance of Email
-
-            return View(email);
-        }
-*/
-
-
-
-
-
         public async Task<IActionResult> SentEmails(string receiverEmail)
         {
             var sentEmails = await _context.Emails
@@ -157,23 +71,6 @@ namespace WebApplication1.Controllers
 
             return View(sentEmails);
         }
-
-
-
-
-
-        /*[HttpPost]
-        public async Task<IActionResult> ReceivedEmails(String email)
-        {
-            var receivedEmails = await _context.Emails
-            .Where(e => e.ReceiverId == email) 
-                .ToListAsync();
-
-            ViewBag.ReceivedEmails = receivedEmails;
-
-            return RedirectToAction(nameof(Index));
-        }
-*/
 
         [HttpPost]
         public async Task<IActionResult> ReceivedEmails(string emailAddress)
@@ -273,16 +170,7 @@ namespace WebApplication1.Controllers
             return emails;
         }
 
-
-       /* public async Task<ActionResult> ShowEmails(string emailAddress)
-        {
-            var emails = await GetEmailsAsync(emailAddress);
-            return View(emails);
-        }
-*/
-
-
-        [HttpPost]
+        /*[HttpPost]
         public async Task<ActionResult> ShowEmails(string emailAddress)
         {
             List<Email> relevantEmails = new List<Email>();
@@ -320,9 +208,9 @@ namespace WebApplication1.Controllers
                 return Content("Error retrieving emails: " + ex.Message); // Return an error message
             }
         }
+*/
 
-
-        public async Task<ActionResult> ReceiveEmailsAsync(string emailAddress)
+       /* public async Task<ActionResult> ReceiveEmailsAsync(string emailAddress)
         {
             List<MimeMessage> receivedEmails = new List<MimeMessage>();
             // Get the currently logged-in user
@@ -407,80 +295,10 @@ namespace WebApplication1.Controllers
             ViewBag.EmailAddress = emailAddress; // Pass the email address to the view
 
             return View();
-        }
+        }*/
 
 
 
-
-
-        /*public async Task<ActionResult> ReceiveEmailsAsync(string emailAddress)
-        {
-            List<MimeMessage> receivedEmails = new List<MimeMessage>();
-            // Get the currently logged-in user
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            try
-            {
-                using (var client = new ImapClient())
-                {
-                    client.Connect("imap.gmail.com", 993, true);
-                    client.Authenticate("gymmanagement0@gmail.com", "tsda oboq jsdv mjgq");
-
-                    var inbox = client.Inbox;
-                    inbox.Open(FolderAccess.ReadOnly);
-
-                    // Search for emails with the specified email address in the From header
-                    var query = SearchQuery.HeaderContains("From", emailAddress);
-                    var uids = inbox.Search(query);
-
-                    foreach (var uid in uids)
-                    {
-                        var message = inbox.GetMessage(uid);
-                        receivedEmails.Add(message);
-                    }
-
-                    client.Disconnect(true);
-                }
-
-                ViewBag.ReceivedEmails = receivedEmails;
-
-                // Create a new Member with the UserId set to the current user's Id
-                var newEmail = new Email
-                {
-                    SenderId = fromAddress,
-                    ReceiverId = ReceiverId,
-                    Subject = Subject,
-                    Content = Content,
-                    Timestamp = DateTime.Now,
-                    ApplicationUser = user,
-                };
-
-
-                // Add the new Member and TransactionFee to the database
-                _context.Emails.Add(newEmail);
-
-                // Save changes to the database
-                await _context.SaveChangesAsync();
-
-
-
-            }
-            catch (System.Exception ex)
-            {
-                ViewBag.ErrorMessage = "Error receiving emails: " + ex.Message;
-            }
-
-            // Ensure ViewBag.ReceivedEmails is initialized even if an exception occurs
-            if (ViewBag.ReceivedEmails == null)
-            {
-                ViewBag.ReceivedEmails = new List<MimeMessage>();
-            }
-
-            ViewBag.EmailAddress = emailAddress;
-
-            return View();
-        }
-*/
         public IActionResult EmailPage()
         {
             // Retrieve all members from the database
@@ -490,99 +308,7 @@ namespace WebApplication1.Controllers
             return View(members);
         }
 
-
-
-
-
-
-        /*[HttpPost]
-        public async Task<IActionResult> SendEmail(string ReceiverId, string Subject, string Content)
-        {
-
-
-            // Sender's email address and password
-            string fromAddress = "gymmanagement0@gmail.com";
-            string password = "Gym12345@Gym";
-
-            // Set up SMTP client
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.EnableSsl = true;
-            smtp.Credentials = new NetworkCredential(fromAddress, password);
-
-            // Create MailMessage object
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(fromAddress);
-            mailMessage.To.Add(new MailAddress(ReceiverId));
-            mailMessage.Subject = Subject;
-            mailMessage.Body = Content;
-
-            // Send the email
-            smtp.Send(mailMessage);
-
-            try
-            {
-
-                *//*// Sender's email address and password
-                string fromAddress = "gymmanagement0@gmail.com";
-                string password = "Gym12345@Gym";
-
-                // Set up SMTP client
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-                smtp.EnableSsl = true;
-                smtp.Credentials = new NetworkCredential(fromAddress, password);
-
-                // Create MailMessage object
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(fromAddress);
-                mailMessage.To.Add(new MailAddress(ReceiverId));
-                mailMessage.Subject = Subject;
-                mailMessage.Body = Content;
-
-                // Send the email
-                smtp.Send(mailMessage);*//*
-
-                ViewBag.Message = "Email sent successfully!";
-            }
-            catch (System.Exception ex)
-            {
-                ViewBag.Message = "Error sending email: " + ex.Message;
-            }
-
-            return RedirectToAction(nameof(Index));
-        }*/
-
-
-        /*public ViewResult Index(WebApplication1.Models.Email _objModelMail)
-        {
-            if (ModelState.IsValid)
-            {
-                MailMessage mail = new MailMessage();
-                mail.To.Add(_objModelMail.SenderId);
-                mail.From = new MailAddress(_objModelMail.ReceiverId);
-                mail.Subject = _objModelMail.Subject;
-                string Body = _objModelMail.Content;
-                mail.Body = Body;
-                mail.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("khanaddi193@gmail.com", "audhfH1482$"); 
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
-                return View("Index", _objModelMail);
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-
-
-*/
-
-
+ 
         // GET: Emails/Details/5
         public async Task<IActionResult> Details(int? id)
         {
