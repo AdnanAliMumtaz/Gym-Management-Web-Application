@@ -63,18 +63,11 @@
         @foreach (var resource in Model)
         {
             <div class="box ">
-                @* <p><strong>Class ID:</strong> @resource.ClassID</p> *@
                 <h3><strong>@resource.ClassName</strong></h3>
-
                 <p class="description">@resource.Description</p>
-
-                @* <p>@resource.Description</p> *@
                 <p>@resource.Date.ToString("dd MMMM yyyy")</p>
-                @* <p> @(resource.Duration.Hours) hour @(resource.Duration.Minutes) minutes</p> *@
-
                 <div class="actions">
-@*                     <a asp-controller="Classes" asp-action="Edit" asp-route-id="@resource.ClassID">Edit</a>
- *@                    <a asp-action="Delete" asp-route-id="@resource.ClassID">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@resource.ClassID">Delete</a>
                     <a asp-action="Details" asp-route-id="@resource.ClassID">View</a> 
                 </div>
             </div>

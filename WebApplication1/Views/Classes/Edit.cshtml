@@ -173,49 +173,6 @@
                     </div>
                 </div>
 
-
-                @* <div class="inputBox">
-                    <div class="form-group">
-                        <label asp-for="Duration" class="control-label"></label>
-                        <input asp-for="Duration" class="form-control" />
-                        <span asp-validation-for="Duration" class="text-danger"></span>
-                    </div>
-                </div> *@
-
-                @* <div class="inputBox">
-                    <div class="form-group">
-                        <label>Select Members</label>
-                        @foreach (var member in ViewBag.MemberList)
-                        {
-                            var isChecked = Model.ClassMember.Any(cm => cm.MemberID == member.MemberID);
-                            <div>
-                                <input type="checkbox" id="employee-@member.MemberID" name="MemberIDs" value="@member.MemberID" @(isChecked ? "checked" : "")>
-                                <label for="employee-@member.MemberID">@member.MemberFirstName @member.MemberLastName</label>
-                            </div>
-                        }
-                    </div>
-                </div> 
-                
-                
-                
-                
-
-                <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <select asp-for="Gender" class="form-control">
-                <option value="">-- Select Gender --</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-                </select>
-                <span asp-validation-for="Gender" class="text-danger"></span>
-                </div>
-                
-
-
-                *@
-
-
                 <div class="inputBox">
                     <label for="MemberIDs" class="control-label">Select Members</label>
                     <div class="scrollable-box">

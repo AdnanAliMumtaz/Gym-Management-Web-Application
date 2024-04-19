@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "x5qA25/G+ooPUMXM064OxPE1VVf0GpWj0kRcpPCp7SU=",
+  "Hash": "bOe6Ecr9H3mqOD8niaZwfw2ksDa0CunhXiqcdeNb2Y4=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -1088,6 +1088,23 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\Classes\\delete.css",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "css/Views/Classes/delete.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Views\\Classes\\delete.css"
+    },
+    {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\css\\Views\\dashboard.css",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
@@ -1375,6 +1392,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\DollarSign.png"
+    },
+    {
+      "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\EmployeesIcon.png",
+      "SourceId": "WebApplication1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\",
+      "BasePath": "_content/WebApplication1",
+      "RelativePath": "images/EmployeesIcon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\EmployeesIcon.png"
     },
     {
       "Identity": "C:\\Users\\adnan\\Gym-Management-Web-Application\\WebApplication1\\wwwroot\\images\\Logo.png",

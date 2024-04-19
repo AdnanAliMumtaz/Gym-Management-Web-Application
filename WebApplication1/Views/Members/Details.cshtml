@@ -48,7 +48,7 @@
     // Retrieve all weight entries for the current member
     var weightEntries = dbContext.WeightEntries
         .Where(w => w.MemberID == currentMemberId)
-        .Select(m => m.Weight) 
+        .Select(m => m.Weight)
         .ToList();
 
 
@@ -59,7 +59,7 @@
 
 
     int? totalCalories = breakfastCalories + LunchCalories + DinnerCalories + SnackCalories;
-    
+
     var latestWeightEntry = dbContext.WeightEntries
     .Where(w => w.MemberID == currentMemberId)
     .OrderByDescending(w => w.Date)
@@ -140,11 +140,6 @@
             }
 
 
-
-
-
-
-
     .search-container {
         position: relative;
         display: flex;
@@ -186,9 +181,6 @@
     }
 
 
-
-
-
     /* CSS for table */
     .table-container {
         overflow-x: auto;
@@ -225,19 +217,6 @@
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     .middle-table-bottom a {
         background-color: #304D70;
         color: white;
@@ -270,22 +249,6 @@
         scrollbar-color: #304D70 transparent;
         scrollbar-radius: 7px;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /* Styling for the pop-up container */
@@ -337,17 +300,9 @@
     }
 
 
-
-
-
-
-
     .inputBox {
         padding: 10px 20px;
     }
-
-
-
 
     .edit-Button {
         background-color: #304D70;
@@ -365,27 +320,12 @@
             color: white;
         }
 
-
-
-
-
-
-
     .upper-info-class {
         height: 78%;
         background-color: white;
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
         border-radius: 5px;
     }
-
-
-
-
-
-
-
-
-
 
     .under-info-class {
         height: 28%;
@@ -440,23 +380,7 @@
         .inputBoxContent a {
             color: black;
             text-decoration: none;
-
         }
-
-
-    /* .inputBox {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-
-        .inputBoxHeader {
-            margin-bottom: 10px;
-        }
-
-        .inputBoxContent p {
-            margin: 0;
-        } */
 
 
     .inputBoxButton {
@@ -467,9 +391,6 @@
 
     .back-icon {
         color: black /* Set the color to black */
-        /* background-color: #304D70; */
-        /*   padding: 5px 10px;
-            border-radius: 7px; */
     }
 
     .inputBoxButton {
@@ -492,6 +413,261 @@
             text-decoration: none;
             color: black;
         }
+
+    .middleBody-Right {
+        height: 108%;
+        padding-left: 20px;
+    }
+
+    .middleBody-Body {
+        height: 100%;
+        border-radius: 7px;
+        background-color: #304D70;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .progress-container {
+        width: 100%;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar {
+        width: 0%;
+        height: 20px;
+        background-color: #4caf50;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+    }
+
+    .middleBody-Upper {
+        padding-top: 35px;
+        padding-left: 20px;
+        color: white;
+        height: 15%;
+    }
+
+        .middleBody-Upper p {
+            padding-left: 2px;
+            margin-top: -10px;
+        }
+
+    .middleBody-Middle {
+        height: 60%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .middleBody-Middle img {
+            padding-top: 50px;
+            width: 90%;
+        }
+
+
+
+    /*Donut Chart*/
+    .middleBody-Body-Upper {
+        height: 65%;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+    }
+
+        .middleBody-Body-Upper p {
+            padding-left: 30px;
+            font-size: 18px;
+        }
+
+        .middleBody-Body-Upper canvas {
+            margin-top: -60px;
+        }
+
+    .upper-flex {
+        display: flex;
+        padding-top: 18px;
+        padding-right: 25px;
+    }
+
+    .upper-flex-left {
+        width: 50%;
+        text-align: left;
+        align-items: center;
+        /* background-color: blue; */
+    }
+
+    .upper-flex-right {
+        width: 50%;
+        text-align: right;
+        align-items: center;
+    }
+
+    /* Styling for the pop-up container */
+    .popup-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 65%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        border-radius: 7px;
+    }
+
+    /* Styling for the pop-up form */
+    .popup-form {
+        /* Add your form styling here */
+    }
+
+    /* Styling for the overlay/background behind the pop-up */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .BTN {
+        color: white;
+        background-color: #304D70;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        height: 10%;
+        transition: 0.5s;
+    }
+
+        .BTN:hover {
+            color: white;
+            transition: 0.5s;
+            transform: scale(1.04);
+        }
+
+    .imageContent img {
+        width: 40%;
+    }
+
+
+
+    .under-info-class-Bottom {
+        height: 8%;
+        background-color: red;
+        border-radius: 5px;
+        padding: 0px;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+    }
+
+        .under-info-class-Bottom form {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+        }
+
+        .under-info-class-Bottom button {
+            width: 100%;
+            height: 100%;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            background-color: #304D70;
+            transition: 0.5s;
+        }
+
+            .under-info-class-Bottom button:hover {
+                transition: 0.5s;
+                transform: scale(1.03);
+            }
+
+    .middleBody-Body-Low {
+        height: 41%;
+        padding-top: 15%;
+    }
+
+    .middleBody-Body-Low-Graph {
+        border-radius: 5px;
+        height: 100%;
+        background-color: white;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
+    }
+
+        .middleBody-Body-Low-Graph p {
+            padding-left: 30px;
+            font-size: 18px;
+        }
+
+
+    /* Styling for the pop-up container */
+    .popup-container-Weight {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 65%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        border-radius: 7px;
+    }
+
+    /* Styling for the pop-up form */
+    .popup-form {
+        /* Add your form styling here */
+    }
+
+    /* Styling for the overlay/background behind the pop-up */
+    .overlay-Weight {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+
+    .upper-flex-right {
+        /* background-color: red; */
+    }
+
+    .BTNWeight {
+        background-color: #304D70;
+        color: black;
+        height: 80%;
+        border: none;
+        transition: 0.5s;
+        /* padding: 5px 15px; */
+        padding: 5px 11px;
+        border-radius: 50px;
+        color: white;
+    }
+
+        .BTNWeight:hover {
+            transition: 0.5s;
+            transform: scale(1.05);
+        }
+
+    #lineChart {
+        border-radius: 5px;
+    }
 </style>
 
 
@@ -509,7 +685,7 @@
 
             <div class="upper-info-class">
 
-                @*  
+                @*
                 <div class="inputBox">
                 <a href="#" onclick="history.go(-1); return false;"><i class="fas fa-angle-left back-icon"></i></a>
                 </div>
@@ -528,9 +704,9 @@
                             <a asp-action="Delete" asp-route-id="@Model?.MemberID"><i class="fas fa-trash-alt"></i></a>
                         </div>
 
-                    </div>                    
-                   
-                    
+                    </div>
+
+
                     <div class="inputBoxHeader">
                         <p><strong>Name</strong></p>
                     </div>
@@ -595,12 +771,6 @@
                 </div>
             </div>
 
-            <style>
-                .imageContent img {
-                    width: 40%;
-                }
-            </style>
-
             <div class="under-info-class">
                 <div class="firstBox">
                     <div class="firstBox-Upper">
@@ -646,40 +816,6 @@
                 </div>
             </div>
 
-            <style>
-                .under-info-class-Bottom {
-                    height: 8%;
-                    background-color: red;
-                    border-radius: 5px;
-                    padding: 0px;
-                    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
-                }
-
-                .under-info-class-Bottom form {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    text-align: center;
-                }
-
-                .under-info-class-Bottom button {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    color: white;
-                    border-radius: 5px;
-                    background-color: #304D70;
-                    transition: 0.5s;
-                }
-
-                .under-info-class-Bottom button:hover {
-                    transition: 0.5s;
-                    transform: scale(1.03);
-                }
-
-
-            </style>
-
             <div class="under-info-class-Bottom">
                 <form action="@Url.Action("AddEntry", "Members")" method="post">
                     <input type="hidden" name="memberId" value="@Model.MemberID" />
@@ -687,152 +823,7 @@
                 </form>
             </div>
         </div>
-        <style>
-            .middleBody-Right {
-                height: 108%;
-                padding-left: 20px;
-            }
 
-            .middleBody-Body {
-                height: 100%;
-                border-radius: 7px;
-                background-color: #304D70;
-                box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
-            }
-
-
-            .progress-container {
-                width: 100%;
-                background-color: #f0f0f0;
-                border-radius: 5px;
-                margin-bottom: 20px;
-            }
-
-            .progress-bar {
-                width: 0%;
-                height: 20px;
-                background-color: #4caf50;
-                border-radius: 5px;
-                text-align: center;
-                line-height: 30px;
-                color: white;
-            }
-
-            .middleBody-Upper {
-                padding-top: 35px;
-                padding-left: 20px;
-                color: white;
-                height: 15%;
-            }
-
-                .middleBody-Upper p {
-                    padding-left: 2px;
-                    margin-top: -10px;
-                }
-
-            .middleBody-Middle {
-                height: 60%;
-                width: 100%;
-                display: flex;
-                justify-content: center; 
-                align-items: center; 
-            }
-
-                .middleBody-Middle img {
-                    padding-top: 50px;
-                    width: 90%;
-                }
-
-
-
-            /*Donut Chart*/
-            .middleBody-Body-Upper {
-                height: 65%;
-                border-radius: 5px;
-                background-color: white;
-                box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
-            }
-
-            .middleBody-Body-Upper p {
-                padding-left: 30px;
-                font-size: 18px;
-            }
-
-            .middleBody-Body-Upper canvas {
-                margin-top: -60px;
-            }
-
-            .upper-flex {
-                display: flex;
-                padding-top: 18px;
-                padding-right: 25px;
-            }
-
-            .upper-flex-left {
-                width: 50%;
-                text-align: left;
-                align-items: center;
-                /* background-color: blue; */
-            }
-
-            .upper-flex-right {
-                width: 50%;
-                text-align: right;
-                align-items: center;
-            }
-
-            /* Styling for the pop-up container */
-            .popup-container {
-                display: none;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                width: 60%;
-                height: 65%;
-                transform: translate(-50%, -50%);
-                background-color: white;
-                padding: 20px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                z-index: 1000;
-                border-radius: 7px;
-            }
-
-            /* Styling for the pop-up form */
-            .popup-form {
-                /* Add your form styling here */
-            }
-
-            /* Styling for the overlay/background behind the pop-up */
-            .overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 999;
-            }
-
-            .BTN {
-                color: white;
-                background-color: #304D70;
-                border: none;
-                width: 100%;
-                border-radius: 5px;
-                height: 10%;
-                transition: 0.5s;
-            }
-
-                .BTN:hover {
-                    color: white;
-                    transition: 0.5s;
-                    transform: scale(1.04);
-                }
-
-        </style>
-
-        
         <div class="middleBody-Right">
             <div class="middleBody-Body-Upper">
                 <div class="upper-flex">
@@ -840,7 +831,6 @@
                         <p><strong>Calories</strong></p>
                     </div>
                     <div class="upper-flex-right">
-
                     </div>
                 </div>
                 <canvas id="donutChart" width="300" height="300"></canvas>
@@ -883,64 +873,6 @@
                 </div>
             </div>
 
-            <style>
-                .middleBody-Body-Low {
-                    height: 41%;
-                    padding-top: 15%;
-                }
-
-                .middleBody-Body-Low-Graph {
-                    border-radius: 5px;
-                    height: 100%;
-                    background-color: white;
-                    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
-                }
-
-                .middleBody-Body-Low-Graph p {
-                    padding-left: 30px;
-                    font-size: 18px;
-                }
-
-
-
-                /* .middleBody-Body-Upper {
-                    height: 65%;
-                    border-radius: 5px;
-                    background-color: white;
-                    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.05);
-                }
-
-                    .middleBody-Body-Upper p {
-                        padding-left: 30px;
-                        font-size: 18px;
-                    }
-
-                    .middleBody-Body-Upper canvas {
-                        margin-top: -60px;
-                    }
-
-
-
-                                    {
-                            label: 'Data 2',
-                            data: [28, 48, 40, 19, 86, 27],
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1,
-                            pointRadius: 0,
-                            tension: 0.4,
-                            hoverRadius: 8,
-                            hitRadius: 10,
-                            fill: true
-                        }
- */
-
-               .middleBody-Body-Low-Graph  canvas {
-                   /* background-color:red; */
-               }
-            </style>
-
-            
-
             <div class="middleBody-Body-Low">
                 <div class="middleBody-Body-Low-Graph">
                     <div class="upper-flex">
@@ -948,74 +880,11 @@
                             <p><strong>Weight</strong></p>
                         </div>
 
-
-                        <style>
-                            /* Styling for the pop-up container */
-                            .popup-container-Weight {
-                                display: none;
-                                position: fixed;
-                                top: 50%;
-                                left: 50%;
-                                width: 60%;
-                                height: 65%;
-                                transform: translate(-50%, -50%);
-                                background-color: white;
-                                padding: 20px;
-                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                                z-index: 1000;
-                                border-radius: 7px;
-                            }
-
-                            /* Styling for the pop-up form */
-                            .popup-form {
-                                /* Add your form styling here */
-                            }
-
-                            /* Styling for the overlay/background behind the pop-up */
-                            .overlay-Weight {
-                                display: none;
-                                position: fixed;
-                                top: 0;
-                                left: 0;
-                                width: 100%;
-                                height: 100%;
-                                background-color: rgba(0, 0, 0, 0.5);
-                                z-index: 999;
-                            }
-
-                            
-                            .upper-flex-right {
-                                /* background-color: red; */
-                            }
-
-                            .BTNWeight {
-                                background-color: #304D70;
-                                color:black;
-                                height: 80%;
-                                border: none;
-                                transition: 0.5s;
-                                /* padding: 5px 15px; */
-                                padding: 5px 11px;
-                                border-radius: 50px;
-                                color: white;
-                            }
-
-                            .BTNWeight:hover {
-                                transition: 0.5s;
-                                transform: scale(1.05);
-                            }
-
-
-
-                        </style>
-
-
-
                         <div class="upper-flex-right">
                             <button id="openPopupButtonWeight" class="BTNWeight">
                                 <i class="fas fa-plus"></i>
                             </button>
-                            
+
                             <div id="popupFormContainerWeight" class="popup-container-Weight">
                                 <form method="post" asp-controller="Members" asp-action="AddingWeight" class="popup-form">
                                     <div class="inputBox">
@@ -1035,12 +904,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <style>
-                        #lineChart {
-                            border-radius: 5px;
-                        }
-                    </style>
 
                     <canvas id="lineChart" width="200" height="67"></canvas>
                 </div>
@@ -1132,7 +995,7 @@
     });
 
 
-    
+
     $(document).ready(function () {
         var ctx = document.getElementById('donutChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -1178,23 +1041,7 @@
             }
         });
     });
-    
 
-
-
-
-
-
-
-
-
-
-
-
-    // Dummy data
-    //var gradientLeaving = ctx.createLinearGradient(0, 0, 0, 300);
-    //gradientLeaving.addColorStop(0, 'rgba(65, 184, 213, 1)'); 
-    //gradientLeaving.addColorStop(1, 'rgba(65, 184, 213, 0)'); 
 
     var weightEntries = @Html.Raw(Json.Serialize(weightEntries));
     var weightEntriesLabel = @Html.Raw(Json.Serialize(weightEntriesLabel));
@@ -1270,6 +1117,6 @@
         data: data,
         options: options
     });
-    
+
 
 </script>
