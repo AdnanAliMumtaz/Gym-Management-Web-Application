@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication1.Controllers
 {
-    /*[Authorize(Roles = "Admin")]*/
     public class RolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

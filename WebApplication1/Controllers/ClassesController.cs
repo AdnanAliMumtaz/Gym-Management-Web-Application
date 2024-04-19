@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Areas.Identity.Data;
 using WebApplication1.Data;
 using WebApplication1.Models;
 
-
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class ClassesController : Controller
     {
         private readonly WebDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
 
         public ClassesController(WebDbContext context, UserManager<ApplicationUser> userManager)
         {
@@ -39,14 +33,7 @@ namespace WebApplication1.Controllers
             {
                 search = search.ToLower();
                 resourcesQuery = resourcesQuery.Where(m =>
-                    m.ClassName.ToLower().Contains(search)  /* ||
-                    m.ItemType.ToLower().Contains(search)
-                   ||
-                    m.ItemType.ToLower().Contains(search) ||
-                    m.ItemQuantity.ToString().Contains(search) ||
-                    m.PurchasedDate.ToString().Contains(search) ||
-                    m.ItemPrice.ToString().Contains(search) ||
-                    m.ItemNotes.Contains(search)*/);
+                    m.ClassName.ToLower().Contains(search));
             }
 
             var classes = resourcesQuery.ToList();
@@ -54,7 +41,6 @@ namespace WebApplication1.Controllers
             return PartialView("searchResults", classes);
         }
 
-        // GET: Resources
         public async Task<IActionResult> Index(string search)
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -70,8 +56,7 @@ namespace WebApplication1.Controllers
                     m.ClassName.ToLower().Contains(search));
             }
 
-            // Include the ClassMember and ClassEmployee navigation properties
-            // to eagerly load ClassMembers and ClassEmployees
+            // Include the ClassMember and ClassEmployee navigation properties to eagerly load ClassMembers and ClassEmployees
             var classes = await classQuery
                 .Include(c => c.ClassMember)
                 .Include(c => c.ClassEmployee)
@@ -84,12 +69,6 @@ namespace WebApplication1.Controllers
             return View(classes);
         }
 
-
-
-
-
-
-        // GET: Classes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Classes == null)
@@ -138,10 +117,9 @@ namespace WebApplication1.Controllers
 
 
 
-        [Authorize]
+        
         [HttpPost]
-        public async Task<IActionResult> AddClass(string ClassName, string Description, 
-            DateTime Date, TimeSpan Duration, List<int> MemberIDs, List<int> EmployeeIDs)
+        public async Task<IActionResult> AddClass(string ClassName, string Description, DateTime Date, TimeSpan Duration, List<int> MemberIDs, List<int> EmployeeIDs)
         {
             // Get the currently logged-in user
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -197,7 +175,6 @@ namespace WebApplication1.Controllers
                 }
             }
 
-
             // Save changes to the database
             await _context.SaveChangesAsync();
 
@@ -205,36 +182,11 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // GET: Classes/Edit/
-        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound(); // Class ID not provided
+                return NotFound(); 
             }
 
             // Find the class by its ID
@@ -245,7 +197,7 @@ namespace WebApplication1.Controllers
 
             if (@class == null)
             {
-                return NotFound(); // Class not found
+                return NotFound(); 
             }
 
             // Populate dropdown lists for members and employees
@@ -259,11 +211,6 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditConfirmed(Classes editedClass)
         {
-            /*if (ModelState.IsValid)
-            {
-            }*/
-
-            // Check if the member exists in the database
             var originalClass = _context.Classes.Find(editedClass.ClassID);
 
             if (originalClass == null)
@@ -272,18 +219,12 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            // Update the existing member's properties with the edited values
             originalClass.ClassName = editedClass.ClassName;
             originalClass.Description = editedClass.Description;
             originalClass.Date = editedClass.Date;
             originalClass.Duration = editedClass.Duration;
             
-
-            // Update the existing member's properties with the edited values
-            /*_context.Update(updatedMember);*/
-
             _context.Entry(originalClass).State = EntityState.Modified;
-
 
             // Save changes to the database
             _context.SaveChanges();
@@ -292,18 +233,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
-
-
-
-
-
-
-
-
-
-        // GET: Classes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Classes == null)
@@ -330,7 +259,7 @@ namespace WebApplication1.Controllers
             var classToDelete = await _context.Classes.FindAsync(id);
             if (classToDelete == null)
             {
-                return NotFound(); // Class not found
+                return NotFound();
             }
 
             try
@@ -354,7 +283,7 @@ namespace WebApplication1.Controllers
             catch (Exception ex)
             {
                 // Log or handle the exception
-                return StatusCode(500, ex.Message); // Internal server error
+                return StatusCode(500, ex.Message); 
             }
         }
 

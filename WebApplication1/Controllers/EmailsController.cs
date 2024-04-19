@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Web.Helpers;
-using MailKit;
-using MailKit.Net.Imap;
-using MailKit.Search;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Azure.Management.Monitor.Fluent.Models;
 using Microsoft.EntityFrameworkCore;
-using MimeKit;
-using NuGet.Protocol.Plugins;
 using WebApplication1.Areas.Identity.Data;
 using WebApplication1.Data;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class EmailsController : Controller
     {
         private readonly WebDbContext _context;
@@ -60,11 +52,11 @@ namespace WebApplication1.Controllers
             return View(email);
         }
 
-
         public async Task<IActionResult> SentEmails(string receiverEmail)
         {
+            // Filter sent emails by the receiver's email address
             var sentEmails = await _context.Emails
-                .Where(e => e.ReceiverId == receiverEmail) // Filter sent emails by the receiver's email address
+                .Where(e => e.ReceiverId == receiverEmail) 
                 .ToListAsync();
 
             ViewBag.SentEmails = sentEmails;
@@ -94,16 +86,12 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> SendEmail(string ReceiverId, string Subject, string Content)
         {
             // Sender's email address and app-specific password
             string fromAddress = "gymmanagement0@gmail.com";
             string password = "tsda oboq jsdv mjgq";
-
 
             // Get the currently logged-in user
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -125,8 +113,6 @@ namespace WebApplication1.Controllers
                 // Send the email
                 smtp.Send(mailMessage);
 
-
-
                 // Create a new Member with the UserId set to the current user's Id
                 var newEmail = new Email
                 {
@@ -138,16 +124,11 @@ namespace WebApplication1.Controllers
                     ApplicationUser = user,
                 };
 
-
-                // Add the new Member and TransactionFee to the database
+                // Add the new email to the database
                 _context.Emails.Add(newEmail);
 
                 // Save changes to the database
                 await _context.SaveChangesAsync();
-
-
-
-
 
                 ViewBag.Message = "Email sent successfully!";
             }
@@ -159,157 +140,13 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<List<Email>> GetEmailsAsync(string emailAddress)
-        {
-            // Retrieve emails sent and received by the specified email address, ordered by timestamp in descending order
-            var emails = await _context.Emails
-                .Where(e => e.SenderId == emailAddress || e.ReceiverId == emailAddress)
-                .OrderByDescending(e => e.Timestamp)
-                .ToListAsync();
-
-            return emails;
-        }
-
-        /*[HttpPost]
-        public async Task<ActionResult> ShowEmails(string emailAddress)
-        {
-            List<Email> relevantEmails = new List<Email>();
-            // Get the currently logged-in user
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-
-            try
-            {
-                // Retrieve relevant emails where the inputted email is either the sender or receiver
-                relevantEmails = _context.Emails
-                    .Where(e => e.SenderId == emailAddress || e.ReceiverId == emailAddress)
-                    .ToList();
-
-                // Format the emails for display
-                string emailsMessage = "No emails found.";
-                if (relevantEmails.Any())
-                {
-                    emailsMessage = "<ul>";
-                    foreach (var email in relevantEmails)
-                    {
-                        emailsMessage += "<li>";
-                        emailsMessage += $"<strong>From:</strong> {email.SenderId}<br>";
-                        emailsMessage += $"<strong>To:</strong> {email.ReceiverId}<br>";
-                        emailsMessage += $"<strong>Subject:</strong> {email.Subject}<br>";
-                        emailsMessage += $"<strong>Content:</strong> {email.Content}<br>";
-                        emailsMessage += "</li>";
-                    }
-                    emailsMessage += "</ul>";
-                }
-
-                return Content(emailsMessage); // Return the formatted emails as HTML content
-            }
-            catch (Exception ex)
-            {
-                return Content("Error retrieving emails: " + ex.Message); // Return an error message
-            }
-        }
-*/
-
-       /* public async Task<ActionResult> ReceiveEmailsAsync(string emailAddress)
-        {
-            List<MimeMessage> receivedEmails = new List<MimeMessage>();
-            // Get the currently logged-in user
-            ApplicationUser user = await _userManager.GetUserAsync(User);
-            string fromAddress = "gymmanagement0@gmail.com";
-
-            try
-            {
-                using (var client = new ImapClient())
-                {
-                    client.Connect("imap.gmail.com", 993, true);
-                    client.Authenticate("gymmanagement0@gmail.com", "tsda oboq jsdv mjgq");
-
-                    var inbox = client.Inbox;
-                    inbox.Open(FolderAccess.ReadOnly);
-
-                    // Search for emails with the specified email address in the From header
-                    var query = SearchQuery.HeaderContains("From", emailAddress);
-                    var uids = inbox.Search(query);
-
-                    foreach (var uid in uids)
-                    {
-                        var message = inbox.GetMessage(uid);
-                        receivedEmails.Add(message);
-                    }
-
-                    client.Disconnect(true);
-                }
-
-
-
-                // Save received emails to the database
-                foreach (var message in receivedEmails)
-                {
-                        var recipientAddress = message.From.Mailboxes.FirstOrDefault()?.Address;
-
-
-                    // Check if an email with the same content already exists
-                    bool emailExists = _context.Emails.Any(e =>
-                        e.SenderId == recipientAddress &&
-                        e.ReceiverId == fromAddress &&
-                        e.Subject == message.Subject &&
-                        e.Content == message.TextBody &&
-                        e.Timestamp == message.Date.DateTime &&
-                        e.ApplicationUser.Id == user.Id);
-
-                    if (!emailExists)
-                    {
-
-
-                        var newEmail = new Email
-                        {
-                            SenderId = recipientAddress, // Assuming SenderId is a string field
-                            ReceiverId = fromAddress,
-                            Subject = message.Subject,
-                            Content = message.TextBody, // Assuming Content is a string field
-                            Timestamp = message.Date.DateTime,
-                            ApplicationUser = user
-                        };
-
-                        _context.Emails.Add(newEmail);
-                    }
-                }
-
-
-                ViewBag.ReceivedEmails = receivedEmails;
-
-                // Save changes to the database
-                await _context.SaveChangesAsync();
-            }
-            catch (System.Exception ex)
-            {
-                ViewBag.ErrorMessage = "Error receiving emails: " + ex.Message;
-            }
-
-            // Ensure ViewBag.ReceivedEmails is initialized even if an exception occurs
-            if (ViewBag.ReceivedEmails == null)
-            {
-                ViewBag.ReceivedEmails = new List<MimeMessage>();
-            }
-
-            ViewBag.EmailAddress = emailAddress; // Pass the email address to the view
-
-            return View();
-        }*/
-
-
-
         public IActionResult EmailPage()
         {
-            // Retrieve all members from the database
-            var members = _context.Members.ToList(); // Assuming "Members" is your DbSet in DbContext
+            var members = _context.Members.ToList(); 
 
-            // Pass the list of members to the view
             return View(members);
         }
 
- 
-        // GET: Emails/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Emails == null)
@@ -328,16 +165,12 @@ namespace WebApplication1.Controllers
             return View(email);
         }
 
-        // GET: Emails/Create
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Emails/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmailId,SenderId,ReceiverId,Subject,Content,Timestamp,UserId")] Email email)
@@ -352,7 +185,6 @@ namespace WebApplication1.Controllers
             return View(email);
         }
 
-        // GET: Emails/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Emails == null)
@@ -369,9 +201,6 @@ namespace WebApplication1.Controllers
             return View(email);
         }
 
-        // POST: Emails/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EmailId,SenderId,ReceiverId,Subject,Content,Timestamp,UserId")] Email email)
@@ -405,7 +234,6 @@ namespace WebApplication1.Controllers
             return View(email);
         }
 
-        // GET: Emails/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Emails == null)
@@ -424,7 +252,6 @@ namespace WebApplication1.Controllers
             return View(email);
         }
 
-        // POST: Emails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

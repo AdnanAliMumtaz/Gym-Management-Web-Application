@@ -51,8 +51,6 @@ namespace WebApplication1.Controllers
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
 
-
-
             // Query 1: Total Fees Amount for the specific user's members
             decimal totalFeesAmount = _context.TransactionFees
                 .Where(tf => tf.Member.UserId == user.Id)
@@ -75,8 +73,6 @@ namespace WebApplication1.Controllers
             }
 
             var members = await membersQuery.ToListAsync();
-
-
 
             // Retrieve entry logs for the specific user
             var entryLogs = _context.EntryLogs
@@ -111,15 +107,12 @@ namespace WebApplication1.Controllers
             return View(member);
         }
 
-
         public IActionResult Members()
         {
-            var members = _context.Members.ToList(); // Retrieve the list of members from your context
+            var members = _context.Members.ToList();
             return View(members);
         }
 
-
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddDummyData(string FirstName, string LastName, string Email, string PhoneNumber, decimal Amount, DateTime DatePaid)
         {
@@ -156,7 +149,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpPost]
         public async Task<IActionResult> AddingCalories(int BreakfastCalories, int LunchCalories, int DinnerCalories, int SnackCalories, int MemberID)
         {
@@ -181,7 +173,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Details", "Members", new { id = MemberID });
         }
 
-
         [HttpPost]
         public async Task<IActionResult> AddingWeight(double Weight, int MemberID)
         {
@@ -203,10 +194,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Details", "Members", new { id = MemberID });
         }
 
-
-
-
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddEntry(int memberId)
         {
@@ -238,31 +225,17 @@ namespace WebApplication1.Controllers
                     _context.EntryLogs.Add(newEntryLog);
                     _context.SaveChanges();
 
-                    /*return RedirectToAction(nameof(Index));*/
-
                     return RedirectToAction("Details", "Members", new { id = memberId });
                 }
                 else
                 {
-                    // Member already has an entry within the past 2 hours
-                    // Handle this scenario (e.g., display a message or redirect to an error page)
-                    /*return RedirectToAction(nameof(Index));*/
                     return RedirectToAction("Details", "Members", new { id = memberId });
                 }
             }
 
             // Handle the case where the member is not found
-            /*return RedirectToAction(nameof(Index));*/
             return RedirectToAction("Details", "Members", new { id = memberId });
         }
-
-
-
-
-
-
-
-
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -301,8 +274,6 @@ namespace WebApplication1.Controllers
             existingMember.MemberDateJoined = updatedMember.MemberDateJoined;
             existingMember.MemberDateLeft = updatedMember.MemberDateLeft;
 
-
-
             _context.Entry(existingMember).State = EntityState.Modified;
 
             _context.SaveChanges();
@@ -310,8 +281,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        // GET: Member/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -330,7 +299,6 @@ namespace WebApplication1.Controllers
             return View(member);
         }
 
-        // POST: Member/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

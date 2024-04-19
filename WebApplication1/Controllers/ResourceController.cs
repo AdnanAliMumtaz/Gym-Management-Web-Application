@@ -15,6 +15,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class ResourceController : Controller
     {
         private readonly WebDbContext _context;
@@ -25,14 +26,6 @@ namespace WebApplication1.Controllers
             _context = context;
             _userManager = userManager;
         }
-
-        // GET: Resources
-        /*public async Task<IActionResult> Index()
-        {
-            var webDbContext = _context.Resources.Include(r => r.ApplicationUser);
-            return View(await webDbContext.ToListAsync());
-        }
-        */
 
         [HttpGet]
         public IActionResult Search(string search)
@@ -60,7 +53,6 @@ namespace WebApplication1.Controllers
             return PartialView("searchResults", resource);
         }
 
-        // GET: Resources
         public async Task<IActionResult> Index(string search)
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -86,15 +78,13 @@ namespace WebApplication1.Controllers
             return View(resource);
         }
 
-
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddResource(string ItemName, string ItemType, int ItemQuantity, DateTime PurchasedDate, int ItemPrice, string ItemNotes)
         {
             // Get the currently logged-in user
             ApplicationUser user = await _userManager.GetUserAsync(User);
 
-            // Create a new Member with the UserId set to the current user's Id
+            // Create a new Resource with the UserId set to the current user's Id
             var newResource = new Resource
             {
                 ItemName = ItemName,
@@ -106,8 +96,6 @@ namespace WebApplication1.Controllers
                 ApplicationUser = user,
             };
 
-
-            // Add the new Member and TransactionFee to the database
             _context.Resources.Add(newResource);
 
             // Save changes to the database
@@ -117,8 +105,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        // GET: Resources/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Resources == null)
@@ -137,7 +123,6 @@ namespace WebApplication1.Controllers
             return View(resource);
         }
 
-        // GET: Resources/Create
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
@@ -148,7 +133,6 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(String itemName, String itemType, int itemQuantity, DateTime PurchasedDate, int itemPrice, String itemNotes)
         {
-
             ApplicationUser user = await _userManager.GetUserAsync(User);
 
             // Create a new resource instance
@@ -169,7 +153,6 @@ namespace WebApplication1.Controllers
             await _context.SaveChangesAsync();
 
             return View(newResource);
-            // return RedirectToAction(nameof(Index)); // Assuming you have an Index action to display resources
         }
 
 
@@ -195,20 +178,16 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditConfirmed(Resource editedResource)
         {
-            /*if (ModelState.IsValid)
-            {
-            }*/
-
-            // Check if the member exists in the database
+            // Check if the resource exists in the database
             var originalResource = _context.Resources.Find(editedResource.ResourceID);
 
             if (originalResource == null)
             {
-                // If the member is not found, return a 404 Not Found result
+                // If the resource is not found, return a 404 Not Found result
                 return NotFound();
             }
 
-            // Update the existing member's properties with the edited values
+            // Update the resource's properties with the edited values
             originalResource.ItemName = editedResource.ItemName;
             originalResource.ItemType = editedResource.ItemType;
             originalResource.ItemQuantity = editedResource.ItemQuantity;
@@ -216,11 +195,7 @@ namespace WebApplication1.Controllers
             originalResource.ItemPrice = editedResource.ItemPrice;
             originalResource.ItemNotes = editedResource.ItemNotes;
 
-            // Update the existing member's properties with the edited values
-            /*_context.Update(updatedMember);*/
-
             _context.Entry(originalResource).State = EntityState.Modified;
-
 
             // Save changes to the database
             _context.SaveChanges();
@@ -229,8 +204,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        // GET: Resources/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Resources == null)
@@ -249,7 +222,6 @@ namespace WebApplication1.Controllers
             return View(resource);
         }
 
-        // POST: Resources/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

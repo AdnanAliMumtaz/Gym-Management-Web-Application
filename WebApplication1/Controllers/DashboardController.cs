@@ -1,19 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 using WebApplication1.Data;
 using WebApplication1.Models;
-using System.Linq;
 using WebApplication1.Models.ViewModels;
 using WebApplication1.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-/*using WebApplication1.Attributes;*/
 
 namespace WebApplication1.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -24,7 +20,6 @@ namespace WebApplication1.Controllers
             _userManager = userManager;
         }
 
-        /*[Authorize]*/
         public async Task<IActionResult> Index()
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -130,8 +125,6 @@ namespace WebApplication1.Controllers
             return View(viewModel);
         }
 
-
-        [Authorize]
         public async Task<IActionResult> EntriesGraph()
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
