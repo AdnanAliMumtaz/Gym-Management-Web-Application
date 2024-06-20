@@ -37,7 +37,9 @@ The database design follows normalization principles to minimise redundancy and 
 - **Backend**: C# within the ASP.NET MVC framework for robust backend processing.
 - **Database**: Microsoft SQL Server, utilising Entity Framework for data access and manipulation.
 
-## Screenshots of Gym Management Web Application
+## Demo
+For a live demo of the Gym Management Web Application, please visit the following link:
+[Gym Management Web Application Demo](https://youtu.be/k6zQ_I11oaE)
 
 
 
