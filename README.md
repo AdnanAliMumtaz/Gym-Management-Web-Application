@@ -25,18 +25,17 @@ The Gym Management Web Application is built using the ASP.NET MVC framework, ens
 <img width="700" alt="Architecture" src="https://github.com/AdnanAliMumtaz/Gym-Management-Web-Application/assets/81415901/18193976-f8c9-476f-b2ed-7dd10aab3ed5">
 </div>
 
-
-#### Technology Stack
-- **Frontend**: HTML, CSS, JavaScript for structure, styling, and interactivity.
-- **Backend**: C# within the ASP.NET MVC framework for robust backend processing.
-- **Database**: Microsoft SQL Server, utilising Entity Framework for data access and manipulation.
-
 #### Database Design
 The database design follows normalization principles to minimise redundancy and ensure data integrity. The Entity-Relationship Diagram (ERD) illustrates the database structure, defining primary keys, foreign keys, and relationships between tables.
 
 <div align="center">
 <img src="https://github.com/AdnanAliMumtaz/Gym-Management-Web-Application/assets/81415901/f94c3a87-b6d1-43c1-9032-993b72928801" width="600">
 </div>
+
+## Technology Stack
+- **Frontend**: HTML, CSS, JavaScript for structure, styling, and interactivity.
+- **Backend**: C# within the ASP.NET MVC framework for robust backend processing.
+- **Database**: Microsoft SQL Server, utilising Entity Framework for data access and manipulation.
 
 ## Screenshots of Gym Management Web Application
 
